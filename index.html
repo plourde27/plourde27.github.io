@@ -1518,7 +1518,6 @@ var clicked = false;
 var mip = false;
 mouseClicked = function() {
     clicked = true;
-    mouseTouched = false;
 };
 mouseReleased = function() {
     mip = false;
@@ -3677,6 +3676,7 @@ draw = function() {
     }
     newsave[2] = [yourskis];
     clicked = false;
+    mouseTouched = false;
     if (scene !== oscene) {
         if (scene === "FAvatar") {
             println("Here is your avatar code:");
