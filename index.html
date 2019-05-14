@@ -1507,12 +1507,17 @@ for (var i = 0 ; i < 9 ; i++) {
 var clicked = false;
 var mip = false;
 mouseClicked = function() {
-    println(frameCount);
     clicked = true;
-    mip = false;
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) === False) {
+        mip = false;
+    }
 };
+mouseReleased = function() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) === True) {
+
+    	mip = false;
+    }
 mousePressed = function() {
-    println(frameCount);
     mip = true;
 };
 var fila = 0;
