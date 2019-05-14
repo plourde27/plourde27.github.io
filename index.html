@@ -18,6 +18,13 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>
 	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
   	<script>
+		var mouseDown = 0;
+		document.body.onmousedown = function() { 
+		  ++mouseDown;
+		}
+		document.body.onmouseup = function() {
+		  --mouseDown;
+		}
   		var playSong = function(songName) {
   			console.log(songName);
   			var song = document.getElementById(songName);
@@ -3123,7 +3130,7 @@ var LoadGame = function(s) {
             text("Turn Right", 325, 70);
             if (mouseX > 140 && mouseX < 260 && mouseY > 5 && mouseY < 45) {
                 cursor(HAND);
-                if (mousePressed) {
+                if (mouseDown) {
                     keys[UP] = true;
                 }
                 else {
@@ -3132,7 +3139,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 15 && mouseX < 135 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mousePressed) {
+                if (mouseDown) {
                     keys[LEFT] = true;
                 }
                 else {
@@ -3141,7 +3148,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 140 && mouseX < 260 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mousePressed) {
+                if (mouseDown) {
                     keys[DOWN] = true;
                 }
                 else {
@@ -3150,7 +3157,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 265 && mouseX < 385 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mousePressed) {
+                if (mouseDown) {
                     keys[RIGHT] = true;
                 }
                 else {
