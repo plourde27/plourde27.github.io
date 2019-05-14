@@ -1510,6 +1510,7 @@ mouseClicked = function() {
     clicked = true;
 };
 mousePressed = function() {
+    println(frameCount);
     mip = !mip;
 };
 var fila = 0;
@@ -3561,7 +3562,6 @@ var LoadGame = function(s) {
 };
 
 draw = function() {
-    println(mip);
     oscene = scene;
     if (transition > 0) {
         transition -= 40;
