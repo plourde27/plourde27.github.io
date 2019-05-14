@@ -3561,9 +3561,7 @@ var LoadGame = function(s) {
 };
 
 draw = function() {
-    if (mip) {
-	println(frameCount);
-    }
+    println(mip);
     oscene = scene;
     if (transition > 0) {
         transition -= 40;
