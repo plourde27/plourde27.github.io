@@ -18,15 +18,7 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>
 	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
   	<script>
-  		var playSong = function(songName) {
-  			console.log(songName);
-  			var song = document.getElementById(songName);
-  			song.currentTime = 0;
-  			song.play();
-  		};
-  		var pauseSong = function(songName) {
-  			document.getElementById(songName).pause();
-  		};
+  		
   		var programCode = function(processingInstance) {
     		with (processingInstance) {
     			size(600, 600);
@@ -1504,7 +1496,6 @@ for (var i = 0 ; i < 9 ; i++) {
     ai.push(new AI());
 }
 var clicked = false;
-var mip = false;
 mouseClicked = function() {
     clicked = true;
 };
@@ -1792,7 +1783,7 @@ var LoadGame = function(s) {
             text("SKI RACE", 300 + sub, 180);
             textSize(30);
             if (sub < 10) {
-	            text("Pre-release Edition", 300, 260);
+	            text("Pre-release Version", 300, 260);
 	        }
             textFont(createFont("monospace"));
             textSize(400);
@@ -2382,7 +2373,7 @@ var LoadGame = function(s) {
             textSize(20);
             fill(0, 0, 0);
             textAlign(LEFT, TOP);
-            text("This is a skiing game. The mountains in the game are all based on ski mountains or resorts in real life.\nTo make your ski avatar, you will ski on 10 trails (going from easiest to hardest), and the game will observe your skiing data. It will take about 10 minutes.\nTo play, use the left and right arrow keys to turn.\nUse the up and down arrow keys to accelerate and decelerate.\nOn a mobile device, toggle the clickable buttons on the screen.\nDon't run into any trees or obstacles!\nGood luck.", 30, 140, 540, Infinity);
+            text("This is a skiing game. The mountains in the game are all based on ski mountains or resorts in real life.\nTo make your ski avatar, you will ski on 10 trails (going from easiest to hardest), and the game will observe your skiing data. It will take about 10 minutes.\nTo play, use the left and right arrow keys to turn.\nUse the up and down arrow keys to accelerate and decelerate.\nOn a mobile device, use the clickable buttons on the screen.\nDon't run into any trees or obstacles!\nGood luck.", 30, 140, 540, Infinity);
             textAlign(CENTER, CENTER);
             fill(200, 200, 200, 100);
             rect(300, 525, 300, 50, 5);
@@ -3104,9 +3095,24 @@ var LoadGame = function(s) {
                 valStr += Player1.x.toFixed(0).toString() + ":" + Player1.y.toFixed(0).toString() + ",";
             }
             fill(200, 200, 200, 100);
+            if (keys[UP]) {
+        		fill(100, 200, 100, 100);
+        	}
             rect(200, 25, 120, 40, 5);
+            fill(200, 200, 200, 100);
+            if (keys[LEFT]) {
+        		fill(100, 200, 100, 100);
+        	}
             rect(75, 70, 120, 40, 5);
+            fill(200, 200, 200, 100);
+            if (keys[DOWN]) {
+        		fill(100, 200, 100, 100);
+        	}
             rect(200, 70, 120, 40, 5);
+            fill(200, 200, 200, 100);
+            if (keys[RIGHT]) {
+        		fill(100, 200, 100, 100);
+        	}
             rect(325, 70, 120, 40, 5);
             fill(0, 0, 0);
             textSize(20);
@@ -3545,7 +3551,6 @@ var LoadGame = function(s) {
 };
 
 draw = function() {
-    println(mouseTouched);
     oscene = scene;
     if (transition > 0) {
         transition -= 40;
@@ -3646,9 +3651,7 @@ draw = function() {
         yourskis = [[40, 40, 40, 40, 40, "Basic Skis"]];
     }
     newsave[2] = [yourskis];
-    println(clicked);
     clicked = false;
-    
     if (scene !== oscene) {
         if (scene === "FAvatar") {
             println("Here is your avatar code:");
