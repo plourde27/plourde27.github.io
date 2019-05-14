@@ -34,10 +34,6 @@
   		var pauseSong = function(songName) {
   			document.getElementById(songName).pause();
   		};
-		var mouseTouched = false;
-  		window.addEventListener('touchstart', function() {
-			mouseTouched = true;
-		});
   		var programCode = function(processingInstance) {
     		with (processingInstance) {
     			size(600, 600);
@@ -3657,8 +3653,9 @@ draw = function() {
         yourskis = [[40, 40, 40, 40, 40, "Basic Skis"]];
     }
     newsave[2] = [yourskis];
+    println(clicked);
     clicked = false;
-    mouseTouched = false;
+    
     if (scene !== oscene) {
         if (scene === "FAvatar") {
             println("Here is your avatar code:");
