@@ -3125,7 +3125,7 @@ var LoadGame = function(s) {
             text("Turn Right", 325, 70);
             if (mouseX > 140 && mouseX < 260 && mouseY > 5 && mouseY < 45) {
                 cursor(HAND);
-                if (mip) {
+                if (mousePressed) {
                     keys[UP] = true;
                 }
                 else {
@@ -3134,7 +3134,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 15 && mouseX < 135 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mip) {
+                if (mousePressed) {
                     keys[LEFT] = true;
                 }
                 else {
@@ -3143,7 +3143,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 140 && mouseX < 260 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mip) {
+                if (mousePressed) {
                     keys[DOWN] = true;
                 }
                 else {
@@ -3152,7 +3152,7 @@ var LoadGame = function(s) {
             }
             if (mouseX > 265 && mouseX < 385 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mip) {
+                if (mousePressed) {
                     keys[RIGHT] = true;
                 }
                 else {
