@@ -34,7 +34,10 @@
   		var pauseSong = function(songName) {
   			document.getElementById(songName).pause();
   		};
-  		
+		var mouseTouched = false;
+  		window.addEventListener('touchstart', function() {
+			mouseTouched = true;
+		});
   		var programCode = function(processingInstance) {
     		with (processingInstance) {
     			size(600, 600);
@@ -3571,7 +3574,7 @@ var LoadGame = function(s) {
 };
 
 draw = function() {
-    println(mouseDown);
+    println(mouseTouched);
     oscene = scene;
     if (transition > 0) {
         transition -= 40;
