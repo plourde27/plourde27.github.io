@@ -18,13 +18,6 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>
 	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
   	<script>
-		var mouseDown = 0;
-		document.body.onmousedown = function() { 
-		  ++mouseDown;
-		}
-		document.body.onmouseup = function() {
-		  --mouseDown;
-		}
   		var playSong = function(songName) {
   			console.log(songName);
   			var song = document.getElementById(songName);
