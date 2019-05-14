@@ -538,7 +538,7 @@ Player.prototype.update = function() {
     if (keys[UP] && this.spd < 2 && psf >= 1) {
         this.spd += 0.03;
     }
-    if (keys[DOWN] && this.spd > 0 && psf >= 1) {
+    if (keys[DOWN] && this.spd > 0.5 && psf >= 1) {
         this.spd -= 0.03;
     }
     if (this.dx > 8 || this.dy > 8 || this.dx < -8 || this.dy < -8) {
@@ -643,7 +643,7 @@ Player.prototype.update = function() {
     }
     if (dist(this.x, this.y, trs[trl][trs[trl].length - 1][0], trs[trl][trs[trl].length - 1][1]) < 80) {
         scene = "Avatar";
-        if (tcount === 9) {
+        if (tcount === 10) {
             scene = "FAvatar";
         }
         mntn = 0;
@@ -1790,6 +1790,10 @@ var LoadGame = function(s) {
             textFont(createFont("Skia"));
             text("ULTIMATE", 300 - sub, 80);
             text("SKI RACE", 300 + sub, 180);
+            textSize(30);
+            if (sub < 10) {
+	            text("Pre-release Version", 300, 260);
+	        }
             textFont(createFont("monospace"));
             textSize(400);
             fill(0, 0, 0, inc);
@@ -3097,7 +3101,7 @@ var LoadGame = function(s) {
             
             noStroke();
             if (time > 0) {
-                valStr += Player1.x.toFixed(0).toString() + ":" + Player1.y.toFixed(1).toString() + ",";
+                valStr += Player1.x.toFixed(0).toString() + ":" + Player1.y.toFixed(0).toString() + ",";
             }
             fill(200, 200, 200, 100);
             rect(200, 25, 120, 40, 5);
@@ -3287,7 +3291,7 @@ var LoadGame = function(s) {
                     
                 
                     scene = "Avatar";
-                    if (tcount === 9) {
+                    if (tcount === 10) {
                         scene = "FAvatar";
                     }
                     mntn = 0;
@@ -3325,7 +3329,7 @@ var LoadGame = function(s) {
                 cursor(HAND);
                 if (clicked) {
                     scene = "Avatar";
-                    if (tcount === 9) {
+                    if (tcount === 10) {
                         scene = "FAvatar";
                     }
                     mntn = 0;
