@@ -1507,10 +1507,12 @@ for (var i = 0 ; i < 9 ; i++) {
 var clicked = false;
 var mip = false;
 mouseClicked = function() {
+    println(frameCount);
     clicked = true;
     mip = false;
 };
 mousePressed = function() {
+    println(frameCount);
     mip = true;
 };
 var fila = 0;
