@@ -2399,7 +2399,7 @@ var LoadGame = function(s) {
             textSize(20);
             fill(0, 0, 0);
             textAlign(LEFT, TOP);
-            text("This is a skiing game. The mountains in the game are all based on ski mountains or resorts in real life.\nTo make your ski avatar, you will ski on 10 trails (going from easiest to hardest), and the game will observe your skiing data. It will take about 10 minutes.\nTo play, use the left and right arrow keys to turn.\nUse the up and down arrow keys to accelerate and decelerate.\nOn a mobile device, use the clickable buttons on the screen.\nDon't run into any trees or obstacles!\nGood luck.", 30, 140, 540, Infinity);
+            text("This is a skiing game. The mountains in the game are all based on ski mountains or resorts in real life.\nTo make your ski avatar, you will ski on 10 trails (going from easiest to hardest), and the game will observe your skiing data. It will take about 10 minutes.\nTo play, use the left and right arrow keys to turn.\nUse the up and down arrow keys to accelerate and decelerate.\nOn a mobile device, toggle the clickable buttons on the screen.\nDon't run into any trees or obstacles!\nGood luck.", 30, 140, 540, Infinity);
             textAlign(CENTER, CENTER);
             fill(200, 200, 200, 100);
             rect(300, 525, 300, 50, 5);
@@ -3133,38 +3133,26 @@ var LoadGame = function(s) {
             text("Turn Right", 325, 70);
             if (mouseX > 140 && mouseX < 260 && mouseY > 5 && mouseY < 45) {
                 cursor(HAND);
-                if (mouseTouched) {
-                    keys[UP] = true;
-                }
-                else {
-                    keys[UP] = false;
+                if (clicked) {
+                    keys[UP] = !keys[UP];
                 }
             }
             if (mouseX > 15 && mouseX < 135 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mouseTouched) {
-                    keys[LEFT] = true;
-                }
-                else {
-                    keys[LEFT] = false;
+                if (clicked) {
+                    keys[LEFT] = !keys[LEFT];
                 }
             }
             if (mouseX > 140 && mouseX < 260 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mouseTouched) {
-                    keys[DOWN] = true;
-                }
-                else {
-                    keys[DOWN] = false;
+                if (clicked) {
+                    keys[DOWN] = !keys[DOWN];
                 }
             }
             if (mouseX > 265 && mouseX < 385 && mouseY > 50 && mouseY < 90) {
                 cursor(HAND);
-                if (mouseTouched) {
-                    keys[RIGHT] = true;
-                }
-                else {
-                    keys[RIGHT] = false;
+                if (clicked) {
+                    keys[RIGHT] = !keys[RIGHT];
                 }
             }
             break;
