@@ -1,0 +1,29 @@
+#map {
+  margin-left: 50% - 500px
+  width: 1000px;
+  height: 600px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50%;
+  height: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s
+  transition: opacity .2s;
+}
+
+body {
+  text-align: center;
+  font-family: 'Montserrat';
+}
+
+#title {
+  background-color: rgb(200, 220, 255);
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 10px;
+}
