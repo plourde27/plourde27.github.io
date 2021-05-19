@@ -62,10 +62,12 @@ crossorigin=""></script>
 
     <script>
 
-      var LEFT = -76.549;
-      var RIGHT = -75.619;
-      var TOP = 43.305;
-      var BOTTOM = 42.776;
+      var CDS = [43.210430, -76.372374, 42.949697, -75.913115];
+
+      var LEFT = CDS[1];
+      var RIGHT = CDS[3];
+      var TOP = CDS[0];
+      var BOTTOM = CDS[2];
 
       function findVT(coords1) {
         var vt1 = 0;
@@ -509,8 +511,8 @@ crossorigin=""></script>
     var lastm = -1;
     var lastvt = -1;
     var lastvt2 = -1;
-    var vt2 = 61859;
-    var vt = 255858;
+    var vt2 = 16209;
+    var vt = 85844;
     var rv3 = -1;
     var mdg = -1;
     var ix = 0;
