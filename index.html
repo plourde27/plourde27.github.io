@@ -36,18 +36,25 @@ crossorigin=""></script>
           <span>Longer and Safer  </span><input type="range" min="0" max="100" value="50" class = "slider" id="slider"><span>    Shorter and Less Safe</span>
 
       </div>
+
+      <br><br><div id="disp">Calculating Route...</div>
+
       <br>
       Control Mode: <select id="slcmove">
-          <option value="0">Select Start Point</option>
           <option value="1">Select Destination</option>
-          <option value="2">Select Road</option>
+          <option value="0">Select Start Point</option>
+          <option value="2">Select Road On Route</option>
+          <option value="3">Select Road Not On Route</option>
 
       </select>
+
+
       <div id="roadcontrols"><br>
         Selected Road: <span id="sel">No Selection</span>
       <br><br>
       <button id="blacklist" onclick="blackliist()">Blacklist Selected Road</button><button id="whitelist" onclick="whiteliist()">Whitelist Selected Road</button>
       </div><br><br>
+
       <div id="map"></div>
 
 
@@ -291,7 +298,7 @@ crossorigin=""></script>
       }
     }
 
-
+    var distt = -1;
 
     var mymap = L.map('map').setView([43.1, -76.2], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoicGxvdXJkZTI3IiwiYSI6ImNram4yc3BuMjBsancydGx5OWI4eDgwZnIifQ.7MWGBl1SMiO6inaJ-6un0A', {
@@ -377,7 +384,7 @@ crossorigin=""></script>
           var lat1 = graphy[vt];
           var lon2 = graphx[adjList[vt][i][0]];
           var lat2 = graphy[adjList[vt][i][0]];
-          var ds = dst(lat1, lon1, lat2, lon2) * (60 / 12);
+          var ds = dst(lat1, lon1, lat2, lon2);
 
           if (distances[adjList[vt][i][0]] != -1) continue;
 
@@ -544,9 +551,17 @@ crossorigin=""></script>
 
       mdg = parseInt(document.getElementById("slider").value);
 
-      if (f1 != lf1 || f2 != lf2 || f3 != lf3 || mdg != lastm || vt != lastvt || vt2 != lastvt2 || bl != lbl || wl != lwl) {
+      if (f1 != lf1 || f2 != lf2 || f3 != lf3 || mdg != lastm || vt != lastvt || vt2 != lastvt2 || ((bl != lbl || wl != lwl) && lrv3 == rv3)) {
 
         var dk = allDijkstra(vt2, mdg);
+
+        distt = dk[0][vt];
+        if (distt == -1) {
+            document.getElementById("disp").innerHTML = "Sorry, no route was found with the given parameters";
+        }
+        else {
+          document.getElementById("disp").innerHTML = "Route Length: " + (parseInt(distt*10)/10) + " miles";
+        }
 
         chain = makeChain(dk[1], dk[2], vt);
 
@@ -714,6 +729,17 @@ crossorigin=""></script>
     var type = 0;
 
     function updateslider() {
+      f1 = parseInt(document.getElementById("slider2").value);
+      f2 = parseInt(document.getElementById("slider3").value);
+      f3 = parseInt(document.getElementById("slider4").value);
+
+
+      mdg = parseInt(document.getElementById("slider").value);
+
+      if (f1 != lf1 || f2 != lf2 || f3 != lf3 || mdg != lastm || vt != lastvt || vt2 != lastvt2 || bl != lbl || wl != lwl) {
+        document.getElementById("disp").innerHTML = "Calculating Route..."
+      }
+
       type = parseInt(document.getElementById("slcmove").value, 10);
 
       if (type < 2) {
@@ -810,20 +836,23 @@ crossorigin=""></script>
           }
         }
 
-        mn = 1000000000;
+        if (type == 2) {
 
-        for (var k = 0 ; k < chchn.length ; k++) {
-          var i = chchn[k];
-          for (var j = 0 ; j < roadc[i].length ; j++) {
+          mn = 1000000000;
 
-              var lat = graphy[roadc[i][j]];
-              var lon = graphx[roadc[i][j]];
+          for (var k = 0 ; k < chchn.length ; k++) {
+            var i = chchn[k];
+            for (var j = 0 ; j < roadc[i].length ; j++) {
 
-              var ds = dst(lat, lon, cat, con);
+                var lat = graphy[roadc[i][j]];
+                var lon = graphx[roadc[i][j]];
 
-              if (ds < mn) {
-                mn = ds;
-                rv3 = i;
+                var ds = dst(lat, lon, cat, con);
+
+                if (ds < mn) {
+                  mn = ds;
+                  rv3 = i;
+                }
               }
             }
           }
