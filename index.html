@@ -26,7 +26,15 @@ crossorigin=""></script>
       <p>Disclaimer: the safety of roads calculated in this program is based on a computerized algorithm, and may not always be perfectly accurate. Always use your best judgment when biking on roads, regardless of how safe this program indicates that a road is.</p>
       <br><br></div><br><br>
       <div class="slidec">
+                    <p>Importance of Traffic Level in Finding Road Safety</p>
+          <span>Less  </span><input type="range" min="1" max="11" value="6" class = "slider" id="slider2"><span>    More</span><br><br>
+          <p>Importance of Shoulder Size in Finding Road Safety</p>
+          <span>Less  </span><input type="range" min="1" max="11" value="6" class = "slider" id="slider3"><span>    More</span><br><br>
+          <p>Importance of Speed Limit in Finding Road Safety</p>
+          <span>Less  </span><input type="range" min="1" max="11" value="6" class = "slider" id="slider4"><span>    More</span><br><br>
+          <p>Overall Route Type</p>
           <span>Longer and Safer  </span><input type="range" min="0" max="100" value="50" class = "slider" id="slider"><span>    Shorter and Less Safe</span>
+
       </div>
       <br>
       Control Mode: <select id="slcmove">
@@ -94,9 +102,12 @@ crossorigin=""></script>
       rwhitelist.push(false);
     }
 
-    function dangermap(car, shoulder, limit) {
-      var cval = parseInt(((car * (3/4)) + (shoulder * (1/4))) * (2/3) + limit / 3);
+    function dangermap(car, shoulder, limit, fc1, fc2, fc3) {
 
+      fc1 *= 3;
+      fc3 *= 2;
+
+      var cval = parseInt(((car * fc1) + (shoulder * fc2) + (limit * fc3)) / (fc1 + fc2 + fc3));
 
       if (shoulder >= 100) {
         cval = 75 + (car / 8) + (limit / 8);
@@ -149,7 +160,7 @@ crossorigin=""></script>
 
 
 
-              edgeList.push([e1, e2, dangermap(d1, d2, d3)]);
+              edgeList.push([e1, e2, d1, d2, d3]);
               t++;
             }
 
@@ -298,20 +309,29 @@ crossorigin=""></script>
     radius: 50
   }).addTo(mymap);
 
-
-  readTextFile("../dangerdata.txt");
-
     var adjList = [];
+
+  function proclist(f1, f2, f3) {
+    adjList = [];
     for (var i = 0 ; i < graphx.length + 1 ; i++) {
       adjList.push([]);
     }
 
+    for (var i = 0 ; i < edgeList.length ; i++) {
+      adjList[edgeList[i][0]].push([edgeList[i][1], dangermap(edgeList[i][2], edgeList[i][3], edgeList[i][4], f1, f2, f3), i]);
+      adjList[edgeList[i][1]].push([edgeList[i][0], dangermap(edgeList[i][2], edgeList[i][3], edgeList[i][4], f1, f2, f3), i]);
+    }
+  }
+
+
+  readTextFile("../dangerdata.txt");
+
+
+
+
     //console.log(edgeList);
 
-    for (var i = 0 ; i < edgeList.length ; i++) {
-      adjList[edgeList[i][0]].push([edgeList[i][1], edgeList[i][2], i]);
-      adjList[edgeList[i][1]].push([edgeList[i][0], edgeList[i][2], i]);
-    }
+    proclist(6, 6, 6);
 
     var end = parseInt(Math.random()*adjList.length);
 
@@ -461,11 +481,6 @@ crossorigin=""></script>
 
     var st = "";
 
-    function animate() {
-
-    }
-
-    window.setInterval(animate, 1000);
 
 
 
@@ -498,6 +513,9 @@ crossorigin=""></script>
     var wl = false;
     var lwl = false;
     var lbl = false;
+    var lf1 = -1;
+    var lf2 = -1;
+    var lf3 = -1;
 
 
 
@@ -515,10 +533,18 @@ crossorigin=""></script>
         }
       }
 
+      f1 = parseInt(document.getElementById("slider2").value);
+      f2 = parseInt(document.getElementById("slider3").value);
+      f3 = parseInt(document.getElementById("slider4").value);
 
-      mdg = document.getElementById("slider").value;
+      if (f1 != lf1 || f2 != lf2 || f3 != lf3) {
+        console.log(f1 + " " + f2 + " " + f3);
+        proclist(f1, f2, f3);
+      }
 
-      if (mdg != lastm || vt != lastvt || vt2 != lastvt2 || bl != lbl || wl != lwl) {
+      mdg = parseInt(document.getElementById("slider").value);
+
+      if (f1 != lf1 || f2 != lf2 || f3 != lf3 || mdg != lastm || vt != lastvt || vt2 != lastvt2 || bl != lbl || wl != lwl) {
 
         var dk = allDijkstra(vt2, mdg);
 
@@ -533,6 +559,9 @@ crossorigin=""></script>
       lrv3 = rv3;
       lbl = bl;
       lwl = wl;
+      lf1 = f1;
+      lf2 = f2;
+      lf3 = f3;
 
       for (var i = 0 ; i < shapes.length ; i++) {
         shapes[i].remove();
