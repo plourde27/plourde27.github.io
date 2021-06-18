@@ -28,7 +28,9 @@
       var address = "";
       var revString = "";
       var originalString = "";
-      //window.localStorage.setItem('data', '');
+      if (window.localStorage.getItem('data') == null) {
+        window.localStorage.setItem('data', '');
+      }
       var pairs = window.localStorage.getItem('data');
       document.getElementById("results").innerHTML = pairs;
       function submitEmail() {
