@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <meta charset="utf-8">
     <title>Kishmish</title>
   </head>
@@ -13,55 +13,79 @@
     <div class="mainstuff">
       <input id="searchbar" type="text" placeholder="Enter a String">
       <button id="button" onclick="submit()">Reverse</button>
+      <button id="button" onclick="reset()">Reset Past Results</button>
 
       <br>
 
       <p id="results"></p>
       <input id="searchbar2" type="text" placeholder="Enter Email Address">
       <button id="button2" onclick="submitEmail()">Update Email Address</button>
-      <br><a id="email" href="mailto:explored27@gmail.com?subject=Test&body=Message">Send Results in Email</a>
+      <a id="email" href="mailto:explored27@gmail.com?subject=Test&body=Message">Send Results in Email</a>
 
     </div>
     <script>
       document.getElementById("email").hidden = true;
+      //Initially, the "send email" button is hidden
+
       var frames = 0;
       var address = "";
       var revString = "";
       var originalString = "";
+      //Initializes some of the variables
+
       if (window.localStorage.getItem('data') == null) {
         window.localStorage.setItem('data', '');
+      } //Prevents the text from being 'null' at the very start (the very first time someone runs the program)
+
+      var empairs = window.localStorage.getItem('data');
+      var pairs = empairs.split(", ").join("<br>"); //Retrieves data from localStorage
+
+      document.getElementById("results").innerHTML = pairs; //Puts the localStorage data in the webpage
+
+      function reset() {
+        empairs = "";
+        pairs = "";
+        window.localStorage.setItem('data', '');
+        document.getElementById("results").innerHTML = "";
+        //Resets both the in-webpage storage and localStorage
       }
-      var pairs = window.localStorage.getItem('data');
-      document.getElementById("results").innerHTML = pairs;
+
       function submitEmail() {
-        document.getElementById("email").href = "mailto:" + address + "?subject=Kishmish String Reversing Results&body=" + pairs.split("\n").join(", ");
+        address = document.getElementById("searchbar2").value;
+        //Updates the email address based on what the user has entered
+
+        document.getElementById("email").href = "mailto:" + address + "?subject=Kishmish String Reversing Results&body=" + empairs;
+        //Updates the email link to send to the correct address and with the correct text
 
         document.getElementById("email").hidden = false;
+        //Un-hides the "send email" button now that the user has entered an email address
+
         document.getElementById("searchbar2").value = "";
+        //Resets the text entry field
       }
-      function submit() {
+
+      function submit() { //The function called when the "Reverse" button is pressed
         originalString = document.getElementById("searchbar").value;
         revString = reverse(originalString);
-        address = document.getElementById("searchbar2").value;
-        document.getElementById("button2").hidden = false;
-        document.getElementById("searchbar2").hidden = false;
-        pairs = originalString + " -> " + revString + "\n" + pairs;
-        window.localStorage.setItem('data', pairs);
+        //Reverses the string
+
+        pairs = originalString + " -> " + revString + "<br>" + pairs;
+        if (empairs == '') {
+          empairs = originalString + " -> " + revString;
+        }
+        else {
+          empairs = originalString + " -> " + revString + ", " + empairs;
+        }
+        //Updates the displayed text of past string reversal history
+
+        window.localStorage.setItem('data', empairs);
+        //Updates localStorage
 
         document.getElementById("results").innerHTML = originalString + " -> " + revString + "<br>" + document.getElementById("results").innerHTML;
 
         document.getElementById("searchbar").value = "";
-        document.getElementById("searchbar2").value = "";
+        //Resets the text entry field
       }
-
-      function animate() {
-        //document.getElementById("emailform").action = "mailto:21xplourde@jd.cnyric.org";
-        var val = document.getElementById("searchbar").value;
-        window.requestAnimationFrame(animate);
-      }
-
-      animate();
-
 
       function reverse(originalString) { //The function to reverse the string
 
@@ -127,8 +151,6 @@
 
         return originalString;
       }
-
-      console.log(reverse("s(a(bc))ff(ce)"));
 
     </script>
 
