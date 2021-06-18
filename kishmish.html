@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="utf-8">
+    <title>Kishmish</title>
+  </head>
+  <body>
+    <h1 id="top">String Reverser</h1>
+    <h1 id="top2">Made by Xavier Plourde</h1>
+    <p id="top3">This webpage reverses strings according to the task statement, and displays all your browser's previous runs of the program through localStorage. You can also email all of your results to a specified email address.</p>
+
+    <div class="mainstuff">
+      <input id="searchbar" type="text" placeholder="Enter a String">
+      <button id="button" onclick="submit()">Reverse</button>
+
+      <br>
+
+      <p id="results"></p>
+      <input id="searchbar2" type="text" placeholder="Enter Email Address">
+      <button id="button2" onclick="submitEmail()">Update Email Address</button>
+      <br><a id="email" href="mailto:explored27@gmail.com?subject=Test&body=Message">Send Results in Email</a>
+
+    </div>
+    <script>
+      document.getElementById("email").hidden = true;
+      var frames = 0;
+      var address = "";
+      var revString = "";
+      var originalString = "";
+      //window.localStorage.setItem('data', '');
+      var pairs = window.localStorage.getItem('data');
+      document.getElementById("results").innerHTML = pairs;
+      function submitEmail() {
+        document.getElementById("email").href = "mailto:" + address + "?subject=Kishmish String Reversing Results&body=" + pairs.split("\n").join(", ");
+
+        document.getElementById("email").hidden = false;
+        document.getElementById("searchbar2").value = "";
+      }
+      function submit() {
+        originalString = document.getElementById("searchbar").value;
+        revString = reverse(originalString);
+        address = document.getElementById("searchbar2").value;
+        document.getElementById("button2").hidden = false;
+        document.getElementById("searchbar2").hidden = false;
+        pairs = originalString + " -> " + revString + "\n" + pairs;
+        window.localStorage.setItem('data', pairs);
+
+        document.getElementById("results").innerHTML = "<br>" + originalString + " -> " + revString + document.getElementById("results").innerHTML;
+
+        document.getElementById("searchbar").value = "";
+        document.getElementById("searchbar2").value = "";
+      }
+
+      function animate() {
+        //document.getElementById("emailform").action = "mailto:21xplourde@jd.cnyric.org";
+        var val = document.getElementById("searchbar").value;
+        window.requestAnimationFrame(animate);
+      }
+
+      animate();
+
+
+      function reverse(originalString) { //The function to reverse the string
+
+        originalString = originalString.split(""); //Converts the string into a list of its characters
+
+        var parCount = 0; //Variable for counting the number of parentheses in the string, initially at 0
+
+        for (var i = 0 ; i < originalString.length ; i++) {
+          if (originalString[i] == '(' || originalString[i] == ')') {
+            parCount++; //Increments the parenthesis counter
+          }
+        }
+
+        while (parCount > 0) { //Continues to reverse parts of the string until all parentheses are removed
+
+          var balance = 0; //The variable for finding the balance of parts in the string (in order to find which set of parentheses are the innermost, which should be removed first)
+          var maxBalance = 0; //The variable for storing the maximum balance (eventually, the innermost set of parentheses)
+          var maxLeftIndex = -1; //The (initially uninitialized) variable for storing the left parenthesis that will be removed
+          var maxRightIndex = -1; //The (initially uninitialized) variable for storing the right parenthesis that will be removed
+
+          for (var i = 0 ; i < originalString.length ; i++) { //Loops through the characters of the string to find the innermost parenthesis at each iteration. Since the while loop runs at most N/2 times (N = length of string) and this for loop runs up to N times, the total complexity of the program will be O(N^2), which is fast enough for 0 <= N <= 2000.
+            if (originalString[i] == ")" && balance == maxBalance) { //If this is a closed parenthesis and we're at the current maximum balance, set maxRightIndex to i (it will store the right index of the segment to reverse when the for loop is finished)
+              maxRightIndex = i;
+            }
+
+            if (originalString[i] == "(") { //Increase the balance variable if the loop encounters an open parenthesis
+              balance++;
+            }
+            if (originalString[i] == ")") { //Decrease the balance variable if the loop encounters a closed parenthesis
+              balance--;
+            }
+
+            if (balance >= maxBalance) { //If this balance is greater than or equal to the maximum balance that we've found, update the maxBalance variable
+              maxBalance = balance;
+            }
+
+            if (originalString[i] == "(" && balance == maxBalance) { //If this is an open parenthesis and we're at the current maximum balance, set maxLeftIndex to i (it will store the left index of the segment to reverse when the for loop is finished)
+              maxLeftIndex = i;
+            }
+
+          }
+
+          originalString[maxLeftIndex] = "";
+          originalString[maxRightIndex] = ""; //Erase the parentheses from the part that we're about to reverse
+
+
+          parCount -= 2;
+
+          var newString = [];
+          for (var i = 0 ; i < originalString.length ; i++) {
+            newString.push(originalString[i]);
+          } //Copy originalString into newString (just doing newString = originalString won't work here, since arrays are immutable)
+
+          for (var i = maxLeftIndex + 1 ; i < maxRightIndex ; i++) {
+            newString[i] = originalString[maxRightIndex - (i - maxLeftIndex)]; //Reverse the current innermost segment found in the earlier loop
+          }
+
+          originalString = newString; //Update originalString with the changes we just made
+
+        }
+
+        originalString = originalString.join(""); //After the loop finishes, convert originalString back into a string, instead of a list
+
+        return originalString;
+      }
+
+      console.log(reverse("s(a(bc))ff(ce)"));
+
+    </script>
+
+  </body>
+</html>

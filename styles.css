@@ -1,29 +1,55 @@
-#map {
-  margin-left: 50% - 500px
-  width: 1000px;
-  height: 600px;
-}
-
-.slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 50%;
-  height: 5px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s
-  transition: opacity .2s;
-}
-
-body {
+.mainstuff {
   text-align: center;
-  font-family: 'Montserrat';
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 100px;
 }
 
-#title {
-  background-color: rgb(200, 220, 255);
-  padding-left: 50px;
-  padding-right: 50px;
-  border-radius: 10px;
+#top {
+  font-size: 60px;
+  font-family: 'Monaco';
+  text-align: center;
+}
+
+#top2 {
+  font-size: 30px;
+  font-family: 'Monaco';
+  text-align: center;
+}
+
+#top3 {
+  font-size: 20px;
+  font-family: 'Monaco';
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#searchbar {
+  font-size: 40px;
+  font-family: 'Monaco'
+}
+
+#button {
+  font-size: 40px;
+  font-family: 'Monaco'
+}
+
+#results {
+  font-size: 40px;
+  font-family: 'Monaco'
+}
+
+#email {
+  font-size: 40px;
+  font-family: 'Monaco'
+}
+
+#searchbar2 {
+  font-size: 40px;
+  font-family: 'Monaco'
+}
+
+#button2 {
+  font-size: 40px;
+  font-family: 'Monaco'
 }
