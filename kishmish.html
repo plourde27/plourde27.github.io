@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="stylesheet" type="text/css" href="../sstyles.css">
     <meta charset="utf-8">
     <title>Kishmish</title>
   </head>
@@ -48,7 +48,7 @@
         pairs = originalString + " -> " + revString + "\n" + pairs;
         window.localStorage.setItem('data', pairs);
 
-        document.getElementById("results").innerHTML = "<br>" + originalString + " -> " + revString + document.getElementById("results").innerHTML;
+        document.getElementById("results").innerHTML = originalString + " -> " + revString + "<br>" + document.getElementById("results").innerHTML;
 
         document.getElementById("searchbar").value = "";
         document.getElementById("searchbar2").value = "";
