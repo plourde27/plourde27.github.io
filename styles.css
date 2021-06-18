@@ -2,19 +2,27 @@
   text-align: center;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 #top {
   font-size: 60px;
   font-family: 'Monaco';
   text-align: center;
+  background-color: rgba(50, 240, 240, 0.2);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 #top2 {
   font-size: 30px;
   font-family: 'Monaco';
   text-align: center;
+  background-color: rgba(50, 240, 120, 0.2);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 #top3 {
@@ -40,16 +48,16 @@
 }
 
 #email {
-  font-size: 40px;
+  font-size: 26px;
   font-family: 'Monaco'
 }
 
 #searchbar2 {
-  font-size: 40px;
+  font-size: 26px;
   font-family: 'Monaco'
 }
 
 #button2 {
-  font-size: 40px;
+  font-size: 26px;
   font-family: 'Monaco'
 }
