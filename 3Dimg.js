@@ -1288,7 +1288,7 @@ function runProgram(num) {
     var maxX = 0;
     var maxY = 0;
 
-    var godmode = true;
+    var godmode = false;
     var possible = false;
 
     function animate() {
