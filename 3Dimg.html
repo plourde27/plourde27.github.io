@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3D</title>
+    <style>
+      body {margin: 0; }
+      canvas {display: block; }
+      #top {
+        text-align: center;
+        font-family: 'Avenir';
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script src="3Dimg.js" type="module">
+    </script>
+    <script src="three.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+  </head>
+  <body>
+    <!--<canvas id="topbar" display="block" margin="0 auto"></canvas>!-->
+    <div id="top"></div>
+    <div id="three"></div>
+    <canvas id="game" display="block" margin="0 auto"></canvas>
+	   <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+    <div id="extra" hidden=true></div>
+    <script>
+    var programCode = function(processingInstance) {
+      with (processingInstance) {
+        size(window.innerWidth, window.innerHeight);
+        frameRate(60);
+        angleMode = "degrees";
+        {
+            background(255, 255, 255);
+            var clicked = false;
+            var mouseClicked = function() {
+              clicked = true;
+          };
+
+          var scene = "Menu";
+
+             /*var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN"];
+             var stats = [
+               ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
+               ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
+               ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 2],
+               ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 3],
+               ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 4],
+               ["KILLINGTON", "Killington, VT", 3050, 155, 22, 5],
+               ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 6],
+               ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7]
+             ];
+*/
+              var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
+              var stats = [
+                ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 0],
+                ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 1],
+                ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 2],
+                ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 3]
+              ];
+             draw = function() {
+               if (scene == "Menu") {
+                 cursor(ARROW);
+                 background(255, 255, 255);
+                 fill(150, 150, 0);
+                 rectMode(CENTER);
+                 textAlign(CENTER, CENTER);
+                 textFont(createFont("Avenir"));
+                 textSize(80);
+                 text("Ultimate Ski Race 3D", width/2, 60);
+                 fill(0, 0, 0);
+                 textSize(24);
+                 text("Made by Xavier Plourde", width/2,170);
+                 text("June 29 Pre-release Version", width/2, 130);
+                 noStroke();
+                 fill(100, 100, 100, 40);
+                 rect(width*0.25, 220, 100, 40, 5);
+                 rect(width*0.5, 220, 100, 40, 5);
+                 rect(width*0.65, 220, 100, 40, 5);
+                 rect(width*0.75, 220, 100, 40, 5);
+                 rect(width*0.85, 220, 100, 40, 5);
+                 fill(0, 0, 0);
+                 textSize(16);
+                 textFont(createFont("Avenir"));
+                 textAlign(CENTER, CENTER);
+                 text("Name", width*0.25, 220);
+                 text("Location", width*0.5, 220);
+                 text("Vertical Drop", width*0.65, 220);
+                 text("Trails", width*0.75, 220);
+                 text("Lifts", width*0.85, 220);
+
+                 if (mouseX >= width*0.65-50 && mouseX <= width*0.65+50 && mouseY >= 200 && mouseY <= 240) {
+                   cursor(HAND);
+                   if (clicked) {
+                     stats.sort(function(a, b) { return b[2] - a[2] });
+                   }
+                 }
+                 if (mouseX >= width*0.75-50 && mouseX <= width*0.75+50 && mouseY >= 200 && mouseY <= 240) {
+                   cursor(HAND);
+                   if (clicked) {
+                     stats.sort(function(a, b) { return b[3] - a[3] });
+                   }
+                 }
+                 if (mouseX >= width*0.85-50 && mouseX <= width*0.85+50 && mouseY >= 200 && mouseY <= 240) {
+                   cursor(HAND);
+                   if (clicked) {
+                     stats.sort(function(a, b) { return b[4] - a[4] });
+                   }
+                 }
+
+                 for (var i = 0  ; i < targs.length ; i++) {
+                   fill(0, 0, 200, 40);
+                   noStroke();
+                   if (mouseX >= width*0.1 && mouseX <= width*0.9 && mouseY >= 249 +i*50 && mouseY <= 291 + i*50) {
+                     cursor(HAND);
+                     rect(width/2, 270 + i*50, width*0.8 + 10, 47, 5);
+                     if (clicked) {
+                       //document.getElementById("game").sel = stats[i][6];
+                       scene = "Loading";
+                     }
+                   }
+                   else {
+                     rect(width/2, 270 + i*50, width*0.8, 42, 5);
+                   }
+                   fill(0, 0, 0);
+                   textSize(22);
+                   textFont(createFont("AvenirNext-Bold"));
+                   textAlign(LEFT, CENTER);
+                   text(stats[i][0], width*0.1 + 12, 270 + i*50);
+                   stroke(100, 100, 100, 200);
+                   strokeWeight(1);
+                   textAlign(CENTER, CENTER);
+                   textFont(createFont("Avenir"));
+                   text(stats[i][1], width*0.5, 270 + i*50);
+                   text(stats[i][2], width*0.65, 270 + i*50);
+                   text(stats[i][3], width*0.75, 270 + i*50);
+                   text(stats[i][4], width*0.85, 270 + i*50);
+
+                   line(width*0.4, 249 + i*50, width*0.4, 291 + i*50);
+                   line(width*0.6, 249 + i*50, width*0.6, 291 + i*50);
+                   line(width*0.7, 249 + i*50, width*0.7, 291 + i*50);
+                   line(width*0.8, 249 + i*50, width*0.8, 291 + i*50);
+                   //line(width*0.825, 249 + i*50, width*0.825, 291 + i*50);
+
+                 }
+               }
+               else if (scene == "Loading") {
+                 background(255, 255, 255);
+                 fill(0, 0, 0);
+                 textFont(createFont("Avenir"));
+                 textSize(100);
+                 text("Loading Mountain...", width/2, height/2);
+               }
+               clicked = false;
+
+
+             };
+
+
+         }
+       }
+     };
+
+    var canvas = document.getElementById("game");
+    var processingInstance = new Processing(canvas, programCode);
+
+
+
+    var programCode2 = function(processingInstance) {
+      with (processingInstance) {
+        size(window.innerWidth, 50);
+        frameRate(60);
+        angleMode = "degrees";
+        {
+          background(255, 255, 255);
+          /*rectMode(CENTER);
+
+          fill(100, 100, 100, 40);
+          noStroke();
+          rect(width*0.5, height/2, 120, 40, 5);
+          fill(0, 0, 0);
+          textSize(19);
+
+          textFont(createFont("Avenir"));
+          textAlign(CENTER, CENTER);
+          text("Menu", width*0.5, height/2);*/
+        }
+      }
+
+    };
+
+    var programCode3 = function(processingInstance) {
+      with (processingInstance) {
+        size(window.innerWidth, 50);
+        frameRate(60);
+        angleMode = "degrees";
+        {
+          background(255, 255, 255);
+        }
+      }
+
+    };
+
+     var tick = 0;
+     var loaded = false;
+
+     function animate2() {
+       window.requestAnimationFrame(animate2);
+       if (document.getElementById("extra").innerHTML == "Loaded Lifts") {
+         document.getElementById("extra").innerHTML = "";
+         //document.getElementById("game").width = 0;
+         //document.getElementById("game").height = 0;
+         loaded = true;
+       }
+       else if (document.getElementById("extra").innerHTML == "Going Back") {
+         document.getElementById("extra").innerHTML = "";
+         document.getElementById("game").width = window.innerWidth;
+         document.getElementById("game").height = window.innerHeight;
+       }
+
+       tick++;
+       /*if (loaded) {
+         var canvas2 = document.getElementById("topbar");
+         var processingInstance2 = new Processing(canvas2, programCode2);
+       }
+       else {
+         var canvas2 = document.getElementById("topbar");
+         var processingInstance2 = new Processing(canvas2, programCode3);
+       }*/
+    }
+
+    animate2();
+
+    </script>
+  </body>
