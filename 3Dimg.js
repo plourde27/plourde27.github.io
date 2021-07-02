@@ -84,69 +84,14 @@ function runProgram(num) {
           allText = allText.split("\n");
 
           var ind = 0;
-          for (var i = 0 ; i < allText.length ; i++) {
-            if (allText[i] == TARGET) {
-              ind = i;
-            }
-          }
-
-          var n;
-          var m;
-
-          while (true) {
-            ind++;
-
-            if (allText[ind] == "Pixels: " || allText[ind] == "Elevation: " || allText[ind].length <= 1) {
-              continue;
-            }
 
 
-            var lens = allText[ind].split(" ");
-
-            n = parseInt(lens[0]);
-            m = parseInt(lens[1]);
-            break;
-
-          }
+          var line = allText[1].split(" ");
+          var n = parseInt(line[0]);
+          var m = parseInt(line[1]);
 
 
-          /*for (var i = 0 ; i < n ; i++) {
-            grid.push([]);
-            for (var j = 0 ; j < m ; j++) {
-              grid[i].push(-1);
-            }
-          }*/
 
-          ind++;
-          ind++;
-          ind++;
-
-          for (var i = 0 ; i < n ; i++) {
-            var line = allText[i + ind].split(" ");
-            for (var j = 0 ; j < m ; j++) {
-              //rid[i][j] = line[j].split(",");
-              for (var k = 0 ; k < 4 ; k++) {
-                //grid[i][j][k] = parseInt(grid[i][j][k]);
-              }
-            }
-          }
-
-          ind += n;
-
-
-          while (true) {
-            ind++;
-            if (allText[ind] == "Elevation: " || allText[ind] == "Pixels" || allText[ind].length <= 1) {
-              continue;
-            }
-
-            var lens = allText[ind].split(" ");
-
-            n = parseInt(lens[0]);
-            m = parseInt(lens[1]);
-            break;
-
-          }
 
           for (var i = 0 ; i < n ; i++) {
             elev.push([]);
@@ -155,26 +100,18 @@ function runProgram(num) {
             }
           }
 
-          ind++;
-          ind++;
-          ind++;
-
           for (var i = 0 ; i < n ; i++) {
-            var line = allText[i + ind].split(" ");
+            var line = allText[i + 2].split(" ");
             for (var j = 0 ; j < m ; j++) {
-              line[j] = line[j].split(",");
-              for (var k = 0 ; k < 4 ; k++) {
-                line[j][k] = parseInt(line[j][k]);
-              }
 
-              if (i < 600 && j == 2000) {
-              }
-              elev[i][j] = -10000 + ((line[j][0] * 256 * 256 + line[j][1] * 256 + line[j][2]) * 0.1);
+              elev[i][j] = parseFloat(line[j]);
 
             }
           }
 
           elev = swap(elev);
+
+          console.log(elev);
         }
       }
     }
@@ -190,6 +127,7 @@ function runProgram(num) {
         if (rawFile.status === 200 || rawFile.status == 0) {
           var allText = rawFile.responseText;
           allText = allText.split("\n");
+          console.log(allText);
 
           var ind = 0;
 
@@ -242,8 +180,9 @@ function runProgram(num) {
     rawFile.send(null);
   }
 
-  readTextFile("pixels/m" + (nums[num]+3) + "e.txt");
-  readTextFile2("pixels/m" + (nums[num]+3) + "p.txt");
+  readTextFile("pixels/m" + (nums[num]+3) + "a.txt");
+  readTextFile2("pixels/m" + (nums[num]+3) + "b.txt");
+
 
 
   function findPixel(x, y) {
@@ -1349,7 +1288,7 @@ function runProgram(num) {
     var maxX = 0;
     var maxY = 0;
 
-    var godmode = false;
+    var godmode = true;
     var possible = false;
 
     function animate() {
