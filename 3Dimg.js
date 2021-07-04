@@ -4,7 +4,7 @@ import { BufferGeometryUtils } from 'https://threejsfundamentals.org/threejs/res
 
 var running = false;
 
-/*var stats = [
+var stats = [
   ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
   ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
   ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 2],
@@ -12,16 +12,18 @@ var running = false;
   ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 4],
   ["KILLINGTON", "Killington, VT", 3050, 155, 22, 5],
   ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 6],
-  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7]
-];*/
-
-var stats = [
-  ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 0],
-  ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 1],
-  ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 2],
-  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 3]
+  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7],
+  ["HOLIDAY VALLEY", "Ellicottville, NY", 750, 60, 13, 8],
+  ["BIG SKY", "Bozeman, MT", 4350, 317, 36, 9],
+  ["OKEMO", "Ludlow, VT", 2200, 121, 20, 10],
+  ["SNOW RIDGE", "Turin, NY", 650, 24, 6, 11],
+  ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12],
+  ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13],
+  ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
+  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15]
 ];
-var nums = [2, 3, 4, 7];
+
+var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1];
 
 var stopped = false;
 
@@ -31,8 +33,8 @@ function runProgram(num) {
   console.log("Running...");
 
 
-  //var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN"];
-  var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
+  var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY"];
+  //var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
 
   var TARGET = targs[num];
 
@@ -43,6 +45,8 @@ function runProgram(num) {
   var ELFA = 840;
 
   var GRIDSCALE = 24;
+
+  GRIDSCALE *= Math.max(1, zooms[num]);
 
   var imgArr = [];
 
@@ -56,7 +60,8 @@ function runProgram(num) {
 
   var CHUNK = 30;
   var STEEPCHUNK = 80;
-  var stand = 4.3;
+  var stand = 7.3;
+  stand /= Math.max(1, zooms[num]);
 
 
   function swap(grid) {
@@ -146,6 +151,8 @@ function runProgram(num) {
 
           var len = parseInt(allText[ind]);
 
+          console.log(len);
+
           ind++;
 
           for (var i = 0 ; i < len ; i++) {
@@ -180,10 +187,11 @@ function runProgram(num) {
     rawFile.send(null);
   }
 
-  readTextFile("pixels/m" + (nums[num]+3) + "a.txt");
-  readTextFile2("pixels/m" + (nums[num]+3) + "b.txt");
+  readTextFile("pixels/m" + (num+3) + "a.txt");
+  readTextFile2("pixels/m" + (num+3) + "b.txt");
 
-
+  console.log(elev);
+  console.log(grid);
 
   function findPixel(x, y) {
     return grid[x][y];
@@ -195,7 +203,6 @@ function runProgram(num) {
 
   var upd = 5;
 
-  console.log(lifts[0]);
   console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);
 
   console.log(camx + " " + camy);
@@ -242,6 +249,7 @@ function runProgram(num) {
       var rightI = parseInt(x/CHUNK) * CHUNK  + CHUNK;
       var leftJ = parseInt(y/CHUNK) * CHUNK;
       var rightJ = parseInt(y/CHUNK) * CHUNK + CHUNK;
+
 
       var x0, y0, x1, y1, x2, y2;
 
@@ -311,7 +319,7 @@ function runProgram(num) {
 
     //const canvas = document.querySelector("#can");
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color('white');
+    scene.background = new THREE.Color('rgb(230, 255, 255)');
 
     /*const geometry = new THREE.BufferGeometry();
     const vertices = new Float32Array( [
@@ -396,6 +404,7 @@ function runProgram(num) {
     for (var j = 0 ; j < signs.length ; j++) {
 
       var STRING = signs[j][0];
+      console.log(STRING);
 
       var cx = (signs[j][1] + signs[j][3]) / 2;
       var cy = (signs[j][2] + signs[j][4]) / 2;
@@ -403,13 +412,21 @@ function runProgram(num) {
       if (signs[j][1] < signs[j][3]) {
         ROT += Math.PI;
       }
+      var ang = Math.atan((signs[j][4] - signs[j][2]) / (signs[j][3] - signs[j][1])) + Math.PI/2;
+      if (signs[j][3] > signs[j][1]) {
+        ang += Math.PI;
+      }
+
 
       var SI = 20;
 
       var lx = cx - ((STRING.length/2)*SI/GRIDSCALE)*Math.cos(ROT);
       var ly = cy - ((STRING.length/2)*SI/GRIDSCALE)*Math.sin(ROT);
 
+      //console.log(signs[j]);
+
       var yy = getElevation(parseInt(cx),parseInt(cy))*ELFA*(XF/2.3);
+
       if (yy == cx) {
 
       }
@@ -429,6 +446,28 @@ function runProgram(num) {
         }
         lx += Math.cos(ROT)*SI/GRIDSCALE;
         ly += Math.sin(ROT)*SI/GRIDSCALE;
+
+      }
+
+      lx = cx - ((STRING.length/2)*SI/GRIDSCALE)*Math.cos(ROT) + Math.cos(ang + Math.PI)*1/GRIDSCALE;
+      ly = cy - ((STRING.length/2)*SI/GRIDSCALE)*Math.sin(ROT) + Math.sin(ang + Math.PI) * 1/GRIDSCALE;
+
+      for (var i = 0 ; i < STRING.length ; i++) {
+        var geometry4 = new THREE2.BoxGeometry(SI, SI, 1);
+
+        geometry4.rotateY(-ROT);
+        geometry4.translate((lx)*GRIDSCALE, yy + 40, -(grid[0].length - (ly))*GRIDSCALE);
+
+        if (STRING[STRING.length-i-1] == "_") {
+          letgeo[signs[j][5]][26].push(geometry4);
+        }
+        else {
+          letgeo[signs[j][5]][STRING.charCodeAt(STRING.length-i-1) - 65].push(geometry4);
+        }
+
+        lx += Math.cos(ROT)*SI/GRIDSCALE;
+        ly += Math.sin(ROT)*SI/GRIDSCALE;
+
 
       }
     }
@@ -456,7 +495,7 @@ function runProgram(num) {
         }*/
         var material5;
 
-        material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("letters/" + chars[i] + (6-Math.min(3,j)) + ".png"), transparent: true,opacity: 0.4});
+        material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("letters/" + chars[i] + (6-Math.min(3,j)) + ".png"), transparent: false});
         //material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("bristol.png"), transparent: true,opacity: 0.4});
 
         var mergedGeometry4 = BufferGeometryUtils.mergeBufferGeometries(letgeo[j][i], false);
@@ -497,6 +536,7 @@ function runProgram(num) {
 
       var x = lifts[i][1];
       var y = lifts[i][2];
+
       var circle = new THREE2.CircleGeometry(WDT/2, 32);
       circle.rotateX(3*Math.PI/2);
       circle.translate(x*GRIDSCALE, getElevation(x, y) * ELFA * (XF / 2.3) + OH + 3, -(grid[0].length-y)*GRIDSCALE);
@@ -549,6 +589,7 @@ function runProgram(num) {
 
         var ccx = x + (WDT/(2*GRIDSCALE))*Math.cos(j);
         var ccy = y + (WDT/(2*GRIDSCALE))*Math.sin(j);
+
         var ccz = getElevation(ccx,ccy)*ELFA*(XF/2.3) + OH;
 
         bottomWheel.push([ccx*GRIDSCALE, -(grid[0].length-ccy)*GRIDSCALE, ccz]);
@@ -1016,7 +1057,7 @@ function runProgram(num) {
     class Cylinder {
       constructor(x, y, z) {
         const HT = Math.random()*40 + 220;
-        const geometry = new THREE2.CylinderGeometry(1.6, 1.6, HT, 3);
+        const geometry = new THREE2.CylinderGeometry(9.6, 9.6, HT, 3);
         /*const material = new THREE2.MeshBasicMaterial({color: 'rgb(0, 125, 0)'});
         const cylinder = new THREE2.Mesh(geometry, material);
         cylinder.rotation.x = 0.5*Math.PI;*/
@@ -1144,7 +1185,7 @@ function runProgram(num) {
         y1 = grid[0].length - y1 - 1;
         y2 = grid[0].length - y2 - 1;
 
-        if (z1 >= 6000 || z2 >= 6000 || z3 >= 6000 || z4 >= 6000) continue;
+        //if (z1 >= 6000 || z2 >= 6000 || z3 >= 6000 || z4 >= 6000) continue;
 
         var el = elev[i][j];
 
