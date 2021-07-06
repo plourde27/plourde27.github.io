@@ -3,6 +3,8 @@ import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/t
 import { BufferGeometryUtils } from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/utils/BufferGeometryUtils.js';
 
 var running = false;
+var mouseY = 0;
+var mouseX = 0;
 
 var stats = [
   ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
@@ -20,10 +22,12 @@ var stats = [
   ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12],
   ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13],
   ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
-  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15]
+  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15],
+  ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 16],
+  //["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17]
 ];
 
-var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1];
+var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1, 2, 2];
 
 var stopped = false;
 
@@ -33,7 +37,7 @@ function runProgram(num) {
   console.log("Running...");
 
 
-  var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY"];
+  var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH"];//, "HEAVENLY"];
   //var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
 
   var TARGET = targs[num];
@@ -268,6 +272,10 @@ function runProgram(num) {
         y1 = rightJ;
         x2 = rightI;
         y2 = rightJ;
+      }
+
+      if (x0 == NaN) {
+        return 0;
       }
 
       if (x0 > elev.length) {
@@ -516,7 +524,7 @@ function runProgram(num) {
     var totalAngles = [];
     var goald = [];
 
-    const WDT = 80;
+    var WDT = 80;
 
     for (var i = 0 ; i < lifts.length ; i++) {
 
@@ -526,6 +534,8 @@ function runProgram(num) {
       var OH = 80;
       var MH = 220;
       var HINC = 8;
+
+      WDT += (lifts[i][0] - 2) * 10;
 
 
 
@@ -1238,6 +1248,17 @@ function runProgram(num) {
 
     var i = 0;
 
+    var tottrees = 0;
+
+    var trees = [];
+    for (var i = 0 ; i < grid.length ; i++ ){
+      trees.push([]);
+      for (var j = 0 ; j < grid[0].length ; j++) {
+        trees[i].push([]);
+      }
+    }
+
+    var TREEF = 20;
 
     while (xval < grid.length) {
       yval = 20;
@@ -1268,6 +1289,22 @@ function runProgram(num) {
         }
         //var pd = findPixel(x, y);
 
+        //grid[x][y] = 1;
+
+        for (var k = 0 ; k < lifts.length ; k++) {
+          var m1 = (lifts[k][4] - lifts[k][2]) / (lifts[k][3] - lifts[k][1]);
+          var b1 = lifts[k][4] - lifts[k][3] * m1;
+          var m2 = -1 / m1;
+          var b2 = yval - m2 * xval;
+          var ix = (b2 - b1) / (m1 - m2);
+          var iy = m1 * ix + b1;
+          var dst = Math.sqrt((xval-ix)*(xval-ix) + (yval-iy)*(yval-iy));
+          if (dst <= 170/GRIDSCALE && xval >= Math.min(lifts[k][1], lifts[k][3]) - 170/GRIDSCALE && xval <= Math.max(lifts[k][1], lifts[k][3]) + 170/GRIDSCALE && yval >= Math.min(lifts[k][2], lifts[k][4]) - 170/GRIDSCALE && yval <= Math.max(lifts[k][2], lifts[k][4]) + 170/GRIDSCALE) {
+            grid[x][y] = 0;
+          }
+
+        }
+
         if (grid[x][y] == 0) {
           j++;
           xval -= rfx;
@@ -1280,7 +1317,10 @@ function runProgram(num) {
           //break;
         }
 
+        trees[parseInt(xval/TREEF)][parseInt((grid[0].length - yval - 1)/TREEF)].push([xval * GRIDSCALE, -(grid[0].length - yval - 1) * GRIDSCALE]);
+
         var c = new Cylinder(xval * GRIDSCALE, (grid[0].length - yval - 1) * GRIDSCALE, ans * XF / 2.3);
+        tottrees++;
 
         xval -= rfx;
         yval -= rfy;
@@ -1316,7 +1356,7 @@ function runProgram(num) {
     var TURNFRICTION = 1.02;
     var FLATFRICTION = 1.002;
     var ACCEL = 0.15;
-    var POLE = 3;
+    var POLE = 6;
     var TURN = 0.06;
 
     var friction = 1;
@@ -1332,16 +1372,57 @@ function runProgram(num) {
     var godmode = false;
     var possible = false;
 
+    var tickt = 0;
+    var treecrash = 0;
+
+    var mouseY = window.innerHeight / 2;
+    var MFA = 0;
+
     function animate() {
+      var px = mouseX;
+
+      mouseX = parseInt(document.getElementById("extra2").innerHTML.split(" ")[0]);
+      mouseY = parseInt(document.getElementById("extra2").innerHTML.split(" ")[1]);
+
+      //console.log(mouseX + " " + mouseY);
+
+      //console.log(mouseY);
+
+      var tarr = trees[parseInt(camx/(GRIDSCALE*TREEF))][parseInt((-camy/GRIDSCALE)/TREEF)];
+      var mn = 1000000000;
+
+      for (var i = 0 ; i < tarr.length ; i++) {
+        var x1 = tarr[i][0];
+        var y1 = tarr[i][1];
+        var x2 = camx;
+        var y2 = camy;
+        mn = Math.min(mn, Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)));
+        //console.log(x1 + " " + y1);
+        //console.log(x2 + " " + y2);
+        if (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) < 25) {
+          treecrash = 100;
+          tickt++;
+        }
+      }
+
+      if (treecrash && !godmode && !ridingLift) {
+        camx = lifts[0][3]*GRIDSCALE;
+        camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+      }
+      //console.log(mn);
       //camx = lifts[0][3] * GRIDSCALE;
       //camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
 
-      console.log(lifts);
+      /*console.log(lifts);
       console.log(camx + " " + camy);
-      console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);
+      console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);*/
 
-      if (!possible && !ridingLift) {
-        document.getElementById("top").innerHTML = "Press W to move forward using your poles, use the J and K keys to turn left and right, and use the I and M keys to look up and down";
+      if (treecrash) {
+        document.getElementById("top").innerHTML = "You hit a tree and crashed. Good thing this isn't real life!";
+        treecrash --;
+      }
+      else if (!possible && !ridingLift) {
+        document.getElementById("top").innerHTML = "Press W to move forward using your poles (on flat terrain), and use the mouse to turn and look around.";
       }
       else if (possible && !ridingLift) {
         document.getElementById("top").innerHTML = "Press R to ride the lift";
@@ -1419,9 +1500,9 @@ function runProgram(num) {
         ridingLift = false;
       }
 
-      var move = 1.2;
+      var move = 1.6;
       if (keys[81] && ridingLift) {
-        move = 24;
+        move = 72;
       }
 
 
@@ -1482,20 +1563,20 @@ function runProgram(num) {
       }
 
       if (ridingLift) {
-        camx = chairliftPos[liftChosen][choice][1] + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 25;
-        camy = chairliftPos[liftChosen][choice][2] +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 25;
+        camx = chairliftPos[liftChosen][choice][1] + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
+        camy = chairliftPos[liftChosen][choice][2] +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
         //camz =
       }
 
 
       friction = FLATFRICTION;
 
-      if (keys[75]) {
-        roty += TURN;
+      if (mouseX > px) {
+        roty += Math.min(TURN/2.1, mouseX - px);
         friction = TURNFRICTION;
       }
-      if (keys[74]) {
-        roty -= TURN;
+      if (mouseX < px) {
+        roty -= Math.min(TURN/2.1, px - mouseX);
         friction = TURNFRICTION;
       }
 
@@ -1655,7 +1736,7 @@ function runProgram(num) {
 
 
 
-      if (keys[87]) {
+      if (keys[87] && playerSpeed < POLE * 0.55) {
         playerSpeed = Math.max(playerSpeed, POLE);
       }
 
@@ -1686,11 +1767,21 @@ function runProgram(num) {
       if (keys[75]) {
         rotz += 0.02;
       }
-      if (keys[77]) {
+      /*if (keys[77]) {
         rotx -= 0.02;
       }
       if (keys[73]) {
         rotx += 0.02;
+      }*/
+
+      rotx = -mouseY * (Math.PI / 700) - MFA;
+
+      if (rotx < -Math.PI / 3) {
+        rotx = -Math.PI/3;
+        MFA -= rotx + Math.PI/3
+      }
+      if (rotx > Math.PI / 3) {
+        MFA += rotx - Math.PI / 3;
       }
 
 
@@ -1719,6 +1810,9 @@ function runProgram(num) {
       }*/
       //}
 
+
+
+
     }
     animate();
   }
@@ -1743,13 +1837,22 @@ function aboutRun() {
   runProgram(num);
 }
 
+elem.addEventListener('mousemove', function(event) {
+  var x = event.pageX - left;
+  var y = event.pageY - etop;
+  console.log(x + " " + y);
+});
+
 elem.addEventListener('mousedown', function(event) {
+  //mouseY = y;
+
 
   if (!running) {
     var x = event.pageX - left;
     var y = event.pageY - etop;
     var width = elem.width;
     var height = elem.height;
+
 
     if (x >= width*0.65-50 && x <= width*0.65+50 && y >= 200 && y <= 240) {
 
