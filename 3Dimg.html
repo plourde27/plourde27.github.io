@@ -25,10 +25,11 @@
     <canvas id="game" display="block" margin="0 auto"></canvas>
 	   <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
     <div id="extra" hidden=true></div>
+    <div id="extra2" hidden=true>0 0</div>
     <script>
     var programCode = function(processingInstance) {
       with (processingInstance) {
-        size(window.innerWidth, 270 + 16 * 50 + 50);
+        size(window.innerWidth, 270 + 17 * 50 + 50);
         frameRate(60);
         angleMode = "degrees";
         {
@@ -40,7 +41,7 @@
 
           var scene = "Menu";
 
-            var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY"];
+            var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH"];//, "HEAVENLY"];
             var stats = [
               ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
               ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
@@ -57,7 +58,9 @@
               ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12],
               ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13],
               ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
-              ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15]
+              ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15],
+              ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 16],
+              //["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17]
             ];
 
              draw = function() {
@@ -72,8 +75,8 @@
                  text("Ultimate Ski Race 3D", width/2, 60);
                  fill(0, 0, 0);
                  textSize(24);
-                 text("Made by Xavier Plourde", width/2,170);
-                 text("June 29 Pre-release Version", width/2, 130);
+                 text("Made by Plourde27", width/2,170);
+                 text("July 6 Pre-release Version", width/2, 130);
                  noStroke();
                  fill(100, 100, 100, 40);
                  rect(width*0.25, 220, 100, 40, 5);
@@ -203,6 +206,9 @@
 
     };
 
+    var mouseY = 0;
+    var mouseX = 0;
+
      var tick = 0;
      var loaded = false;
 
@@ -232,6 +238,47 @@
     }
 
     animate2();
+
+    /*var elem = document.getElementById("three");
+    var left = elem.offsetLeft + elem.clientLeft;
+    var etop = elem.offsetTop + elem.clientTop;
+
+
+    elem.addEventListener('mousemove', function(event) {
+      var x = event.pageX - left;
+      var y = event.pageY - etop;
+      document.getElementById("extra2").innerHTML = y;
+    });*/
+
+    const elem = document.getElementById("three");
+
+    function lockPointer(elem) {
+      if (elem.requestPointerLock) {
+        elem.requestPointerLock();
+      } else if (elem.webkitRequestPointerLock) {
+        elem.webkitRequestPointerLock();
+      } else if (elem.mozRequestPointerLock) {
+        elem.mozRequestPointerLock();
+      } else {
+        console.warn("Pointer locking not supported");
+      }
+    }
+
+    elem.addEventListener("mousemove", e => {
+      const {
+        movementX,
+        movementY
+      } = e;
+
+      mouseX += movementX;
+      mouseY += movementY;
+
+      document.getElementById("extra2").innerHTML = mouseX + " " + mouseY;
+    });
+
+    elem.addEventListener("mousedown", e => {
+      lockPointer(elem);
+    });
 
     </script>
   </body>
