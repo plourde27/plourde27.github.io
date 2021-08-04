@@ -32,6 +32,7 @@
 	   <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
     <div id="extra" hidden=true></div>
     <div id="extra2" hidden=true>0 0</div>
+<<<<<<< HEAD
     <div id="pos" hidden=true></div>
     <canvas id="minimap" width=0 height=0></canvas>
     <img id="1" src="pixels/m1i.png">
@@ -133,6 +134,8 @@
     <div id="num" hidden=true>
 
 
+=======
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
     <script>
 
     //document.getElementById("7").hidden = true;
@@ -146,7 +149,11 @@
 
     var programCode = function(processingInstance) {
       with (processingInstance) {
+<<<<<<< HEAD
         size(window.innerWidth, 270 + 50 * 100 + 50);
+=======
+        size(window.innerWidth, 270 + 17 * 50 + 50);
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
         frameRate(60);
         angleMode = "degrees";
         {
@@ -158,7 +165,11 @@
 
           var scene = "Menu";
 
+<<<<<<< HEAD
             /*var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH", "HEAVENLY", "SWAIN", "HUNTER MOUNTAIN"];
+=======
+            var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH"];//, "HEAVENLY"];
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
             var stats = [
               ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
               ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
@@ -177,6 +188,7 @@
               ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
               ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15],
               ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 16],
+<<<<<<< HEAD
               ["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17],
               ["SWAIN", "Swain, NY", 650, 35, 5, 18],
               ["HUNTER MOUNTAIN", "Hunter, NY", 1600, 67, 13, 19]
@@ -278,6 +290,9 @@
               ["LOST TRAIL", "Sula, MT", 1800, 69, 8, 92, 968, 1068, 848, 689, 2],
               ["LOST VALLEY", "Auburn, ME", 240, 31, 4, 93, 637, 662, 509, 452, 1],
               ["LOVELAND", "Keystone, CO", 2210, 94, 10, 94, 1654, 1097, 1631, 749, 2]
+=======
+              //["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17]
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
             ];
             var targs = [];
             for (var i = 0 ; i < stats.length ; i++) {
@@ -297,7 +312,11 @@
                  fill(0, 0, 0);
                  textSize(24);
                  text("Made by Plourde27", width/2,170);
+<<<<<<< HEAD
                  text("August 3 Pre-release Version", width/2, 130);
+=======
+                 text("July 6 Pre-release Version", width/2, 130);
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
                  noStroke();
                  fill(100, 100, 100, 40);
                  rect(width*0.25, 220, 100, 40, 5);
@@ -429,8 +448,11 @@
 
     var mouseY = 0;
     var mouseX = 0;
+<<<<<<< HEAD
     var nr = 0;
     var orot = 0;
+=======
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
      var tick = 0;
      var loaded = false;
@@ -555,6 +577,7 @@
       var x = event.pageX - left;
       var y = event.pageY - etop;
       document.getElementById("extra2").innerHTML = y;
+<<<<<<< HEAD
     });
 
     const elem = document.getElementById("three");
@@ -584,6 +607,8 @@
 
     elem.addEventListener("mousedown", e => {
       lockPointer(elem);
+=======
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
     });*/
 
     const elem = document.getElementById("three");
