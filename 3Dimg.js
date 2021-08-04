@@ -5,6 +5,7 @@ import { BufferGeometryUtils } from 'https://threejsfundamentals.org/threejs/res
 var running = false;
 var mouseY = 0;
 var mouseX = 0;
+<<<<<<< HEAD
 var startX = -1;
 var startY = -1;
 
@@ -137,6 +138,31 @@ for (var i = 0 ; i < stats.length ; i++) {
 }
 
 //zooms = [1, 2, 2, 2, 1, 2, 2, 4];
+=======
+
+var stats = [
+  ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
+  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
+  ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 2],
+  ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 3],
+  ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 4],
+  ["KILLINGTON", "Killington, VT", 3050, 155, 22, 5],
+  ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 6],
+  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7],
+  ["HOLIDAY VALLEY", "Ellicottville, NY", 750, 60, 13, 8],
+  ["BIG SKY", "Bozeman, MT", 4350, 317, 36, 9],
+  ["OKEMO", "Ludlow, VT", 2200, 121, 20, 10],
+  ["SNOW RIDGE", "Turin, NY", 650, 24, 6, 11],
+  ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12],
+  ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13],
+  ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
+  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15],
+  ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 16],
+  //["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17]
+];
+
+var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1, 2, 2];
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
 var stopped = false;
 
@@ -150,12 +176,17 @@ function runProgram(num) {
 
   console.log("Running...");
 
+<<<<<<< HEAD
   var targs = [];
   for (var i = 0 ; i < stats.length ; i++) {
     targs.push(stats[i][0]);
   }
   //var targs = ["AFTON ALPS", "ALTA", "ALYESKA", "ANGEL FIRE", "ANTHONY LAKES", "ARAPAHOE BASIN", "ARIZONA SNOWBOWL"];
   //var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH", "HEAVENLY", "SWAIN", "HUNTER MOUNTAIN"];
+=======
+
+  var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH"];//, "HEAVENLY"];
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
   //var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
 
   var TARGET = targs[num];
@@ -436,7 +467,11 @@ function runProgram(num) {
         return 0;
       }
 
+<<<<<<< HEAD
       if (x0 < 0 || x0 > elev.length) {
+=======
+      if (x0 > elev.length) {
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
         return -1;
       }
       if (x1 < 0 || x1 > elev.length) {
@@ -692,7 +727,11 @@ function runProgram(num) {
       var MH = 220;
       var HINC = 8;
 
+<<<<<<< HEAD
       WDT = 80 + (lifts[i][0] - 2) * 10;
+=======
+      WDT += (lifts[i][0] - 2) * 10;
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
 
 
@@ -1478,8 +1517,11 @@ function runProgram(num) {
           //break;
         }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
         trees[parseInt(xval/TREEF)][parseInt((grid[0].length - yval - 1)/TREEF)].push([xval * GRIDSCALE, -(grid[0].length - yval - 1) * GRIDSCALE]);
 
         var c = new Cylinder(xval * GRIDSCALE, (grid[0].length - yval - 1) * GRIDSCALE, ans * XF / 2.3);
@@ -1540,6 +1582,7 @@ function runProgram(num) {
 
     var mouseY = window.innerHeight / 2;
     var MFA = 0;
+<<<<<<< HEAD
     var frm =0 ;
 
     function animate() {
@@ -1589,12 +1632,22 @@ function runProgram(num) {
 
 
       document.getElementById("pos").innerHTML = parseInt(mpx3) + " " + parseInt(mpy3) + " " + anggg;
+=======
+
+    function animate() {
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
       var px = mouseX;
 
       mouseX = parseInt(document.getElementById("extra2").innerHTML.split(" ")[0]);
       mouseY = parseInt(document.getElementById("extra2").innerHTML.split(" ")[1]);
 
+<<<<<<< HEAD
 
+=======
+      //console.log(mouseX + " " + mouseY);
+
+      //console.log(mouseY);
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
       var tarr = trees[parseInt(camx/(GRIDSCALE*TREEF))][parseInt((-camy/GRIDSCALE)/TREEF)];
       var mn = 1000000000;
@@ -1605,17 +1658,37 @@ function runProgram(num) {
         var x2 = camx;
         var y2 = camy;
         mn = Math.min(mn, Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)));
+<<<<<<< HEAD
 
+=======
+        //console.log(x1 + " " + y1);
+        //console.log(x2 + " " + y2);
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
         if (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) < 25) {
           treecrash = 100;
           tickt++;
         }
       }
+<<<<<<< HEAD
 
       if (treecrash && !godmode && !ridingLift) {
         camx = lifts[0][3]*GRIDSCALE;
         camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
       }
+=======
+
+      if (treecrash && !godmode && !ridingLift) {
+        camx = lifts[0][3]*GRIDSCALE;
+        camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+      }
+      //console.log(mn);
+      //camx = lifts[0][3] * GRIDSCALE;
+      //camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+
+      /*console.log(lifts);
+      console.log(camx + " " + camy);
+      console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);*/
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
       if (treecrash) {
         document.getElementById("top").innerHTML = "You hit a tree and crashed. Good thing this isn't real life!";
@@ -1780,6 +1853,7 @@ function runProgram(num) {
 
       friction = FLATFRICTION;
 
+<<<<<<< HEAD
       var PIF = Math.PI / 400;
 
       if (mouseX > px) {
@@ -1798,6 +1872,14 @@ function runProgram(num) {
         else {
           roty -= Math.min(TURN/1.1, (px - mouseX) * PIF);
         }
+=======
+      if (mouseX > px) {
+        roty += Math.min(TURN/2.1, mouseX - px);
+        friction = TURNFRICTION;
+      }
+      if (mouseX < px) {
+        roty -= Math.min(TURN/2.1, px - mouseX);
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
         friction = TURNFRICTION;
       }
 
@@ -2031,6 +2113,7 @@ function runProgram(num) {
       }*/
       //}
 
+<<<<<<< HEAD
       if (keys[79]) {
 
         quit();
@@ -2041,6 +2124,10 @@ function runProgram(num) {
 
         setTimeout(animate, 1000/60);
       }
+=======
+
+
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 
     }
     animate();
@@ -2124,11 +2211,19 @@ function aboutRun2() {
 elem.addEventListener('mousemove', function(event) {
   var x = event.pageX - left;
   var y = event.pageY - etop;
+<<<<<<< HEAD
 });
 
 var clicking = false;
 
+=======
+  console.log(x + " " + y);
+});
+
+>>>>>>> d1e3c6b9dd9dd4a2e1825b8f315a9ad974382e47
 elem.addEventListener('mousedown', function(event) {
+  //mouseY = y;
+
 
   //mouseY = y;
 
