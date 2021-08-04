@@ -3,37 +3,159 @@ import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/t
 import { BufferGeometryUtils } from 'https://threejsfundamentals.org/threejs/resources/threejs/r125/examples/jsm/utils/BufferGeometryUtils.js';
 
 var running = false;
+var mouseY = 0;
+var mouseX = 0;
+var startX = -1;
+var startY = -1;
+
+/*var stats = [
+  ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0, 1345, 1295, 1410, 420],
+  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1, 557, 729, 447, 388],
+  ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 2, -1, -1, -1, -1],
+  ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 3, -1, -1, -1, -1],
+  ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 4, 1397, 1059, 1580, 567],
+  ["KILLINGTON", "Killington, VT", 3050, 155, 22, 5, 2314, 1652, 2826, 1082],
+  ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 6, 1270, 1146, 971, 513],
+  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7, 619, 1095, 544, 473],
+  ["HOLIDAY VALLEY", "Ellicottville, NY", 750, 60, 13, 8, 1607, 820, 2116, 704],
+  ["BIG SKY", "Bozeman, MT", 4350, 317, 36, 9, 2392 , 1761, 2008, 1120],
+  ["OKEMO", "Ludlow, VT", 2200, 121, 20, 10, 2011, 1017, 1826, 452],
+  ["SNOW RIDGE", "Turin, NY", 650, 24, 6, 11, -1, -1, -1, -1],
+  ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12, 1453, 929, 1831, 306],
+  ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13, 3391, 2424, 2872, 1223],
+  ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14, -1, -1, -1, -1],
+  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15, -1, -1, -1, -1],
+  ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 16, 1075, 1239, 1617, 699],
+  ["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 17, 2627, 1557, 2509, 1164],
+  ["SWAIN", "Swain, NY", 650, 35, 5, 18, 878, 1017, 895, 740],
+  ["HUNTER MOUNTAIN", "Hunter, NY", 1600, 67, 13, 19, 2043, 329, 1383, 350]
+];*/
 
 var stats = [
-  ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0],
-  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1],
-  ["SONG MOUNTAIN", "Tully, NY", 700, 24, 5, 2],
-  ["TOGGENBURG", "Fabius, NY", 700, 22, 5, 3],
-  ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 4],
-  ["KILLINGTON", "Killington, VT", 3050, 155, 22, 5],
-  ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 6],
-  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 24, 3, 7],
-  ["HOLIDAY VALLEY", "Ellicottville, NY", 750, 60, 13, 8],
-  ["BIG SKY", "Bozeman, MT", 4350, 317, 36, 9],
-  ["OKEMO", "Ludlow, VT", 2200, 121, 20, 10],
-  ["SNOW RIDGE", "Turin, NY", 650, 24, 6, 11],
-  ["WHITEFACE MOUNTAIN", "Wilmington, NY", 3430, 89, 12, 12],
-  ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 13],
-  ["REVELSTOKE", "Revelstoke, BC", 5620, 59, 6, 14],
-  ["WOODS VALLEY", "Westernville, NY", 500, 21, 6, 15]
-];
+  ["AFTON ALPS", "Hastings, MN", 350, 48, 21, 0, 570, 706, 844, 357, 1],
+  ["ALTA", "Alta, UT", 2538, 119, 6, 1, 1367, 2046, 972, 1328, 2],
+  ["ALYESKA", "Anchorage, AK", 2500, 76, 7, 2, 1766, 1528, 1370, 911, 2],
+  ["ANGEL FIRE", "Angel Fire, NM", 2077, 81, 7, 3, 2218, 1358, 917, 517, 2],
+  ["ANTHONY LAKES", "Rock Creek, OR", 900, 21, 3, 4, 1184, 870, 1217, 334, 1],
+  ["ARAPAHOE BASIN", "Dillon, CO", 2530, 147, 9, 5, 452, 1630, 713, 1153, 2],
+  ["ARIZONA SNOWBOWL", "Flagstaff, AZ", 2300, 55, 8, 6, 1076, 1897, 1069, 588, 2],
+  ["ASPEN SNOWMASS", "Aspen, CO", 4406, 336, 40, 7, 1289, 1915, 2060, 1205, 4],
+  ["ATTITASH", "Bartlett, NH", 1750, 68, 9, 8, 1994, 1356, 1939, 296, 2],
+  ["BEAR CREEK", "Longswamp, PA", 510, 23, 6, 9, 796, 725, 500, 206, 1],
+  ["BEAR VALLEY", "Bear Valley, CA", 1900, 56, 10, 10, 1793, 1277, 1603, 843, 2],
+  ["BEAVER CREEK", "Eagle-Vail, CO", 3340, 150, 24, 11, 1348, 1516, 885, 857, 4],
+  ["BEAVER MOUNTAIN", "Garden, UT", 1600, 48, 6, 12, 1789, 1283, 1953, 489, 1],
+  ["BELLEAYRE", "Highmount, NY", 1404, 50, 8, 13, 1071, 1172, 972, 310, 2],
+  ["BERKSHIRE EAST", "Charlemont, MA", 1180, 38, 5, 14, 745, 961, 778, 304, 1],
+  ["BIG BOULDER", "Lake Harmony, PA", 600, 8, 8, 15, 814, 856, 650, 322, 1],
+  ["BIG SKY", "Bozeman, MT", 4350, 317, 36, 16, 2393, 1762, 2009, 1120, 4],
+  ["BLACKTAIL MOUNTAIN", "Lakeside, MT", 1440, 27, 4, 17, 779, 1342, 482, 402, 2],
+  ["BLUE HILLS", "Milton, MA", 309, 16, 4, 18, 682, 616, 883, 238, 1],
+  ["BLUE KNOB", "Claysburg, PA", 1072, 34, 6, 19, 684, 1382, 1430, 462, 1],
+  ["BLUE MOUNTAIN", "Danielsville, PA", 1082, 40, 16, 20, 918, 1125, 887, 238, 1],
+  ["BLUEWOOD", "Dayton, WA", 1125, 26, 3, 21, 953, 1200, 833, 277, 1],
+  ["BOGUS BASIN", "Horseshoe Bend, ID", 1800, 82, 10, 22, 1721, 678, 1462, 228, 2],
+  ["BOLTON VALLEY", "Bolton, VT", 1704, 71, 6, 23, 1990, 1161, 1548, 735, 2],
+  ["BOREAL", "Truckee, CA", 500, 34, 8, 24, 875, 1036, 724, 360, 1],
+  ["BRECKENRIDGE", "Breckenridge, CO", 3398, 187, 34, 25, 1230, 2188, 819, 1682, 4],
+  ["BRETTON WOODS", "Carroll, NH", 1500, 63, 10, 26, 1382, 1570, 1462, 519, 2],
+  ["BRIAN HEAD", "Brian Head, UT", 1548, 71, 8, 27, 1335, 965, 545, 569, 2],
+  ["BRIDGER BOWL", "Bridger, MT", 2600, 105, 11, 28, 1196, 1388, 1112, 937, 4],
+  ["BRIGHTON", "Park City, UT", 1745, 66, 7, 29, 1453, 1497, 285, 1008, 2],
+  ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 30, 1345, 1295, 1410, 420, 1],
+  ["BROMLEY", "Peru, VT", 1334, 47, 9, 31, 872, 1401, 1450, 421, 1],
+  ["BRUNDAGE", "McCall, ID", 1800, 67, 6, 32, 1352, 1439, 1260, 517, 2],
+  ["BUCK HILL", "Burnsville, MN", 309, 16, 10, 33, 554, 604, 516, 260, 1],
+  ["BUENA VISTA", "Puposky, MN", 230, 17, 6, 34, 642, 621, 437, 481, 1],
+  ["BURKE MOUNTAIN", "Burke, VT", 2011, 52, 5, 35, 1348, 1307, 1122, 250, 1],
+  ["CAMDEN SNOW BOWL", "Camden, ME", 850, 20, 3, 36, 1369, 1003, 935, 302, 1],
+  ["CAMELBACK", "Tannersville, PA", 800, 39, 16, 37, 1050, 869, 1141, 287, 1],
+  ["CANAAN VALLEY", "Davis, WV", 850, 47, 4, 38, 960, 772, 773, 181, 1],
+  ["CANNON MOUNTAIN", "Franconia, NH", 2180, 97, 11, 39, 1442, 1377, 641, 657, 2],
+  ["CASCADE MOUNTAIN", "Caledonia, WI", 460, 47, 11, 40, 947, 754, 793, 226, 1],
+  ["CATAMOUNT", "Hillsdale, NY", 1000, 38, 8, 41, 1126, 1094, 1231, 367, 1],
+  ["COFFEE MILL", "Wabasha, MN", 425, 14, 3, 42, 872, 746, 511, 339, 1],
+  ["COOPER", "Leadville North, CO", 1200, 59, 5, 43, 1472, 2448, 2174, 1823, 2],
+  ["COPPER MOUNTAIN", "Copper Mountain, CO", 2738, 150, 24, 44, 1392, 2047, 1397, 1362, 4],
+  ["CRANMORE MOUNTAIN", "Conway, NH", 1200, 57, 8, 45, 692, 1256, 1064, 410, 2],
+  ["CRESTED BUTTE", "Crested Butte, CO", 3062, 121, 14, 46, 2789, 1472, 1694, 717, 2],
+  ["CROTCHED MOUNTAIN", "Francestown, NH", 1016, 23, 5, 47, 789, 925, 803, 175, 1],
+  ["CRYSTAL MOUNTAIN", "White River, WA", 3100, 86, 11, 48, 1603, 1397, 1548, 492, 2],
+  ["DEER MOUNTAIN", "Terry, SD", 940, 63, 4, 49, 420, 1039, 908, 358, 1],
+  ["DEER VALLEY", "Park City, UT", 3000, 103, 21, 50, 1248, 1571, 1493, 890, 2],
+  ["DEVILS HEAD", "Greenfield, WI", 500, 23, 9, 51, 953, 774, 948, 498, 1],
+  ["DIAMOND PEAK", "Incline Village, NV", 1840, 30, 7, 52, 1406, 1280, 750, 520, 1],
+  ["DISCOVERY", "Granite, MT", 2380, 74, 8, 53, 2124, 1659, 2644, 1332, 2],
+  ["DODGE RIDGE", "Pinecrest, CA", 1600, 67, 12, 54, 1679, 728, 870, 277,  2],
+  ["DONNER SKI RANCH", "Truckee, CA", 750, 52, 8, 55, 417, 691, 847, 679, 1],
+  ["EAGLE ROCK", "Weston, PA", 550, 14, 3, 56, 845, 933, 611, 285, 1],
+  ["ECHO MOUNTAIN", "Idaho Springs, CO", 600, 9, 3, 57, 969, 904, 781, 284, 1],
+  ["ELDORA", "Eldora, CO", 1400, 65, 10, 58, 632, 1161, 1169, 521, 2],
+  ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 59, 1272, 1149, 970, 514, 1],
+  ["GIANTS RIDGE", "Biwabik, MN", 500, 35, 7, 60, 853, 758, 702, 244, 1],
+  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 61, 1171, 1699, 905, 752, 2],
+  ["GRAND TARGHEE", "Alta, WY", 2270, 97, 5, 62, 1121, 1608, 1571, 890, 2],
+  ["GRANITE PEAK", "Wausau, WI", 700, 58, 5, 63, 800, 1117, 1053, 443, 1],
+  ["GREAT DIVIDE", "Marysville, MT", 1580, 110, 6, 64, 1473, 1565, 1670, 1470, 2],
+  ["GREEK PEAK", "Virgil, NY", 952, 55, 8, 65, 1370, 1053, 1560, 540, 1],
+  ["GUNSTOCK", "Gilford, NH", 1400, 48, 7, 66, 1493, 1377, 1154, 236, 2],
+  ["HEAVENLY", "Heavenly, CA", 3500, 97, 28, 67, 2626, 1555, 2507, 1165, 4],
+  ["HOGADON BASIN", "Casper Mountain, WY", 640, 28, 2, 68, 947, 1053, 690, 376, 1],
+  ["HOLIDAY VALLEY", "Ellicottville, NY", 750, 60, 13, 69, 742, 748, 1492, 551, 1],
+  ["HOLIMONT", "Ellicottville, NY", 700, 55, 8, 70, 1084, 944, 1271, 398, 1],
+  ["HOMEWOOD", "Homewood, CA", 1650, 67, 8, 71, 1500, 1520, 986, 1074, 2],
+  ["HOODOO", "Santiam Junction, OR", 1035, 36, 6, 72, 969, 1388, 808, 744, 2],
+  ["HOWELSEN HILL", "Steamboat Springs, CO", 440, 17, 4, 73, 903, 1462, 888, 1193, 1],
+  ["HUNTER MOUNTAIN", "Hunter, NY", 1600, 67, 13, 74, 543, 1026, 1360, 470, 2],
+  ["HYLAND HILLS", "Bloomington, MN", 175, 11, 7, 75, 510, 415, 481, 270, 1],
+  ["JACK FROST", "Blakeslee, PA", 600, 18, 9, 76, 931, 991, 925, 401, 1],
+  ["JACKSON HOLE", "Teton Village, WY", 4139, 133, 13, 77, 2336, 1769, 1281, 424, 2],
+  ["JAY PEAK", "Jay, VT", 2153, 81, 9, 78, 1104, 1653, 1092, 378, 2],
+  ["JIMINY PEAK", "Lanesborough, MA", 1150, 45, 9, 79, 1123, 1158, 987, 373, 2],
+  ["JUNE MOUNTAIN", "June Lake, CA", 2590, 43, 7, 80, 818, 1691, 521, 289, 2],
+  ["KELLY CANYON", "Heise, ID", 1000, 51, 6, 81, 1100, 1202, 1050, 344, 2],
+  ["KEYSTONE", "Keystone, CO", 3128, 128, 20, 82, 663, 2083, 1244, 1972, 4],
+  ["KILLINGTON", "Killington, VT", 3050, 155, 22, 83, 2026, 1272, 1727, 919, 2],
+  ["KIRKWOOD", "Kit Carson, CA", 2000, 85, 12, 84, 1794, 1289, 1967, 719, 2],
+  ["KISSING BRIDGE", "Glenwood, NY", 550, 39, 10, 85, 915, 889, 889, 385, 1],
+  ["LABRADOR MOUNTAIN", "Truxton, NY", 700, 23, 4, 86, 999, 1052, 643, 500, 1],
+  ["LEE CANYON", "Charleston, NV", 860, 27, 3, 87, 755, 1195, 1255, 849, 2],
+  ["LIBERTY", "Carroll Valley, PA", 620, 21, 7, 88, 1463, 874, 972, 886, 1],
+  ["LITTLE SWITZERLAND", "Slinger, WI", 200, 18, 8, 89, 864, 620, 643, 377, 1],
+  ["LOOKOUT PASS", "Larson, ID", 1150, 38, 4, 90, 457, 1365, 800, 1072, 2],
+  ["LOON MOUNTAIN", "Lincoln, NH", 2100, 61, 10, 91, 1670, 1574, 1481, 702, 2],
+  ["LOST TRAIL", "Sula, MT", 1800, 69, 8, 92, 968, 1068, 848, 689, 2],
+  ["LOST VALLEY", "Auburn, ME", 240, 31, 4, 93, 637, 662, 509, 452, 1],
+  ["LOVELAND", "Keystone, CO", 2210, 94, 10, 94, 1654, 1097, 1631, 749, 2]
+]
 
-var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1];
+
+//var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1, 2, 2, 1, 2];
+var zooms = [];
+for (var i = 0 ; i < stats.length ; i++) {
+  zooms.push(stats[i][10]);
+}
+
+//zooms = [1, 2, 2, 2, 1, 2, 2, 4];
 
 var stopped = false;
 
 function runProgram(num) {
+  var mpx1 = stats[num][6];
+  var mpy1 = stats[num][7];
+  var mpx2 = stats[num][8];
+  var mpy2 = stats[num][9];
+
   running = true;
 
   console.log("Running...");
 
-
-  var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY"];
+  var targs = [];
+  for (var i = 0 ; i < stats.length ; i++) {
+    targs.push(stats[i][0]);
+  }
+  //var targs = ["AFTON ALPS", "ALTA", "ALYESKA", "ANGEL FIRE", "ANTHONY LAKES", "ARAPAHOE BASIN", "ARIZONA SNOWBOWL"];
+  //var targs = ["BRISTOL MOUNTAIN", "GORE MOUNTAIN", "SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "KILLINGTON", "ELK MOUNTAIN", "LABRADOR MOUNTAIN", "HOLIDAY VALLEY", "BIG SKY", "OKEMO", "SNOW RIDGE", "WHITEFACE MOUNTAIN", "SUGARLOAF", "REVELSTOKE", "WOODS VALLEY", "SMUGGLERS NOTCH", "HEAVENLY", "SWAIN", "HUNTER MOUNTAIN"];
   //var targs = ["SONG MOUNTAIN", "TOGGENBURG", "GREEK PEAK", "LABRADOR MOUNTAIN"];
 
   var TARGET = targs[num];
@@ -116,7 +238,6 @@ function runProgram(num) {
 
           elev = swap(elev);
 
-          console.log(elev);
         }
       }
     }
@@ -132,7 +253,7 @@ function runProgram(num) {
         if (rawFile.status === 200 || rawFile.status == 0) {
           var allText = rawFile.responseText;
           allText = allText.split("\n");
-          console.log(allText);
+
 
           var ind = 0;
 
@@ -151,7 +272,6 @@ function runProgram(num) {
 
           var len = parseInt(allText[ind]);
 
-          console.log(len);
 
           ind++;
 
@@ -168,7 +288,7 @@ function runProgram(num) {
           }
 
           len = parseInt(allText[ind]);
-          console.log(len);
+
           ind++;
 
           for (var i = 0 ; i < len ; i++) {
@@ -187,11 +307,17 @@ function runProgram(num) {
     rawFile.send(null);
   }
 
-  readTextFile("pixels/m" + (num+3) + "a.txt");
-  readTextFile2("pixels/m" + (num+3) + "b.txt");
+  readTextFile("pixels/m" + (num+1) + "c.txt");
+  readTextFile2("pixels/m" + (num+1) + "f.txt");
 
-  console.log(elev);
-  console.log(grid);
+  var onec = 0;
+  for (var i = 0 ; i < grid.length ; i++) {
+    for (var j = 0 ; j < grid.length ; j++) {
+      if (grid[i][j] != "0" && grid[i][j] != 0) {
+        onec++;
+      }
+    }
+  }
 
   function findPixel(x, y) {
     return grid[x][y];
@@ -203,11 +329,46 @@ function runProgram(num) {
 
   var upd = 5;
 
-  console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);
 
-  console.log(camx + " " + camy);
+
   var camx = lifts[0][3] * GRIDSCALE;
   var camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+
+  var mpx4 = lifts[0][1];
+  var mpy4 = lifts[0][2];
+  var mpx5 = lifts[0][3];
+  var mpy5 = lifts[0][4];
+  var mpx3 = startX;
+  var mpy3 = startY;
+
+  var miniAngle1 = Math.atan((mpy5 - mpy4) / (mpx5 - mpx4 + 0.000001));
+  if (mpx5 < mpx4) {
+    miniAngle1 += Math.PI;
+  }
+
+  var mpd1 = Math.sqrt((mpx5-mpx4)*(mpx5-mpx4) + (mpy5-mpy4)*(mpy5-mpy4));
+  var mpd2 = Math.sqrt((mpx2-mpx1)*(mpx2-mpx1) + (mpy2-mpy1)*(mpy2-mpy1));
+  var mpd3 = Math.sqrt((mpx3-mpx1)*(mpx3-mpx1) + (mpy3-mpy1)*(mpy3-mpy1));
+
+  var miniAngle2 = Math.atan((mpy3 - mpy1) / (mpx3 - mpx1 + 0.000001));
+  if (mpx3 < mpx1) {
+    miniAngle1 += Math.PI;
+  }
+
+  var miniAngle3 = Math.atan((mpy2 - mpy1) / (mpx2 - mpx1 + 0.000001));
+  if (mpx2 < mpx1) {
+    miniAngle3 += Math.PI;
+  }
+
+  var miniAngle4 = miniAngle1 + miniAngle2 - miniAngle3;
+
+  var mpx6 = mpx4 + Math.cos(miniAngle4) * mpd3 * (mpd1 / mpd2);
+  var mpy6 = mpy4 + Math.sin(miniAngle4) * mpd3 * (mpd1 / mpd2);
+
+
+
+  camx = mpx6 * GRIDSCALE;
+  camy = -(grid[0].length - mpy6) * GRIDSCALE;
 
   var px = 100;
   var pz = 100;
@@ -245,6 +406,7 @@ function runProgram(num) {
     var XF = 12;
 
     function getElevation(x, y) {
+
       var leftI = parseInt(x/CHUNK) * CHUNK;
       var rightI = parseInt(x/CHUNK) * CHUNK  + CHUNK;
       var leftJ = parseInt(y/CHUNK) * CHUNK;
@@ -270,23 +432,27 @@ function runProgram(num) {
         y2 = rightJ;
       }
 
-      if (x0 > elev.length) {
+      if (x0 == NaN) {
+        return 0;
+      }
+
+      if (x0 < 0 || x0 > elev.length) {
         return -1;
       }
-      if (x1 > elev.length) {
+      if (x1 < 0 || x1 > elev.length) {
         return -1;
       }
-      if (x2 > elev.length) {
+      if (x2 < 0 || x2 > elev.length) {
         return -1;
       }
 
-      if (y0 > elev[x0].length) {
+      if (y0 < 0 || y0 > elev[x0].length) {
         return -1;
       }
-      if (y1 > elev[x1].length) {
+      if (y1 < 0 || y1 > elev[x1].length) {
         return -1;
       }
-      if (y2 > elev[x2].length) {
+      if (y2 < 0 || y2 > elev[x2].length) {
         return -1;
       }
 
@@ -316,6 +482,7 @@ function runProgram(num) {
 
       //return z / DV;
     }
+
 
     //const canvas = document.querySelector("#can");
     var scene = new THREE.Scene();
@@ -404,7 +571,6 @@ function runProgram(num) {
     for (var j = 0 ; j < signs.length ; j++) {
 
       var STRING = signs[j][0];
-      console.log(STRING);
 
       var cx = (signs[j][1] + signs[j][3]) / 2;
       var cy = (signs[j][2] + signs[j][4]) / 2;
@@ -423,7 +589,6 @@ function runProgram(num) {
       var lx = cx - ((STRING.length/2)*SI/GRIDSCALE)*Math.cos(ROT);
       var ly = cy - ((STRING.length/2)*SI/GRIDSCALE)*Math.sin(ROT);
 
-      //console.log(signs[j]);
 
       var yy = getElevation(parseInt(cx),parseInt(cy))*ELFA*(XF/2.3);
 
@@ -516,7 +681,7 @@ function runProgram(num) {
     var totalAngles = [];
     var goald = [];
 
-    const WDT = 80;
+    var WDT = 80;
 
     for (var i = 0 ; i < lifts.length ; i++) {
 
@@ -526,6 +691,8 @@ function runProgram(num) {
       var OH = 80;
       var MH = 220;
       var HINC = 8;
+
+      WDT = 80 + (lifts[i][0] - 2) * 10;
 
 
 
@@ -607,6 +774,7 @@ function runProgram(num) {
 
         var ccx = x + (WDT/(2*GRIDSCALE))*Math.cos(j);
         var ccy = y + (WDT/(2*GRIDSCALE))*Math.sin(j);
+
         var ccz = getElevation(ccx,ccy)*ELFA*(XF/2.3) + OH;
 
         topWheel.push([ccx*GRIDSCALE, -(grid[0].length-ccy)*GRIDSCALE, ccz]);
@@ -657,11 +825,11 @@ function runProgram(num) {
 
           var x1 = nx;
           var y1 = ny;
+
           var z1 = getElevation(x1,y1)*ELFA*(XF/2.3) + HTT;
           leftPositions.push([x1*GRIDSCALE, -(grid[0].length-y1)*GRIDSCALE, z1]);
           var x2 = nx + diffx;
           var y2 = ny + diffy;
-
 
           var z2 = getElevation(x2,y2)*ELFA*(XF/2.3) + NX;
 
@@ -720,6 +888,7 @@ function runProgram(num) {
 
           var x1 = nx;
           var y1 = ny;
+
           var z1 = getElevation(x1,y1)*ELFA*(XF/2.3) + HTT;
           rightPositions.push([x1*GRIDSCALE, -(grid[0].length-y1)*GRIDSCALE, z1]);
 
@@ -782,12 +951,14 @@ function runProgram(num) {
           var x1 = x - Math.cos(ang+Math.PI/2)*(WDT/(2*GRIDSCALE));
           //x1 = nx;
           var y1 = y - Math.sin(ang+Math.PI/2)*(WDT/(2*GRIDSCALE));
+
           //y1 = ny;
           var z1 = getElevation(x1,y1)*ELFA*(XF/2.3) + HTT;
           var x2 = x + Math.cos(ang+Math.PI/2)*(WDT/(2*GRIDSCALE));
           //x2 = nx + 100;
           var y2 = y + Math.sin(ang+Math.PI/2)*(WDT/(2*GRIDSCALE));
           //y2 = ny + 100;
+
           var z2 = getElevation(x2,y2)*ELFA*(XF/2.3) + HTT;
 
 
@@ -1043,7 +1214,7 @@ function runProgram(num) {
          v1.x, v1.y, v1.z
       ] );
 
-    geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+      geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
       //const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
       //const mesh = new THREE.Mesh( geometry, material );
       steepgeo[tier].push(geometry);
@@ -1231,13 +1402,24 @@ function runProgram(num) {
     const lonFudge = Math.PI * .5;
     const latFudge = Math.PI * -0.135;
 
-    var xval = 0;
+    var xval = 20;
     var yval = 20;
 
     var CHAOS = 0.1;
 
     var i = 0;
 
+    var tottrees = 0;
+
+    var trees = [];
+    for (var i = 0 ; i < grid.length ; i++ ){
+      trees.push([]);
+      for (var j = 0 ; j < grid[0].length ; j++) {
+        trees[i].push([]);
+      }
+    }
+
+    var TREEF = 20;
 
     while (xval < grid.length) {
       yval = 20;
@@ -1268,6 +1450,22 @@ function runProgram(num) {
         }
         //var pd = findPixel(x, y);
 
+        //grid[x][y] = 1;
+
+        for (var k = 0 ; k < lifts.length ; k++) {
+          var m1 = (lifts[k][4] - lifts[k][2]) / (lifts[k][3] - lifts[k][1]);
+          var b1 = lifts[k][4] - lifts[k][3] * m1;
+          var m2 = -1 / m1;
+          var b2 = yval - m2 * xval;
+          var ix = (b2 - b1) / (m1 - m2);
+          var iy = m1 * ix + b1;
+          var dst = Math.sqrt((xval-ix)*(xval-ix) + (yval-iy)*(yval-iy));
+          if (dst <= 170/GRIDSCALE && xval >= Math.min(lifts[k][1], lifts[k][3]) - 170/GRIDSCALE && xval <= Math.max(lifts[k][1], lifts[k][3]) + 170/GRIDSCALE && yval >= Math.min(lifts[k][2], lifts[k][4]) - 170/GRIDSCALE && yval <= Math.max(lifts[k][2], lifts[k][4]) + 170/GRIDSCALE) {
+            grid[x][y] = 0;
+          }
+
+        }
+
         if (grid[x][y] == 0) {
           j++;
           xval -= rfx;
@@ -1280,7 +1478,12 @@ function runProgram(num) {
           //break;
         }
 
+
+
+        trees[parseInt(xval/TREEF)][parseInt((grid[0].length - yval - 1)/TREEF)].push([xval * GRIDSCALE, -(grid[0].length - yval - 1) * GRIDSCALE]);
+
         var c = new Cylinder(xval * GRIDSCALE, (grid[0].length - yval - 1) * GRIDSCALE, ans * XF / 2.3);
+        tottrees++;
 
         xval -= rfx;
         yval -= rfy;
@@ -1316,7 +1519,7 @@ function runProgram(num) {
     var TURNFRICTION = 1.02;
     var FLATFRICTION = 1.002;
     var ACCEL = 0.15;
-    var POLE = 3;
+    var POLE = 6;
     var TURN = 0.06;
 
     var friction = 1;
@@ -1329,19 +1532,97 @@ function runProgram(num) {
     var maxX = 0;
     var maxY = 0;
 
-    var godmode = false;
+    var godmode = true;
     var possible = false;
 
+    var tickt = 0;
+    var treecrash = 0;
+
+    var mouseY = window.innerHeight / 2;
+    var MFA = 0;
+    var frm =0 ;
+
     function animate() {
-      //camx = lifts[0][3] * GRIDSCALE;
-      //camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+      frm++;
+      console.log(frm);
 
-      console.log(lifts);
-      console.log(camx + " " + camy);
-      console.log(lifts[0][3]*GRIDSCALE + " " + lifts[0][4]*GRIDSCALE);
+      document.getElementById("num").innerHTML = num+1;
 
-      if (!possible && !ridingLift) {
-        document.getElementById("top").innerHTML = "Press W to move forward using your poles, use the J and K keys to turn left and right, and use the I and M keys to look up and down";
+      var mpx4 = lifts[0][1];
+      var mpy4 = lifts[0][2];
+      var mpx5 = lifts[0][3];
+      var mpy5 = lifts[0][4];
+      var mpx6 = camx / GRIDSCALE;
+      var mpy6 = (grid[0].length + camy /GRIDSCALE);
+      var miniAngle1 = Math.atan((mpy5 - mpy4) / (mpx5 - mpx4 + 0.000001));
+      if (mpx5 < mpx4) {
+        miniAngle1 += Math.PI;
+      }
+
+      var mpd1 = Math.sqrt((mpx5-mpx4)*(mpx5-mpx4) + (mpy5-mpy4)*(mpy5-mpy4));
+      var mpd2 = Math.sqrt((mpx2-mpx1)*(mpx2-mpx1) + (mpy2-mpy1)*(mpy2-mpy1));
+      var mpd3 = Math.sqrt((mpx6-mpx4)*(mpx6-mpx4) + (mpy6-mpy4)*(mpy6-mpy4));
+
+      var miniAngle2 = Math.atan((mpy6 - mpy4) / (mpx6 - mpx4 + 0.000001));
+      if (mpx6 < mpx4) {
+        miniAngle1 += Math.PI;
+      }
+
+      var miniAngle3 = Math.atan((mpy2 - mpy1) / (mpx2 - mpx1 + 0.000001));
+      if (mpx2 < mpx1) {
+        miniAngle3 += Math.PI;
+      }
+
+      var miniAngle4 = miniAngle3 + miniAngle2 - miniAngle1;
+
+      var mpx3 = mpx1 + Math.cos(miniAngle4) * mpd3 * (mpd2 / mpd1);
+      var mpy3 = mpy1 + Math.sin(miniAngle4) * mpd3 * (mpd2 / mpd1);
+
+
+      var anggg = Math.PI/2 - (miniAngle3 + roty - miniAngle1);
+
+
+      if (mpx6 >= mpx4) {
+        anggg += Math.PI;
+      }
+
+
+
+      document.getElementById("pos").innerHTML = parseInt(mpx3) + " " + parseInt(mpy3) + " " + anggg;
+      var px = mouseX;
+
+      mouseX = parseInt(document.getElementById("extra2").innerHTML.split(" ")[0]);
+      mouseY = parseInt(document.getElementById("extra2").innerHTML.split(" ")[1]);
+
+
+
+      var tarr = trees[parseInt(camx/(GRIDSCALE*TREEF))][parseInt((-camy/GRIDSCALE)/TREEF)];
+      var mn = 1000000000;
+
+      for (var i = 0 ; i < tarr.length ; i++) {
+        var x1 = tarr[i][0];
+        var y1 = tarr[i][1];
+        var x2 = camx;
+        var y2 = camy;
+        mn = Math.min(mn, Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)));
+
+        if (Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) < 25) {
+          treecrash = 100;
+          tickt++;
+        }
+      }
+
+      if (treecrash && !godmode && !ridingLift) {
+        camx = lifts[0][3]*GRIDSCALE;
+        camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+      }
+
+      if (treecrash) {
+        document.getElementById("top").innerHTML = "You hit a tree and crashed. Good thing this isn't real life!";
+        treecrash --;
+      }
+      else if (!possible && !ridingLift) {
+        document.getElementById("top").innerHTML = "Press W to move forward using your poles (on flat terrain), and use the mouse to turn and look around.";
       }
       else if (possible && !ridingLift) {
         document.getElementById("top").innerHTML = "Press R to ride the lift";
@@ -1362,66 +1643,75 @@ function runProgram(num) {
       }
 
       possible = false;
+      var mni = -1;
+      var mn = 1000000000;
       for (var i = 0 ; i < lifts.length ; i++) {
-        var x1 = camera.position.x / GRIDSCALE;
-        var y1 = (grid[0].length + camera.position.z / GRIDSCALE);
-        var x2 = lifts[i][1];
-        var y2 = lifts[i][2];
+        var x1 = camera.position.x;
+        var y1 = (camera.position.z);
+        var x2 = lifts[i][1]*GRIDSCALE;
+        var y2 = -(grid[0].length - lifts[i][2])*GRIDSCALE;
 
         var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 
-        if (dist <= 40) {
-          possible = true;
-          if (keys[82]) {
-            ridingLift = true;
-            liftChosen = i;
-            console.log("Riding lift");
-            console.log(chairliftPos[i]);
-            var mn = 1000000000;
-            var mni = 0;
-            var mxe = 0;
-            for (var j = 0 ; j < chairliftPos[i].length ; j++) {
-              var x1 = chairliftPos[i][j][1];
-              var y1 = chairliftPos[i][j][2];
-              var z1 = chairliftPos[i][j][3];
+        if (dist <= mn) {
+          mn = dist;
+          mni = i;
+        }
+      }
 
-              var x2 = camera.position.x;
-              var y2 = camera.position.z;
-              var z2 = camera.position.y;
+      //console.log(mn);
 
-              var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+      if (mn <= 600) {
+        var i = mni;
+        possible = true;
+        if (keys[82]) {
+          ridingLift = true;
+          liftChosen = i;
 
-              if (dist < mn) {
-                mn = dist;
-                mni = j;
-              }
+          var mn = 1000000000;
+          var mni = 0;
+          var mxe = 0;
+          for (var j = 0 ; j < chairliftPos[i].length ; j++) {
+            var x1 = chairliftPos[i][j][1];
+            var y1 = chairliftPos[i][j][2];
+            var z1 = chairliftPos[i][j][3];
+
+            var x2 = camera.position.x;
+            var y2 = camera.position.z;
+            var z2 = camera.position.y;
+
+            var dist = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+
+            if (dist < mn) {
+              mn = dist;
+              mni = j;
             }
-
-            choice = mni;
-
-            roty = Math.PI-chairliftPos[i][choice][6];
-
           }
+
+          choice = mni;
+
+          roty = Math.PI-chairliftPos[i][choice][6];
+
+
         }
       }
 
 
-      document.getElementById("game").width = 0;
-      document.getElementById("game").height = 0;
+
 
       //var canvas = document.getElementById("three").firstChild.getContext('2d');
       //canvas.fillStyle = 'rgb(255, 0, 0)';
       //canvas.fillRect(300, 300, 50, 50);
 
-      requestAnimationFrame(animate);
+      //requestAnimationFrame(animate);
 
       if (ridingLift && chairliftPos[liftChosen][choice][4] >= dsts[liftChosen].length / 2 && chairliftPos[liftChosen][choice][4] < dsts[liftChosen].length*0.75) {
         ridingLift = false;
       }
 
-      var move = 1.2;
+      var move = 1.6;
       if (keys[81] && ridingLift) {
-        move = 24;
+        move = 72;
       }
 
 
@@ -1482,20 +1772,32 @@ function runProgram(num) {
       }
 
       if (ridingLift) {
-        camx = chairliftPos[liftChosen][choice][1] + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 25;
-        camy = chairliftPos[liftChosen][choice][2] +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 25;
+        camx = chairliftPos[liftChosen][choice][1] + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
+        camy = chairliftPos[liftChosen][choice][2] +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
         //camz =
       }
 
 
       friction = FLATFRICTION;
 
-      if (keys[75]) {
-        roty += TURN;
+      var PIF = Math.PI / 400;
+
+      if (mouseX > px) {
+        if (ridingLift) {
+          roty += (mouseX - px) * PIF;
+        }
+        else {
+          roty += Math.min(TURN/1.1, (mouseX - px) * PIF)
+        }
         friction = TURNFRICTION;
       }
-      if (keys[74]) {
-        roty -= TURN;
+      if (mouseX < px) {
+        if (ridingLift) {
+          roty -= (px - mouseX) * PIF;
+        }
+        else {
+          roty -= Math.min(TURN/1.1, (px - mouseX) * PIF);
+        }
         friction = TURNFRICTION;
       }
 
@@ -1655,7 +1957,7 @@ function runProgram(num) {
 
 
 
-      if (keys[87]) {
+      if (keys[87] && playerSpeed < POLE * 0.55) {
         playerSpeed = Math.max(playerSpeed, POLE);
       }
 
@@ -1686,11 +1988,21 @@ function runProgram(num) {
       if (keys[75]) {
         rotz += 0.02;
       }
-      if (keys[77]) {
+      /*if (keys[77]) {
         rotx -= 0.02;
       }
       if (keys[73]) {
         rotx += 0.02;
+      }*/
+
+      rotx = -mouseY * (Math.PI / 700) - MFA;
+
+      if (rotx < -Math.PI / 3) {
+        rotx = -Math.PI/3;
+        MFA -= rotx + Math.PI/3
+      }
+      if (rotx > Math.PI / 3) {
+        MFA += rotx - Math.PI / 3;
       }
 
 
@@ -1719,8 +2031,50 @@ function runProgram(num) {
       }*/
       //}
 
+      if (keys[79]) {
+
+        quit();
+
+        //aboutRun2();
+      }
+      else {
+
+        setTimeout(animate, 1000/60);
+      }
+
     }
     animate();
+
+
+    function quit() {
+      running = false;
+      loaded = false;
+
+      while (scene.children.length > 0) {
+        scene.remove(scene.children[0]);
+      }
+
+      document.getElementById("extra").innerHTML = "";
+
+      document.exitPointerLock();
+
+      document.getElementById("minimap").width = 0;
+      document.getElementById("minimap").height = 0;
+
+      //document.getElementById("minimap").getContext('2d').fillStyle = 'rgb(255,255,255)';
+      //document.getElementById("minimap").getContext('2d').fillRect(-1000, -1000, 2000, 2000);
+
+      document.getElementById("extra").height = 0;
+      document.getElementById("top").innerHTML = "";
+
+      document.getElementById("game").width = window.innerWidth;
+      document.getElementById("game").height = 270 + 50 * 100 + 50;
+
+      console.log(document.getElementById("three"));
+      document.getElementById("three").removeChild(renderer.domElement);
+      //num++;
+    }
+
   }
 
   main();
@@ -1740,16 +2094,50 @@ var context = elem.getContext('2d');
 var num = -1;
 
 function aboutRun() {
+
+  document.getElementById("game").width = 0;
+  document.getElementById("game").height = 0;
+
+  document.getElementById("selimg").width = window.innerWidth;
+  document.getElementById("selimg").height = (imgs[num+1].height/imgs[num+1].width)*window.innerWidth;
+  var g = document.getElementById("selimg").getContext('2d');
+  g.fillStyle = 'rgb(255, 0, 0)';
+  g.drawImage(imgs[num+1], 0, 0, window.innerWidth, (imgs[num+1].height/imgs[num+1].width)*window.innerWidth);
+
+  g.fillStyle = 'rgb(255, 255, 255)';
+
+  g.fillRect(window.innerWidth*0, 0, window.innerWidth, 30);
+
+  g.fillStyle = 'rgb(0, 0, 0)';
+  g.font = '18px Avenir';
+  g.fillText("Click on the map to select a starting location", window.innerWidth*0.37, 20);
+  //runProgram(num);
+}
+
+function aboutRun2() {
+  document.getElementById("selimg").width = 0;
+  document.getElementById("selimg").height = 0;
+
   runProgram(num);
 }
 
+elem.addEventListener('mousemove', function(event) {
+  var x = event.pageX - left;
+  var y = event.pageY - etop;
+});
+
+var clicking = false;
+
 elem.addEventListener('mousedown', function(event) {
 
-  if (!running) {
+  //mouseY = y;
+
+  if (!running && !clicking) {
     var x = event.pageX - left;
     var y = event.pageY - etop;
     var width = elem.width;
     var height = elem.height;
+
 
     if (x >= width*0.65-50 && x <= width*0.65+50 && y >= 200 && y <= 240) {
 
@@ -1775,15 +2163,40 @@ elem.addEventListener('mousedown', function(event) {
         num = stats[i][5];
 
 
-        window.setTimeout(aboutRun, 1000);
+        aboutRun();
+
+        //clicking = true;
       }
     }
   }
-  else {
+});
+
+var elem3 = document.getElementById("selimg");
+var left = elem3.offsetLeft + elem3.clientLeft;
+var etop = elem3.offsetTop + elem3.clientTop;
+var context = elem.getContext('2d');
+
+elem3.addEventListener('mousedown', function(event) {
+  var x = event.pageX - left;
+  var y = event.pageY - etop;
+
+
+  startX = x * (document.getElementById(num+1).width / document.getElementById("selimg").width);
+  startY = y * (document.getElementById(num+1).width / document.getElementById("selimg").width);
 
 
 
-  }
+  var g = document.getElementById("selimg").getContext('2d');
+
+  g.fillStyle = 'rgb(255, 255, 255)';
+
+  g.fillRect(window.innerWidth*0, 0, window.innerWidth, 30);
+
+  g.fillStyle = 'rgb(0, 0, 0)';
+  g.font = '18px Avenir';
+  g.fillText("Loading...", window.innerWidth*0.37, 20);
+
+  window.setTimeout(aboutRun2, 100);
 });
 
 /*elem = document.getElementById("topbar");
