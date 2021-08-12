@@ -2570,6 +2570,11 @@ function runProgram(num, trailInd, raceInd) {
       var dx = Math.cos(-roty);
       var dy = -Math.sin(-roty);
 
+      var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
+      camera.position.y = elevat + upd;
+
+      console.log("Lift: " + ridingLift);
+
       if (starting <= 0) {
 
         playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL;
@@ -2599,11 +2604,11 @@ function runProgram(num, trailInd, raceInd) {
 
         if (ridingLift) {
           camera.position.y = chairliftPos[liftChosen][choice][3] - 35;
+
         }
       }
 
-      var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
-      camera.position.y = elevat + upd;
+
 
 
 
