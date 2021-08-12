@@ -8,6 +8,7 @@ var mouseX = 0;
 var startX = -1;
 var startY = -1;
 
+
 /*var stats = [
   ["BRISTOL MOUNTAIN", "Canandaigua, NY", 1200, 34, 6, 0, 1345, 1295, 1410, 420],
   ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 1, 557, 729, 447, 388],
@@ -86,14 +87,14 @@ var stats = [
   ["DEVILS HEAD", "Greenfield, WI", 500, 23, 9, 51, 953, 774, 948, 498, 1],
   ["DIAMOND PEAK", "Incline Village, NV", 1840, 30, 7, 52, 1406, 1280, 750, 520, 1],
   ["DISCOVERY", "Granite, MT", 2380, 74, 8, 53, 2124, 1659, 2644, 1332, 2],
-  ["DODGE RIDGE", "Pinecrest, CA", 1600, 67, 12, 54, 1679, 728, 870, 277,  2],
+  ["DODGE RIDGE", "Pinecrest, CA", 1600, 67, 12, 54, 1679, 728, 870, 277, 2],
   ["DONNER SKI RANCH", "Truckee, CA", 750, 52, 8, 55, 417, 691, 847, 679, 1],
   ["EAGLE ROCK", "Weston, PA", 550, 14, 3, 56, 845, 933, 611, 285, 1],
   ["ECHO MOUNTAIN", "Idaho Springs, CO", 600, 9, 3, 57, 969, 904, 781, 284, 1],
   ["ELDORA", "Eldora, CO", 1400, 65, 10, 58, 632, 1161, 1169, 521, 2],
   ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 59, 1272, 1149, 970, 514, 1],
   ["GIANTS RIDGE", "Biwabik, MN", 500, 35, 7, 60, 853, 758, 702, 244, 1],
-  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 61, 1171, 1699, 905, 752, 2],
+  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 61, 14, 1171, 1699, 905, 752, 2],
   ["GRAND TARGHEE", "Alta, WY", 2270, 97, 5, 62, 1121, 1608, 1571, 890, 2],
   ["GRANITE PEAK", "Wausau, WI", 700, 58, 5, 63, 800, 1117, 1053, 443, 1],
   ["GREAT DIVIDE", "Marysville, MT", 1580, 110, 6, 64, 1473, 1565, 1670, 1470, 2],
@@ -126,8 +127,140 @@ var stats = [
   ["LOON MOUNTAIN", "Lincoln, NH", 2100, 61, 10, 91, 1670, 1574, 1481, 702, 2],
   ["LOST TRAIL", "Sula, MT", 1800, 69, 8, 92, 968, 1068, 848, 689, 2],
   ["LOST VALLEY", "Auburn, ME", 240, 31, 4, 93, 637, 662, 509, 452, 1],
-  ["LOVELAND", "Keystone, CO", 2210, 94, 10, 94, 1654, 1097, 1631, 749, 2]
-]
+  ["LOVELAND", "Keystone, CO", 2210, 94, 10, 94, 1654, 1097, 1631, 749, 2],
+  ["LUTSEN MOUNTAINS", "Lutsen, MN", 825, 62, 8, 95, 1296, 1304, 856, 910, 2],
+  ["MAD RIVER GLEN", "Fayston, VT", 2037, 52, 5, 96, 1379, 1427, 801, 285, 1],
+  ["MAGIC MOUNTAIN", "Londonderry, VT", 1500, 50, 4, 97, 1091, 1253, 894, 178, 1],
+  ["MAGIC MOUNTAIN", "Oakley, ID", 700, 11, 3, 98, 825, 834, 544, 234, 1],
+  ["MAMMOTH MOUNTAIN", "Mammoth Lakes, CA", 3100, 150, 25, 99, 418, 1058, 1174, 945, 4],
+  ["MAVERICK MOUNTAIN", "Elkhorn Hot Springs, MT", 2020, 22, 2, 100, 728, 1012, 1031, 257, 1],
+  ["MEADOWLARK", "Meadowlark Lake, WY", 1000, 14, 2, 101, 1016, 1091, 1213, 249, 1],
+  ["MISSION RIDGE", "Wenatchee Heights, WA", 2250, 53, 6, 102, 1529, 1094, 2390, 421, 2],
+  ["MONARCH MOUNTAIN", "Monarch, CO", 1162, 64, 7, 103, 878, 1285, 1259, 923, 1],
+  ["MONTAGE MOUNTAIN", "Scranton, PA", 1000, 26, 7, 104, 1247, 921, 1380, 394, 1],
+  ["MONTANA SNOWBOWL", "Schley, MT", 2600, 37, 4, 105, 1329, 1237, 1274, 631, 2],
+  ["MOUNT PETER", "Warwick, NY", 450, 18, 5, 106, 778, 793, 849, 236, 1],
+  ["MOUNT SNOW", "Dover, VT", 1700, 87, 20, 107, 1374, 1690, 1660, 514, 2],
+  ["MOUNT SUNAPEE", "Newbury, NH", 1510, 66, 10, 108, 1372, 1336, 998, 403, 2],
+  ["MOUNTAIN HIGH", "Wrightwood, CA", 1600, 59, 14, 109, 1315, 1514, 1152, 823, 1],
+  ["MT ABRAM", "Greenwood, ME", 1150, 54, 5, 110, 1362, 1377, 1342, 724, 1],
+  ["MT ASHLAND", "Ashland, OR", 1150, 44, 5, 111, 843, 929, 1098, 414, 1],
+  ["MT BACHELOR", "Elk Lake, OR", 3365, 121, 15, 112, 1857, 1939, 1766, 1378, 2],
+  ["MT BAKER", "Whatcom, WA", 1500, 38, 10, 113, 723, 764, 764, 285, 2],
+  ["MT BALDY", "Wrightwood, CA", 2100, 26, 4, 114, 1281, 471, 485, 640, 2],
+  ["MT HOOD MEADOWS", "Hood River, OR", 2777, 85, 13, 115, 1411, 1911, 1256, 1328, 2],
+  ["MT HOOD SKIBOWL", "Government Camp, OR", 1500, 69, 10, 116, 1160, 1153, 1210, 564, 2],
+  ["MT JEFFERSON", "Lee, ME", 432, 12, 3, 117, 996, 771, 650, 240, 1],
+  ["MT ROSE", "New Washoe City, NV", 1800, 65, 8, 118, 655, 912, 1093, 388, 2],
+  ["MT SHASTA", "Mt. Shasta, CA", 1435, 32, 5, 119, 1338, 1284, 1536, 687, 1],
+  ["MT SPOKANE", "Riverside, WA", 2000, 55, 8, 120, 643, 1143, 939, 756, 2],
+  ["NASHOBA VALLEY", "Westford, MA", 240, 17, 11, 121, 586, 826, 707, 541, 1],
+  ["NORDIC VALLEY", "Eden, UT", 960, 36, 5, 122, 1908, 802, 530, 150, 2],
+  ["NORTHSTAR", "Truckee, CA", 2280, 100, 20, 123, 1117, 1006, 1292, 380, 2],
+  ["OKEMO", "Ludlow, VT", 2200, 121, 20, 124, 1058, 1292, 1066, 413, 2],
+  ["OTIS RIDGE", "Otis, MA", 400, 11, 4, 125, 456, 774, 685, 218, 1],
+  ["PAJARITO", "Los Alamos, NM", 1410, 45, 6, 126, 1541, 1032, 1354, 393, 2],
+  ["PARK CITY", "Park City, UT", 3226, 341, 44, 127, 1093, 1626, 728, 1219, 4],
+  ["PEEK N PEAK", "French Creek, NY", 400, 27, 10, 128, 1245, 847, 1232, 319, 1],
+  ["PICO MOUNTAIN", "Killington, VT", 1967, 61, 7, 129, 854, 1631, 909, 853, 2],
+  ["POMERELLE", "Albion, ID", 1000, 24, 3, 130, 871, 1041, 1030, 445, 2],
+  ["POWDERHORN", "Powderhorn, CO", 1650, 50, 4, 131, 867, 1193, 336, 335, 2],
+  ["PURGATORY", "Silverton, CO", 2029, 105, 12, 132, 541, 1558, 949, 665, 4],
+  ["RAGGED MOUNTAIN", "Hill, NH", 1250, 57, 6, 133, 1146, 1301, 1022, 361, 2],
+  ["RED LODGE MOUNTAIN", "Red Lodge, MT", 2400, 70, 7, 134, 1576, 1457, 1060, 1187, 2],
+  ["RED RIVER", "Red River, NM", 1600, 64, 7, 135, 1020, 1595, 736, 698, 2],
+  ["ROUNDTOP", "Fortney, PA", 600, 19, 9, 136, 1067, 834, 858, 368, 1],
+  ["SANDIA PEAK", "Sandia Park, NM", 1700, 35, 4, 137, 837, 1644, 475, 226, 1],
+  ["SCHWEITZER", "Colburn, ID", 2400, 92, 10, 138, 896, 941, 858, 436, 2],
+  ["SEVEN SPRINGS", "Seven Springs, PA", 750, 33, 14, 139, 2053, 964, 1609, 475, 2],
+  ["SHAWNEE MOUNTAIN", "East Stroudsburg, PA", 700, 23, 9, 140, 767, 980, 720, 347, 1],
+  ["SHOWDOWN", "Forest Green, MT", 1400, 36, 4, 141, 1420, 1256, 1590, 537, 2],
+  ["SIERRA AT TAHOE", "Nebelhorn, CA", 2212, 47, 14, 142, 1314, 1138, 838, 565, 2],
+  ["SILVER MOUNTAIN", "Kellogg, ID", 2200, 80, 7, 143, 1050, 1395, 699, 1087, 2],
+  ["SIPAPU", "Tres Ritos, NM", 1055, 42, 6, 144, 726, 1212, 763, 641, 1],
+  ["SKI APACHE", "Ruidoso, NM", 1900, 17, 11, 145, 986, 1639, 1551, 323, 2],
+  ["SKI BIG BEAR", "Masthope, PA", 650, 18, 8, 146, 825, 1053, 1062, 375, 1],
+  ["SKI BUTTERNUT", "Great Barrington, MA", 1000, 22, 10, 147, 1125, 927, 1032, 276, 1],
+  ["SKI SANTA FE", "Tesuque, NM", 1725, 86, 7, 148, 1271, 1635, 1707, 901, 2],
+  ["SKI SAWMILL", "Oregon Hill, PA", 515, 13, 5, 149, 553, 643, 739, 226, 1],
+  ["SKI WARD", "Northborough, MA", 210, 9, 4, 150, 854, 715, 861, 210, 1],
+  ["SLEEPING GIANT", "Cody, WY", 810, 48, 3, 151, 723, 1044, 590, 525, 1],
+  ["SMUGGLERS NOTCH", "Cambridge, VT", 2610, 78, 8, 152, 996, 1238, 1048, 412, 2],
+  ["SNOW SUMMIT", "Big Bear Lake, CA", 1200, 27, 16, 153, 1035, 1338, 1156, 210, 1],
+  ["SNOW VALLEY", "Running Springs, CA", 1041, 32, 12, 154, 382, 1878, 719, 876, 1],
+  ["SNOWBASIN", "Ogden, UT", 2900, 107, 12, 155, 2112, 1689, 2051, 559, 2],
+  ["SNOWBIRD", "Alta, UT", 3240, 140, 14, 156, 1463, 2462, 1287, 1472, 2],
+  ["SNOWSHOE MOUNTAIN", "Snowshoe, WV", 1500, 61, 12, 157, 2066, 172, 1278, 790, 2],
+  ["SNOWY RANGE", "Centennial, WY", 990, 33, 5, 158, 1550, 850, 1651, 224, 2],
+  ["SODA SPRINGS", "Soda Springs, CA", 652, 20, 6, 159, 701, 839, 761, 210, 1],
+  ["SOLDIER MOUNTAIN", "Indian Head Rock, ID", 1400, 36, 3, 160, 649, 1243, 754, 638, 1],
+  ["SOLITUDE", "Solitude, UT", 2494, 82, 9, 161, 969, 1479, 1178, 1140, 2],
+  ["SPOUT SPRINGS", "Tollgate, OR", 610, 14, 4, 162, 416, 762, 660, 390, 1],
+  ["SPRING MOUNTAIN", "Sprint Mt, PA", 450, 9, 6, 163, 455, 710, 658, 185, 1],
+  ["SQUAW VALLEY", "Olympic Valley, CA", 2850, 245, 34, 164, 2459, 1798, 2714, 969, 4],
+  ["STEAMBOAT", "Steamboat Springs, CO", 3668, 169, 18, 165, 2035, 2206, 1554, 1376, 4],
+  ["STEVENS PASS", "Skykomish, WA", 1800, 53, 10, 166, 1310, 1244, 1879, 562, 2],
+  ["STOWE", "Stowe, VT", 2360, 116, 12, 167, 1466, 1188, 1556, 153, 4],
+  ["STRATTON", "Winhall, VT", 2003, 99, 11, 168, 578, 1327, 1046, 776, 2],
+  ["SUGAR BOWL", "Truckee, CA", 1500, 105, 12, 169, 1456, 1249, 1690, 702, 2],
+  ["SUGARBUSH", "Fayston, VT", 2600, 111, 16, 170, 656, 1315, 930, 958, 4],
+  ["SUGARLOAF", "Carabassett Valley, ME", 2820, 162, 13, 171, 1884, 1879, 1815, 974, 4],
+  ["SUICIDE SIX", "Pomfret, VT", 650, 24, 3, 172, 734, 897, 830, 405, 1],
+  ["SUN VALLEY", "Ketchum, ID", 3400, 120, 18, 173, 1282, 1937, 1311, 1160, 4],
+  ["SUNDANCE", "Sundance, UT", 2150, 45, 5, 174, 636, 2264, 1038, 1300, 2],
+  ["SUNDAY RIVER", "Newry, ME", 2340, 135, 18, 175, 955, 1683, 1554, 1057, 2],
+  ["SUNLIGHT MOUNTAIN", "Carbondale, CO", 2010, 72, 3, 176, 1212, 1528, 1413, 678, 2],
+  ["SUNRISE PARK", "Greer, AZ", 1800, 69, 6, 177, 491, 1711, 927, 792, 2],
+  ["TAHOE DONNER", "Truckee, CA", 600, 17, 4, 178, 628, 960, 974, 508, 1],
+  ["TAMARACK", "Donnelly, ID", 2800, 48, 7, 179, 1497, 1737, 1813, 717, 4],
+  ["TAOS", "Taos, NM", 3281, 110, 14, 180, 2003, 1702, 1657, 1157, 2],
+  ["TELLURIDE", "Telluride, CO", 4425, 147, 17, 181, 582, 1220, 1164, 1630, 4],
+  ["TENNEY MOUNTAIN", "Plymouth, NH", 1400, 48, 3, 182, 740, 1306, 1176, 167, 2],
+  ["TERRY PEAK", "Terry, SD", 1100, 30, 5, 183, 821, 1194, 990, 375, 1],
+  ["TETON PASS", "Choteau, MT", 1010, 43, 3, 184, 872, 1179, 831, 314, 1],
+  ["THE SUMMIT AT SNOQUALMIE", "Easton, WA", 1025, 65, 20, 185, 1082, 1136, 1140, 592, 2],
+  ["THUNDER RIDGE", "Patterson, NY", 500, 30, 6, 186, 923, 1103, 779, 274, 1],
+  ["TIMBERLINE", "Government Camp, OR", 3690, 41, 8, 187, 824, 2136, 811, 1542, 2],
+  ["TIMBERLINE MOUNTAIN", "Davis, WV", 1000, 22, 6, 188, 1141, 1104, 910, 283, 1],
+  ["TITUS MOUNTAIN", "Malone, NY", 1200, 50, 10, 189, 1863, 1243, 1979, 615, 2],
+  ["TUSSEY MOUNTAIN", "Boalsburg, PA", 520, 15, 5, 190, 710, 663, 786, 188, 1],
+  ["VAIL", "Vail, CO", 3450, 195, 31, 191, 1748, 833, 1465, 201, 4],
+  ["WACHUSETT", "Princeton, MA", 1000, 27, 8, 192, 1079, 983, 1118, 239, 1],
+  ["WATERVILLE VALLEY", "Waterville Valley, NH", 2020, 62, 12, 193, 1090, 1401, 1502, 506, 2],
+  ["WEST MOUNTAIN", "Queensbury, NY", 1010, 29, 5, 194, 567, 1159, 893, 327, 1],
+  ["WHITE PASS", "Naches Valley, WA", 2050, 45, 8, 195, 1283, 1505, 1600, 831, 2],
+  ["WHITE PINE", "Pinedale, WY", 1100, 25, 2, 196, 1244, 1177, 789, 240, 1],
+  ["WHITEFACE", "Wilmington, NY", 3430, 89, 12, 197, 567, 1663, 1224, 435, 4],
+  ["WHITEFISH", "Whitefish, MT", 2353, 113, 14, 198, 916, 1549, 1738, 881, 2],
+  ["WHITETAIL", "Kasiesville, PA", 935, 22, 8, 199, 1015, 1075, 1371, 316, 1],
+  ["WILDCAT MOUNTAIN", "Jackson, NH", 2112, 48, 5, 200, 1206, 1503, 1125, 229, 2],
+  ["WILLAMETTE PASS", "Cascade Summit, OR", 1563, 29, 5, 201, 985, 1960, 1417, 1301, 2],
+  ["WINDHAM MOUNTAIN", "Windham, NY", 1600, 54, 11, 202, 1096, 1004, 1471, 243, 2],
+  ["WINTER PARK", "Winter Park, CO", 3060, 121, 25, 203, 2091, 2304, 1883, 1666, 4],
+  ["WINTERPLACE", "Ghent, WV", 603, 27, 9, 204, 1357, 970, 1324, 712, 1],
+  ["WISP", "McHenry, MD", 700, 33, 12, 205, 540, 1288, 855, 722, 1],
+  ["WOLF CREEK", "Creed Consolidated 1, CO", 1604, 133, 10, 206, 2342, 1230, 2492, 548, 4]
+];
+
+var trails = [
+  ["ODYSSEY", 66, 3, [1597, 574, 1586, 581, 1596, 648, 1572, 639, 1471, 965, 1459, 958, 1440, 1044, 1428, 1033, 1418, 1069, 1411, 1052]],
+  ["KARYATIS WAY", 66, 1, [1527, 522, 1531, 508, 1482, 500, 1486, 491, 1419, 484, 1420, 467, 1371, 482, 1354, 474, 1435, 627, 1414, 628, 1416, 696, 1406, 696, 1387, 746, 1382, 728, 1331, 771, 1330, 760, 1278, 827, 1267, 827, 1289, 910, 1286, 918, 1356, 960, 1350, 971, 1396, 1051, 1373, 1048]],
+  ["ARCADIAN GATE", 66, 2, [909, 434, 904, 424, 840, 477, 831, 462, 597, 546, 596, 528, 370, 687, 365, 667, 223, 835, 201, 835]],
+  ["SUPERSTAR", 84, 3, [1713, 947, 1732, 926, 1764, 1004, 1784, 984, 1804, 1053, 1818, 1039, 1900, 1154, 1912, 1141, 2015, 1234, 2035, 1190]],
+  ["CASCADE", 84, 4, [2008, 382, 1996, 383, 2020, 463, 1996, 464, 2029, 532, 2007, 535, 2035, 664, 2018, 668, 2065, 735, 2055, 767, 2109, 774, 2110, 798, 2136, 819, 2120, 816, 2120, 958, 2106, 956, 2099, 1178, 2074, 1194]]
+];
+
+var races = [
+  ["GREEK PEAK", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
+  ["GREEK PEAK", 66, [1382, 751, 1360, 785, 1339, 821, 1329, 856, 1323, 880, 1319, 904, 1319, 934]],
+  ["LABRADOR", 87, [662, 495, 697, 545, 744, 624, 797, 705, 830, 751, 879, 818, 947, 919, 989, 986, 1021, 1041]],
+  ["GORE MOUNTAIN", 62, [1403, 995, 1385, 1031, 1346, 1097, 1328, 1135, 1341, 1186, 1341, 1228, 1327, 1249, 1293, 1275, 1274, 1300, 1261, 1334, 1252, 1379, 1250, 1416, 1250, 1450, 1249, 1480, 1254, 1523, 1274, 1570, 1291, 1612, 1289, 1646]],
+  ["BRISTOL MOUNTAIN", 31, [1089, 636, 1105, 687, 1112, 740, 1118, 844, 1118, 925, 1116, 990, 1128, 1031, 1143, 1080, 1145, 1137, 1145, 1192, 1147, 1258, 1146, 1312]],
+  ["KILLINGTON", 84, [1719, 937, 1772, 994, 1819, 1055, 1878, 1125, 1934, 1177, 1978, 1204, 2032, 1238]],
+  ["ELKHORN", 17, [954, 1090, 976, 1122, 1011, 1161, 1042, 1186, 1109, 1219, 1160, 1236, 1192, 1265, 1221, 1298]],
+  ["LOWER BROADWAY", 75, [650, 662, 629, 717, 589, 832, 571, 892, 549, 953, 525, 1015]],
+  ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]]
+];
 
 
 //var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1, 2, 2, 1, 2];
@@ -139,8 +272,34 @@ for (var i = 0 ; i < stats.length ; i++) {
 //zooms = [1, 2, 2, 2, 1, 2, 2, 4];
 
 var stopped = false;
+var trailInd = -1;
+var raceInd = -1;
 
-function runProgram(num) {
+function runProgram(num, trailInd, raceInd) {
+  var starting = 0;
+  if (raceInd != -1) {
+    starting = 6;
+  }
+  console.log(num + " " + trailInd + " " + raceInd);
+  var success = false;
+  var cpval = 100;
+  var countdown = 0;
+  var cpnum = -1;
+  var ch = [];
+  var on = [];
+  var onr = [];
+  if (trailInd != -1 ){
+    for (var i = 0 ; i < trails[trailInd][3].length / 4 ; i++) {
+      ch.push(false);
+      on.push(false);
+    }
+  }
+  if (raceInd != -1) {
+    for (var i = 0 ; i < races[raceInd][2].length / 2 ; i++) {
+      onr.push(false);
+    }
+  }
+
   var mpx1 = stats[num][6];
   var mpy1 = stats[num][7];
   var mpx2 = stats[num][8];
@@ -164,7 +323,7 @@ function runProgram(num) {
   var TOWERS = 10;
   var CABLES = 10;
 
-  var ELFA = 840;
+  var ELFA = 1240;
 
   var GRIDSCALE = 24;
 
@@ -198,7 +357,11 @@ function runProgram(num) {
   }
 
   var signs = [];
+  var sloms = [];
   var lifts = [];
+  var banners = [];
+
+
 
   function readTextFile(file) {
     var rawFile = new XMLHttpRequest();
@@ -329,46 +492,58 @@ function runProgram(num) {
 
   var upd = 5;
 
+  function translate(startX, startY) {
+    var mpx4 = lifts[0][1];
+    var mpy4 = lifts[0][2];
+    var mpx5 = lifts[0][3];
+    var mpy5 = lifts[0][4];
+    var mpx3 = startX;
+    var mpy3 = startY;
 
+    var miniAngle1 = Math.atan((mpy5 - mpy4) / (mpx5 - mpx4 + 0.000001));
+    if (mpx5 < mpx4) {
+      miniAngle1 += Math.PI;
+    }
 
-  var camx = lifts[0][3] * GRIDSCALE;
-  var camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+    var mpd1 = Math.sqrt((mpx5-mpx4)*(mpx5-mpx4) + (mpy5-mpy4)*(mpy5-mpy4));
+    var mpd2 = Math.sqrt((mpx2-mpx1)*(mpx2-mpx1) + (mpy2-mpy1)*(mpy2-mpy1));
+    var mpd3 = Math.sqrt((mpx3-mpx1)*(mpx3-mpx1) + (mpy3-mpy1)*(mpy3-mpy1));
 
-  var mpx4 = lifts[0][1];
-  var mpy4 = lifts[0][2];
-  var mpx5 = lifts[0][3];
-  var mpy5 = lifts[0][4];
-  var mpx3 = startX;
-  var mpy3 = startY;
+    var miniAngle2 = Math.atan((mpy3 - mpy1) / (mpx3 - mpx1 + 0.000001));
+    if (mpx3 < mpx1) {
+      miniAngle1 += Math.PI;
+    }
 
-  var miniAngle1 = Math.atan((mpy5 - mpy4) / (mpx5 - mpx4 + 0.000001));
-  if (mpx5 < mpx4) {
-    miniAngle1 += Math.PI;
+    var miniAngle3 = Math.atan((mpy2 - mpy1) / (mpx2 - mpx1 + 0.000001));
+    if (mpx2 < mpx1) {
+      miniAngle3 += Math.PI;
+    }
+
+    var miniAngle4 = miniAngle1 + miniAngle2 - miniAngle3;
+
+    var mpx6 = mpx4 + Math.cos(miniAngle4) * mpd3 * (mpd1 / mpd2);
+    var mpy6 = mpy4 + Math.sin(miniAngle4) * mpd3 * (mpd1 / mpd2);
+
+    return [mpx6, mpy6];
   }
 
-  var mpd1 = Math.sqrt((mpx5-mpx4)*(mpx5-mpx4) + (mpy5-mpy4)*(mpy5-mpy4));
-  var mpd2 = Math.sqrt((mpx2-mpx1)*(mpx2-mpx1) + (mpy2-mpy1)*(mpy2-mpy1));
-  var mpd3 = Math.sqrt((mpx3-mpx1)*(mpx3-mpx1) + (mpy3-mpy1)*(mpy3-mpy1));
+  if (trailInd != -1) {
+    var post = trails[trailInd][3];
+    for (var i = 0 ; i < post.length ; i += 4) {
+      var x1 = post[i];
+      var y1 = post[i+1];
+      var x2 = post[i+2];
+      var y2 = post[i+3];
 
-  var miniAngle2 = Math.atan((mpy3 - mpy1) / (mpx3 - mpx1 + 0.000001));
-  if (mpx3 < mpx1) {
-    miniAngle1 += Math.PI;
+      var pt1 = translate(x1, y1);
+      var pt2 = translate(x2, y2);
+
+      banners.push([trails[trailInd][0], pt1[0], pt1[1], pt2[0], pt2[1], 1]);
+
+    }
   }
 
-  var miniAngle3 = Math.atan((mpy2 - mpy1) / (mpx2 - mpx1 + 0.000001));
-  if (mpx2 < mpx1) {
-    miniAngle3 += Math.PI;
-  }
 
-  var miniAngle4 = miniAngle1 + miniAngle2 - miniAngle3;
-
-  var mpx6 = mpx4 + Math.cos(miniAngle4) * mpd3 * (mpd1 / mpd2);
-  var mpy6 = mpy4 + Math.sin(miniAngle4) * mpd3 * (mpd1 / mpd2);
-
-
-
-  camx = mpx6 * GRIDSCALE;
-  camy = -(grid[0].length - mpy6) * GRIDSCALE;
 
   var px = 100;
   var pz = 100;
@@ -513,6 +688,99 @@ function runProgram(num) {
     document.getElementById("three").appendChild(renderer.domElement);
 
 
+    var SLALOM = 600;
+
+    var rpos = [];
+    console.log(raceInd);
+    if (raceInd != -1) {
+      console.log("not -1");
+
+      for (var i = 0 ; i < races[raceInd][2].length ; i += 2) {
+        var rp = translate(races[raceInd][2][i], races[raceInd][2][i+1]);
+        rpos.push([rp[0]*GRIDSCALE, -(grid[0].length-rp[1])*GRIDSCALE]);
+      }
+
+      var totDist = 0;
+
+      for (var i = 0 ; i < rpos.length - 1 ; i++) {
+        totDist += Math.sqrt((rpos[i+1][0]-rpos[i][0])*(rpos[i+1][0]-rpos[i][0]) + (rpos[i+1][1]-rpos[i][1])*(rpos[i+1][1]-rpos[i][1]));
+      }
+
+
+      var segs = 1;
+      while (totDist / segs > SLALOM) {
+        segs++;
+      }
+
+      var sd = totDist / segs;
+
+      var i = 0;
+      var x = rpos[0][0];
+      var y = rpos[0][1];
+      var lx = -1;
+      var ly = -1;
+      var along = 0;
+      var left = 1;
+
+      var SIDE = 4.5 / zooms[num];
+
+      for (var j = 0 ; j < segs-1 ; j++) {
+        lx = x;
+        ly = y;
+        while (left > 0) {
+          if (Math.sqrt((rpos[i+1][0]-x)*(rpos[i+1][0]-x) + (rpos[i+1][1]-y)*(rpos[i+1][1]-y)) >= sd*left) {
+            x += (rpos[i+1][0]-rpos[i][0]) * ((left * sd) / Math.sqrt((rpos[i+1][0]-rpos[i][0])*(rpos[i+1][0]-rpos[i][0]) + (rpos[i+1][1]-rpos[i][1])*(rpos[i+1][1]-rpos[i][1])));
+            y += (rpos[i+1][1]-rpos[i][1]) * ((left * sd) / Math.sqrt((rpos[i+1][0]-rpos[i][0])*(rpos[i+1][0]-rpos[i][0]) + (rpos[i+1][1]-rpos[i][1])*(rpos[i+1][1]-rpos[i][1])));
+            left = 0;
+          }
+          else {
+            left -= Math.sqrt((rpos[i+1][0]-x)*(rpos[i+1][0]-x) + (rpos[i+1][1]-y)*(rpos[i+1][1]-y)) / sd;
+            x = rpos[i+1][0];
+            y = rpos[i+1][1];
+            i++;
+          }
+        }
+        var el1 = getElevation(lx/GRIDSCALE, grid[0].length + ly/GRIDSCALE)*ELFA*(XF/2.3);
+        var el2 = getElevation(x/GRIDSCALE, grid[0].length + y/GRIDSCALE)*ELFA*(XF/2.3);
+
+        //console.log(Math.atan((el1 - el2)/()
+
+        var ang = Math.atan((rpos[i+1][1]-rpos[i][1])/(rpos[i+1][0]-rpos[i][0]));
+        if (rpos[i][0] < rpos[i+1][0]) {
+          ang += Math.PI;
+        }
+        ang += Math.PI/2;
+
+        if (j < segs-2) {
+          SIDE = 4.5 / zooms[num];
+        }
+        else {
+          SIDE = 375 / GRIDSCALE;
+        }
+        sloms.push([x + Math.cos(ang) * SIDE * GRIDSCALE, y + Math.sin(ang) * SIDE * GRIDSCALE, x - Math.cos(ang) * SIDE * GRIDSCALE, y - Math.sin(ang) * SIDE * GRIDSCALE, 2]);
+
+        left = 1;
+
+      }
+    }
+
+
+
+    var camx = lifts[0][3] * GRIDSCALE;
+    var camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
+
+    var ppt = translate(startX, startY);
+
+
+
+    camx = ppt[0] * GRIDSCALE;
+    camy = -(grid[0].length - ppt[1]) * GRIDSCALE;
+
+    if (raceInd != -1) {
+      camx = (sloms[0][0] + sloms[0][2])/2;
+      camy = (sloms[0][1] + sloms[0][3])/2;
+    }
+
     /*var controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 2, 0);
     controls.update();
@@ -574,6 +842,7 @@ function runProgram(num) {
 
       var cx = (signs[j][1] + signs[j][3]) / 2;
       var cy = (signs[j][2] + signs[j][4]) / 2;
+      console.log(cx + " " + cy);
       var ROT = Math.atan((signs[j][4] - signs[j][2]) / (signs[j][3] - signs[j][1]));
       if (signs[j][1] < signs[j][3]) {
         ROT += Math.PI;
@@ -636,6 +905,205 @@ function runProgram(num) {
 
       }
     }
+
+    var bangeo = [];
+    var slomgeo = [[], [], []];
+    var banpos = [];
+
+    if (raceInd != -1) {
+      for (var j = 0 ; j < sloms.length ; j++) {
+        var cx = sloms[j][0];
+        var cy = sloms[j][1];
+        if (j%2 == 1) {
+          cx = sloms[j][2];
+          cy = sloms[j][3];
+        }
+        else if (j == 0 || j == sloms.length-1) {
+          cx = (sloms[j][0] + sloms[j][2])/2;
+          cy = (sloms[j][1] + sloms[j][3])/2;
+        }
+
+        var ROT = Math.atan((sloms[j][3] - sloms[j][1]) / (sloms[j][2] - sloms[j][0]));
+        if (sloms[j][0] < sloms[j][2]) {
+          ROT += Math.PI;
+        }
+        var ang = Math.atan((sloms[j][3] - sloms[j][1]) / (sloms[j][2] - sloms[j][0])) + Math.PI/2;
+        if (sloms[j][2] > sloms[j][0]) {
+          ang += Math.PI;
+        }
+
+        var STRING = "A";
+
+        var SI = 20;
+
+
+        var yy = getElevation(parseInt(cx/GRIDSCALE),parseInt((grid[0].length + cy/GRIDSCALE)))*ELFA*(XF/2.3);
+
+        if (yy == cx) {
+
+        }
+
+        var sw = 50;
+        var sw2 = 750;
+        var h = 40;
+        var high = 30;
+        var h2 = 150;
+
+        if (j > 0 && j < sloms.length-1) {
+            var geometry4 = new THREE2.BoxGeometry(sw, 12, 1);
+
+            geometry4.rotateY(-ROT);
+            geometry4.translate(cx, yy + h, cy);
+
+            slomgeo[j%2].push(geometry4);
+
+
+
+          var geomet = new THREE2.BoxGeometry(2, (1000 + h + high)*2, 1);
+          geomet.rotateY(-ROT);
+          geomet.translate(cx - sw/2 * Math.cos(ROT), yy - 1000, cy - sw/2 * Math.sin(ROT));
+          slomgeo[j%2].push(geomet);
+
+          var geomet2 = new THREE2.BoxGeometry(2, (1000 + h + high)*2, 1);
+          geomet2.rotateY(-ROT);
+          geomet2.translate(cx + sw/2 * Math.cos(ROT), yy - 1000, cy + sw/2 * Math.sin(ROT));
+          slomgeo[j%2].push(geomet2);
+        }
+        else {
+          var geometry4 = new THREE2.BoxGeometry(sw2, 20, 1);
+
+          geometry4.rotateY(-ROT);
+          geometry4.translate(cx, yy + h2, cy);
+
+          slomgeo[2].push(geometry4);
+
+
+
+        var geomet = new THREE2.BoxGeometry(10, (1000 + h2 + high)*2, 1);
+        geomet.rotateY(-ROT);
+        geomet.translate(cx - sw2/2 * Math.cos(ROT), yy - 1000, cy - sw2/2 * Math.sin(ROT));
+        slomgeo[2].push(geomet);
+
+        var geomet2 = new THREE2.BoxGeometry(10, (1000 + h2 + high)*2, 1);
+        geomet2.rotateY(-ROT);
+        geomet2.translate(cx + sw2/2 * Math.cos(ROT), yy - 1000, cy + sw2/2 * Math.sin(ROT));
+        slomgeo[2].push(geomet2);
+        }
+      }
+    }
+
+
+
+
+    var smaterial1 = new THREE2.MeshBasicMaterial({color:'rgb(0, 0, 200)', opacity:0.8, transparent: true});
+    //material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("bristol.png"), transparent: true,opacity: 0.4});
+
+    if (slomgeo[0].length) {
+      var smergedGeometry1 = BufferGeometryUtils.mergeBufferGeometries(slomgeo[0], false);
+      var smesh1 = new THREE2.Mesh(smergedGeometry1, smaterial1);
+
+      scene.add(smesh1);
+    }
+
+    var smaterial2 = new THREE2.MeshBasicMaterial({color:'rgb(200, 0, 0)', opacity:0.8, transparent: true});
+    //material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("bristol.png"), transparent: true,opacity: 0.4});
+
+    if (slomgeo[1].length) {
+      var smergedGeometry2 = BufferGeometryUtils.mergeBufferGeometries(slomgeo[1], false);
+      var smesh2 = new THREE2.Mesh(smergedGeometry2, smaterial2);
+
+      scene.add(smesh2);
+    }
+
+    var smaterial3 = new THREE2.MeshBasicMaterial({color:'rgb(0, 0, 0)', opacity:0.8, transparent: true});
+    //material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("bristol.png"), transparent: true,opacity: 0.4});
+
+
+    if (slomgeo[2].length) {
+      var smergedGeometry3 = BufferGeometryUtils.mergeBufferGeometries(slomgeo[2], false);
+      var smesh3 = new THREE2.Mesh(smergedGeometry3, smaterial3);
+
+      scene.add(smesh3);
+    }
+
+    for (var j = 0 ; j < banners.length ; j++) {
+
+
+      var cx = (banners[j][1] + banners[j][3]) / 2;
+      var cy = (banners[j][2] + banners[j][4]) / 2;
+      var ROT = Math.atan((banners[j][4] - banners[j][2]) / (banners[j][3] - banners[j][1]));
+      if (banners[j][1] < banners[j][3]) {
+        ROT += Math.PI;
+      }
+      var ang = Math.atan((banners[j][4] - banners[j][2]) / (banners[j][3] - banners[j][1])) + Math.PI/2;
+      if (banners[j][3] > banners[j][1]) {
+        ang += Math.PI;
+      }
+
+      var STRING = "A";
+
+      var SI = 20;
+
+      var lx = cx - ((STRING.length/2)*SI/GRIDSCALE)*Math.cos(ROT);
+      var ly = cy - ((STRING.length/2)*SI/GRIDSCALE)*Math.sin(ROT);
+      var dist = Math.sqrt((banners[j][3]-banners[j][1])*(banners[j][3]-banners[j][1])+(banners[j][4]-banners[j][2])*(banners[j][4]-banners[j][2]));
+
+      var yy = getElevation(parseInt(cx),parseInt(cy))*ELFA*(XF/2.3);
+
+      if (yy == cx) {
+
+      }
+
+      var sw = dist*GRIDSCALE + 30;
+
+      if (j > 0) {
+        for (var i = 0 ; i < STRING.length ; i++) {
+          var geometry4 = new THREE2.BoxGeometry(sw, 40, 1);
+
+          geometry4.rotateY(-ROT);
+          geometry4.translate(cx*GRIDSCALE, yy + 200, -(grid[0].length - cy)*GRIDSCALE);
+
+          bangeo.push(geometry4);
+
+          lx += Math.cos(ROT)*SI/GRIDSCALE;
+          ly += Math.sin(ROT)*SI/GRIDSCALE;
+
+        }
+
+        var geomet = new THREE2.BoxGeometry(10, 2440, 1);
+        geomet.rotateY(-ROT);
+        geomet.translate(cx*GRIDSCALE - sw/2 * Math.cos(ROT), yy - 1000, -(grid[0].length - cy)*GRIDSCALE - sw/2 * Math.sin(ROT));
+        bangeo.push(geomet);
+
+        var geomet2 = new THREE2.BoxGeometry(10, 2440, 1);
+        geomet2.rotateY(-ROT);
+        geomet2.translate(cx*GRIDSCALE + sw/2 * Math.cos(ROT), yy - 1000, -(grid[0].length - cy)*GRIDSCALE + sw/2 * Math.sin(ROT));
+        bangeo.push(geomet2);
+      }
+
+      banpos.push(cx*GRIDSCALE - sw/2 * Math.cos(ROT));
+      banpos.push(-(grid[0].length - cy)*GRIDSCALE - sw/2 * Math.sin(ROT));
+      banpos.push(cx*GRIDSCALE + sw/2 * Math.cos(ROT));
+      banpos.push(-(grid[0].length - cy)*GRIDSCALE + sw/2 * Math.sin(ROT));
+
+      var geomet3 = new THREE2.BoxGeometry(10, 10000, 1);
+      geomet3.rotateY(-ROT);
+      geomet3.translate((cx)*GRIDSCALE, yy - 420, -(grid[0].length - (cy))*GRIDSCALE);
+      //bangeo.push(geomet3);
+
+    }
+
+    var material53 = new THREE2.MeshBasicMaterial({color:'rgb(0, 200, 40)', opacity:0.4, transparent: true});
+    //material5 = new THREE2.MeshBasicMaterial({color:0xffffff, map: loader.load("bristol.png"), transparent: true,opacity: 0.4});
+
+    if (bangeo.length) {
+      var mergedGeometry43 = BufferGeometryUtils.mergeBufferGeometries(bangeo, false);
+      var mesh43 = new THREE2.Mesh(mergedGeometry43, material53);
+
+      scene.add(mesh43);
+    }
+
+
 
     var chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' '];
 
@@ -1518,9 +1986,10 @@ function runProgram(num) {
 
     var TURNFRICTION = 1.02;
     var FLATFRICTION = 1.002;
-    var ACCEL = 0.15;
+    var ACCEL = 0.35;
     var POLE = 6;
-    var TURN = 0.06;
+    var TURN = 0.15;
+    var FPFAC = 27;
 
     var friction = 1;
     var playerSpeed = 0;
@@ -1542,11 +2011,128 @@ function runProgram(num) {
     var MFA = 0;
     var frm =0 ;
 
+    var ocamx = -1;
+    var ocamy = -1;
+
+    if (trailInd != -1) {
+      for (var i = 0 ; i < banpos.length ; i += 4) {
+        var x1 = banpos[i];
+        var y1 = banpos[i+1];
+        var x2 = banpos[i+2];
+        var y2 = banpos[i+3];
+
+        var m = (y2 - y1) / (x2 - x1);
+        var b = y1 - m * x1;
+
+        var dy = camx * m + b;
+
+
+        if (camy >= dy) {
+          on[i/4] = true;
+        }
+        else if (camy < dy) {
+          on[i/4] = false;
+        }
+      }
+
+    }
+
+    if (trailInd != -1) {
+      for (var i = 0 ; i < banpos.length ; i += 4) {
+        var x1 = banpos[i];
+        var y1 = banpos[i+1];
+        var x2 = banpos[i+2];
+        var y2 = banpos[i+3];
+
+        var m = (y2 - y1) / (x2 - x1);
+        var b = y1 - m * x1;
+
+        var dy = camx * m + b;
+
+
+        if (camy >= dy) {
+          on[i/4] = true;
+        }
+        else if (camy < dy) {
+          on[i/4] = false;
+        }
+      }
+
+    }
+
+    if (raceInd != -1) {
+      for (var i = 0 ; i < sloms.length ; i ++) {
+        var x1 = sloms[i][0];
+        var y1 = sloms[i][1];
+        var x2 = sloms[i][2];
+        var y2 = sloms[i][3];
+
+        var m = (y2 - y1) / (x2 - x1);
+        var b = y1 - m * x1;
+
+        var dy = camx * m + b;
+
+
+        if (camy >= dy) {
+          onr[i] = true;
+        }
+        else if (camy < dy) {
+          onr[i] = false;
+        }
+      }
+
+    }
+
+    var lastCall = -1;
+    var fps = 0;
+    var frav = [];
+
+    var time = -starting;
+    var finalTime = 0;
+    var pentime = 0;
+
     function animate() {
+      if (lastCall != -1) {
+        var diff = (Date.now() - lastCall) / 1000;
+        time += diff;
+        starting -= diff;
+        fps = 1/diff;
+      }
+      lastCall = Date.now();
+
+
+      if (frav.length >= 10) {
+        for (var i = 0 ; i <= 8 ; i++) {
+          frav[i] = frav[i+1];
+        }
+        frav[9] = fps;
+      }
+      else {
+        frav.push(fps);
+      }
+
+      var avg = 0;
+      for (var i=0 ; i < frav.length ; i++) {
+        avg += frav[i];
+      }
+
+      avg = avg / frav.length;
+      if (avg == 0) {
+        avg = 60;
+      }
+
+      TURN = 0.15 * (FPFAC / avg);
+
+      countdown--;
+
+      ocamx = camx;
+      ocamy = camy;
+
       frm++;
-      console.log(frm);
 
       document.getElementById("num").innerHTML = num+1;
+
+
 
       var mpx4 = lifts[0][1];
       var mpy4 = lifts[0][2];
@@ -1617,7 +2203,55 @@ function runProgram(num) {
         camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
       }
 
-      if (treecrash) {
+      if (raceInd != -1) {
+        if (starting > 0) {
+          var tst = (parseInt(starting*10)/10);
+          if (tst % 1 == 0) {
+            tst = tst + ".0";
+          }
+          document.getElementById("top").innerHTML = "Race starts in " + tst + " seconds!";
+        }
+        else if (starting > -2) {
+          document.getElementById("top").innerHTML = "Ready... Set... Go!";
+        }
+        else if (finalTime > 0) {
+          document.getElementById("top").innerHTML = "You finished the race with a final time of " + (parseInt(finalTime*10)/10) + " seconds! Press O to go back to the menu.";
+        }
+        else if (pentime > 0) {
+          pentime -= 3;
+          document.getElementById("top").innerHTML = "You missed a slalom pole, so you have been given a 5 second penalty.";
+        }
+        else {
+          var tst = (parseInt(time*10)/10);
+          if (tst % 1 == 0) {
+            tst = tst + ".0";
+          }
+          document.getElementById("top").innerHTML = "Time taken: " + tst + " seconds";
+        }
+      }
+      else if (countdown > 0) {
+        if (cpnum < trails[trailInd][3].length / 4 - 1) {
+          document.getElementById("top").innerHTML = "Checkpoint " + cpnum + " cleared.";
+        }
+        else {
+          var f = true;
+          for (var i = 1 ; i < ch.length ; i++) {
+            if (!ch[i]) {
+              f = false;
+            }
+          }
+
+          if (f) {
+            document.getElementById("top").innerHTML = "Level cleared! Press O to go back to the menu.";
+            success = true;
+          }
+          else {
+            document.getElementById("top").innerHTML = "You didn't get all the checkpoints. Press R to restart the level, and press O to quit.";
+            success = false;
+          }
+        }
+      }
+      else if (treecrash) {
         document.getElementById("top").innerHTML = "You hit a tree and crashed. Good thing this isn't real life!";
         treecrash --;
       }
@@ -1630,6 +2264,8 @@ function runProgram(num) {
       else {
         document.getElementById("top").innerHTML = "Press and hold Q to fast forward the lift ride";
       }
+
+      console.log(possible);
 
       if (stopped) {
         scene.children.forEach(function(object) {
@@ -1659,12 +2295,13 @@ function runProgram(num) {
         }
       }
 
-      //console.log(mn);
 
       if (mn <= 600) {
         var i = mni;
-        possible = true;
-        if (keys[82]) {
+        if (trailInd == -1) {
+          possible = true;
+        }
+        if (keys[82] && trailInd == -1) {
           ridingLift = true;
           liftChosen = i;
 
@@ -1709,9 +2346,9 @@ function runProgram(num) {
         ridingLift = false;
       }
 
-      var move = 1.6;
+      var move = 1.6 * (FPFAC / avg);
       if (keys[81] && ridingLift) {
-        move = 72;
+        move = 72 * (FPFAC / avg);
       }
 
 
@@ -1780,7 +2417,7 @@ function runProgram(num) {
 
       friction = FLATFRICTION;
 
-      var PIF = Math.PI / 400;
+      var PIF = Math.PI / 800;
 
       if (mouseX > px) {
         if (ridingLift) {
@@ -1801,7 +2438,7 @@ function runProgram(num) {
         friction = TURNFRICTION;
       }
 
-      var UF = 8;
+      var UF = 80;
 
       renderer.render(scene, camera);
 
@@ -1933,51 +2570,41 @@ function runProgram(num) {
       var dx = Math.cos(-roty);
       var dy = -Math.sin(-roty);
 
-      playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL;
+      if (starting <= 0) {
+
+        playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL;
 
 
-      playerSpeed /= friction;
-
-      //roty = Math.PI / 2;
-      /*if (keys[65]) {
-        camy -= Math.cos(-roty) * MFAC;
-        camx -= Math.sin(-roty) * MFAC;
-      }
-      if (keys[68]) {
-        camy += Math.cos(-roty) * MFAC;
-        camx += Math.sin(-roty) * MFAC;
-      }
-      if (keys[83]) {
-        camx -= Math.cos(-roty) * MFAC;
-        camy += Math.sin(-roty) * MFAC;
-
-      }
-
-      */
+        playerSpeed /= friction;
 
 
 
-      if (keys[87] && playerSpeed < POLE * 0.55) {
-        playerSpeed = Math.max(playerSpeed, POLE);
-      }
 
-      playerSpeed = Math.max(playerSpeed, 0);
+        if (keys[87] && playerSpeed < POLE * 0.55) {
+          playerSpeed = Math.max(playerSpeed, POLE);
+        }
 
-      camx += Math.cos(-roty) * playerSpeed;
-      camy -= Math.sin(-roty) * playerSpeed;
+        playerSpeed = Math.max(playerSpeed, 0);
+
+        camx += Math.cos(-roty) * playerSpeed * (FPFAC / avg);
+        camy -= Math.sin(-roty) * playerSpeed * (FPFAC / avg);
 
 
-      if (keys[81] && godmode && !ridingLift) {
-        camx += Math.cos(-roty) * 96;
-        camy -= Math.sin(-roty) * 96;
+        if (keys[81] && godmode && !ridingLift) {
+          camx += Math.cos(-roty) * 96 * (FPFAC / avg);
+          camy -= Math.sin(-roty) * 96 * (FPFAC / avg);
+        }
+
+        var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
+
+        if (ridingLift) {
+          camera.position.y = chairliftPos[liftChosen][choice][3] - 35;
+        }
       }
 
       var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
-
       camera.position.y = elevat + upd;
-      if (ridingLift) {
-        camera.position.y = chairliftPos[liftChosen][choice][3] - 35;
-      }
+
 
 
       //camera.lookAt(camera.position.x, camera.position.y - 10, camera.position.z);
@@ -2033,7 +2660,7 @@ function runProgram(num) {
 
       if (keys[79]) {
 
-        quit();
+        quit(success);
 
         //aboutRun2();
       }
@@ -2042,7 +2669,154 @@ function runProgram(num) {
         setTimeout(animate, 1000/60);
       }
 
+      if (trailInd != -1) {
+        for (var i = 0 ; i < banpos.length ; i += 4) {
+          var x1 = banpos[i];
+          var y1 = banpos[i+1];
+          var x2 = banpos[i+2];
+          var y2 = banpos[i+3];
+
+          var m = (y2 - y1) / (x2 - x1);
+          var b = y1 - m * x1;
+
+          var dy = camx * m + b;
+
+          if (i == 16) {
+            //console.log((camy >= dy) + " " + (on[i/4]));
+              //console.log(ocamy + " " + camy);
+          }
+
+          if (camy >= dy) {
+            if (!on[i/4]) {
+              on[i/4] = true;
+              console.log("linecross");
+              console.log(i);
+              if (i>0 && ocamx >= Math.min(x1,x2) - 100 && ocamx <= Math.max(x1,x2) + 100 && ocamy >= Math.min(y1,y2) - 100 && ocamy <= Math.max(y1,y2) + 100) {
+                //if (!ch[i/4]) {
+                  console.log("CHECKPOINT!");
+                  console.log(i);
+                //}
+                if (!ch[i/4]) {
+                  countdown = cpval;
+                  cpnum = i/4;
+                }
+                ch[i/4] = true;
+              }
+              else if (i==16) {
+                console.log(x1 + " " + y1);
+                console.log(x2 + " " + y2);
+                console.log(Math.min(x1,x2)-100 + " " +Math.min(y1,y2)-100);
+                console.log(ocamx + " " + ocamy);
+                console.log(Math.max(x1,x2)+100 + " " + Math.max(y1,y2)+100);
+              }
+            }
+
+          }
+          else if (camy < dy) {
+            if (on[i/4]) {
+              on[i/4] = false;
+              console.log("linecross");
+              console.log(i);
+              if (i>0 && ocamx >= Math.min(x1,x2)-100 && ocamx <= Math.max(x1,x2)+100 && ocamy >= Math.min(y1,y2)-100 && ocamy <= Math.max(y1,y2)+100) {
+                //if (!ch[i/4]) {
+                  console.log("CHECKPOINT!");
+                  console.log(i);
+                  if (!ch[i/4]) {
+                    countdown = cpval;
+                    cpnum = i/4;
+                  }
+                //}
+                ch[i/4] = true;
+              }
+              else if (i==16) {
+                console.log(x1 + " " + y1);
+                console.log(camx + " " + camy);
+                console.log(x2 + " " + y2);
+              }
+            }
+          }
+        }
+
+      }
+
+      if (raceInd != -1) {
+        for (var i = 0 ; i < sloms.length ; i ++) {
+          var x1 = sloms[i][0];
+          var y1 = sloms[i][1];
+          var x2 = sloms[i][2];
+          var y2 = sloms[i][3];
+
+          var m = (y2 - y1) / (x2 - x1);
+          var b = y1 - m * x1;
+
+          var dy = camx * m + b;
+
+
+          var crossed = false;
+
+          if (i == 2) {
+            //console.log(onr[i]);
+          }
+
+          if (camy >= dy && !onr[i]) {
+            onr[i] = true;
+            crossed = true;
+          }
+          else if (camy < dy && onr[i]) {
+            onr[i] = false;
+            crossed = true;
+          }
+
+          if (crossed) {
+            var x3 = camx;
+            var y3 = camy;
+            var x4 = ocamx+0.000001;
+            var y4 = ocamy+0.000001;
+
+            var m2 = (y4-y3)/(x4-x3);
+            var b2 = y4 - m2*x3;
+
+            var intx = (b2 - b) / (m - m2);
+            var inty = m2 * intx + b2;
+
+
+            //console.log(intx + " " + inty);
+
+            var d1 = Math.sqrt((intx-x1)*(intx-x1) + (inty-y1)*(inty-y1));
+            var d2 = Math.sqrt((intx-x2)*(intx-x2) + (inty-y2)*(inty-y2));
+
+            //console.log(d1);
+            //console.log(d2);
+            if (i > 0 && i < sloms.length - 1) {
+              if (Math.min(d1, d2) < 4000) {
+                if (Math.max(d1, d2) < Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+25) {
+                  //through the slalom
+                  console.log("FAIL " + i);
+                  pentime = 100;
+                  time += 5;
+                }
+                else if ((d1 < d2 && i%2 == 1) || (d1 > d2 && i%2 == 0)) {
+                  console.log("FAIL " + i);
+                  pentime = 100;
+                  time += 5;
+                }
+                else {
+                  console.log("SUCCESS " + i);
+                }
+              }
+            }
+            else if (i == sloms.length - 1) {
+              if (intx >= Math.min(x1,x2) - 375 && intx <= Math.max(x1,x2) + 25 && inty >= Math.min(y1,y2)-25 && inty <= Math.max(y1,y2)+25) {
+                console.log("COMPLETE");
+                finalTime = time;
+              }
+            }
+          }
+        }
+      }
+
     }
+
     animate();
 
 
@@ -2054,7 +2828,19 @@ function runProgram(num) {
         scene.remove(scene.children[0]);
       }
 
+
+      if (finalTime) {
+        document.getElementById("result").innerHTML = "Time " + raceInd + " " + finalTime;
+      }
+      else if (success) {
+        document.getElementById("result").innerHTML = trailInd;
+      }
+      else {
+        document.getElementById("result").innerHTML = -1;
+      }
+
       document.getElementById("extra").innerHTML = "";
+
 
       document.exitPointerLock();
 
@@ -2068,9 +2854,8 @@ function runProgram(num) {
       document.getElementById("top").innerHTML = "";
 
       document.getElementById("game").width = window.innerWidth;
-      document.getElementById("game").height = 270 + 50 * 100 + 50;
+      document.getElementById("game").height = 270 + 50 * 207 + 50;
 
-      console.log(document.getElementById("three"));
       document.getElementById("three").removeChild(renderer.domElement);
       //num++;
     }
@@ -2118,7 +2903,7 @@ function aboutRun2() {
   document.getElementById("selimg").width = 0;
   document.getElementById("selimg").height = 0;
 
-  runProgram(num);
+  runProgram(num, trailInd, raceInd);
 }
 
 elem.addEventListener('mousemove', function(event) {
@@ -2128,44 +2913,105 @@ elem.addEventListener('mousemove', function(event) {
 
 var clicking = false;
 
-elem.addEventListener('mousedown', function(event) {
+var left = elem.offsetLeft + elem.clientLeft;
+var etop = elem.offsetTop + elem.clientTop;
+var mountSel = 0;
 
+elem.addEventListener('mousedown', function(event) {
+  var x = event.pageX - left;
+  var y = event.pageY - etop;
   //mouseY = y;
 
+  if (y >= 165 && y <= 207) {
+    var wd = (window.innerWidth*0.3-60);
+    if (x >= window.innerWidth*0.05 && x <= window.innerWidth*0.05 + wd) {
+      mountSel = 0;
+    }
+    if (x >= window.innerWidth*0.33 + 30 && x <= window.innerWidth * 0.33 + 30 + wd) {
+      mountSel = 1;
+    }
+    if (x >= window.innerWidth*0.67 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+      mountSel = 2;
+    }
+  }
+
   if (!running && !clicking) {
-    var x = event.pageX - left;
-    var y = event.pageY - etop;
     var width = elem.width;
     var height = elem.height;
+    if (mountSel == 0) {
+      var x = event.pageX - left;
+      var y = event.pageY - etop;
 
 
-    if (x >= width*0.65-50 && x <= width*0.65+50 && y >= 200 && y <= 240) {
 
-      stats.sort(function(a, b) { return b[2] - a[2] });
+      if (x >= width*0.65-50 && x <= width*0.65+50 && y >= 200 && y <= 240) {
 
+        stats.sort(function(a, b) { return b[2] - a[2] });
+
+      }
+      if (x >= width*0.75-50 && x <= width*0.75+50 && y >= 200 && y <= 240) {
+
+          stats.sort(function(a, b) { return b[3] - a[3] });
+
+      }
+      if (x >= width*0.85-50 && x <= width*0.85+50 && y >= 200 && y <= 240) {
+
+          stats.sort(function(a, b) { return b[4] - a[4] });
+
+      }
+
+
+      for (var i = 0  ; i < stats.length ; i++) {
+
+        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
+
+          num = stats[i][5];
+
+          raceInd = -1;
+          trailInd = -1;
+
+          aboutRun();
+
+          //clicking = true;
+        }
+      }
     }
-    if (x >= width*0.75-50 && x <= width*0.75+50 && y >= 200 && y <= 240) {
+    else if (mountSel == 1) {
+      for (var i = 0  ; i < trails.length ; i++) {
 
-        stats.sort(function(a, b) { return b[3] - a[3] });
+        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
 
+          trailInd = i;
+          raceInd = -1;
+          num = trails[i][1]-1;
+
+          startX = (trails[i][3][0] + trails[i][3][2]) / 2;
+          startY = (trails[i][3][1] + trails[i][3][3]) / 2;
+
+
+          aboutRun2();
+
+          //clicking = true;
+        }
+      }
     }
-    if (x >= width*0.85-50 && x <= width*0.85+50 && y >= 200 && y <= 240) {
+    else if (mountSel == 2) {
+      for (var i = 0  ; i < races.length ; i++) {
 
-        stats.sort(function(a, b) { return b[4] - a[4] });
+        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
 
-    }
+          trailInd = -1;
+          raceInd = i;
+          num = races[i][1]-1;
 
-
-    for (var i = 0  ; i < stats.length ; i++) {
-
-      if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
-
-        num = stats[i][5];
+          startX = (races[i][2][0] + races[i][2][2]) / 2;
+          startY = (races[i][2][1] + races[i][2][3]) / 2;
 
 
-        aboutRun();
+          aboutRun2();
 
-        //clicking = true;
+          //clicking = true;
+        }
       }
     }
   }
@@ -2176,10 +3022,11 @@ var left = elem3.offsetLeft + elem3.clientLeft;
 var etop = elem3.offsetTop + elem3.clientTop;
 var context = elem.getContext('2d');
 
+var msl = 0;
+
 elem3.addEventListener('mousedown', function(event) {
   var x = event.pageX - left;
   var y = event.pageY - etop;
-
 
   startX = x * (document.getElementById(num+1).width / document.getElementById("selimg").width);
   startY = y * (document.getElementById(num+1).width / document.getElementById("selimg").width);
