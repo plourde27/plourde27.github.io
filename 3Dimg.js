@@ -247,21 +247,44 @@ var trails = [
   ["KARYATIS WAY", 66, 1, [1527, 522, 1531, 508, 1482, 500, 1486, 491, 1419, 484, 1420, 467, 1371, 482, 1354, 474, 1435, 627, 1414, 628, 1416, 696, 1406, 696, 1387, 746, 1382, 728, 1331, 771, 1330, 760, 1278, 827, 1267, 827, 1289, 910, 1286, 918, 1356, 960, 1350, 971, 1396, 1051, 1373, 1048]],
   ["ARCADIAN GATE", 66, 2, [909, 434, 904, 424, 840, 477, 831, 462, 597, 546, 596, 528, 370, 687, 365, 667, 223, 835, 201, 835]],
   ["SUPERSTAR", 84, 3, [1713, 947, 1732, 926, 1764, 1004, 1784, 984, 1804, 1053, 1818, 1039, 1900, 1154, 1912, 1141, 2015, 1234, 2035, 1190]],
-  ["CASCADE", 84, 4, [2008, 382, 1996, 383, 2020, 463, 1996, 464, 2029, 532, 2007, 535, 2035, 664, 2018, 668, 2065, 735, 2055, 767, 2109, 774, 2110, 798, 2136, 819, 2120, 816, 2120, 958, 2106, 956, 2099, 1178, 2074, 1194]]
+  ["CASCADE", 84, 4, [2008, 382, 1996, 383, 2020, 463, 1996, 464, 2029, 532, 2007, 535, 2035, 664, 2018, 668, 2065, 735, 2055, 767, 2109, 774, 2110, 798, 2136, 819, 2120, 816, 2120, 958, 2106, 956, 2099, 1178, 2074, 1194]],
+  ["MILKY WAY", 31, 1, [931, 317, 935, 302, 623, 378, 615, 368, 482, 737, 467, 739, 473, 809, 458, 807, 476, 880, 465, 887, 806, 1158, 802, 1175, 1086, 1307, 1065, 1305]],
+  ["MORNING STAR", 31, 2, [912, 341, 931, 361, 732, 528, 749, 550, 495, 763, 527, 778]],
+  ["SOUTHERN CROSS", 31, 2, [1098, 472, 1092, 463, 1051, 639, 1041, 620, 844, 734, 823, 753, 992, 975, 972, 978, 978, 1031, 972, 1016, 802, 1157, 802, 1172, 1086, 1300, 1063, 1302]],
+  ["COMET", 31, 4, [1091, 467, 1097, 471, 1080, 639, 1097, 633, 1104, 996, 1131, 990, 1133, 1109, 1171, 1113, 1132, 1314, 1170, 1321]],
+  ["ROCKET", 31, 3, [1252, 452, 1273, 456, 1239, 569, 1261, 571, 1193, 963, 1219, 968, 1155, 1312, 1178, 1312]],
+  ["GALAXY", 31, 3, [1393, 415, 1390, 401, 1372, 437, 1384, 431, 1362, 630, 1395, 631, 1326, 1040, 1343, 1037, 1313, 1170, 1337, 1169, 1325, 1297, 1345, 1303]],
+  ["NORTH STAR", 31, 2, [1374, 444, 1391, 438, 1415, 515, 1422, 509, 1524, 646, 1549, 649, 1491, 939, 1507, 942, 1355, 1284, 1364, 1298]],
+  ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
+  ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
+  ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
+  ["RIDGE RUN", 68, 2, [2187, 221, 2205, 217, 2202, 264, 2211, 263, 2206, 314, 2218, 315, 2203, 428, 2220, 423, 2256, 472, 2263, 463, 2321, 538, 2330, 537, 2326, 602, 2337, 609, 2302, 657, 2312, 673, 2218, 698, 2218, 714]],
+  ["BLUE OX", 192, 3, [1640, 1740, 1657, 1737, 1652, 1795, 1665, 1795, 1679, 1881, 1685, 1881, 1879, 2067, 1880, 2060, 1990, 2110, 1996, 2103]],
+  ["RIVA RIDGE", 192, 3, [2138, 1517, 2150, 1516, 2156, 1561, 2171, 1567, 2148, 1632, 2164, 1637, 2132, 1717, 2141, 1717, 2152, 1783, 2159, 1780, 2270, 1942, 2284, 1929, 2339, 2007, 2362, 1982, 2371, 2047, 2386, 2050, 2361, 2153, 2375, 2153, 2394, 2272, 2402, 2272, 2436, 2473, 2455, 2467]],
+  ["CHOPSTIX", 192, 2, [1288, 1472, 1349, 1507, 1368, 1341, 1476, 1417, 1545, 1205, 1579, 1226, 1539, 1076, 1602, 1076, 1548, 962, 1587, 962, 1522, 890, 1570, 920]],
+  ["LOVER'S LEAP", 192, 3, [1468, 216, 1477, 215, 1496, 282, 1519, 282, 1506, 325, 1534, 364, 1465, 377, 1482, 418, 1395, 446, 1404, 453, 1354, 538, 1364, 540]],
+  ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]]
 ];
 
 var races = [
-  ["GREEK PEAK", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
-  ["GREEK PEAK", 66, [1382, 751, 1360, 785, 1339, 821, 1329, 856, 1323, 880, 1319, 904, 1319, 934]],
-  ["LABRADOR", 87, [662, 495, 697, 545, 744, 624, 797, 705, 830, 751, 879, 818, 947, 919, 989, 986, 1021, 1041]],
-  ["GORE MOUNTAIN", 62, [1403, 995, 1385, 1031, 1346, 1097, 1328, 1135, 1341, 1186, 1341, 1228, 1327, 1249, 1293, 1275, 1274, 1300, 1261, 1334, 1252, 1379, 1250, 1416, 1250, 1450, 1249, 1480, 1254, 1523, 1274, 1570, 1291, 1612, 1289, 1646]],
-  ["BRISTOL MOUNTAIN", 31, [1089, 636, 1105, 687, 1112, 740, 1118, 844, 1118, 925, 1116, 990, 1128, 1031, 1143, 1080, 1145, 1137, 1145, 1192, 1147, 1258, 1146, 1312]],
-  ["KILLINGTON", 84, [1719, 937, 1772, 994, 1819, 1055, 1878, 1125, 1934, 1177, 1978, 1204, 2032, 1238]],
+  ["ODYSSEY", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
+  ["CRISTY'S RUN", 66, [1382, 751, 1360, 785, 1339, 821, 1329, 856, 1323, 880, 1319, 904, 1319, 934]],
+  ["JACOPIE", 87, [662, 495, 697, 545, 744, 624, 797, 705, 830, 751, 879, 818, 947, 919, 989, 986, 1021, 1041]],
+  ["ECHO", 62, [1403, 995, 1385, 1031, 1346, 1097, 1328, 1135, 1341, 1186, 1341, 1228, 1327, 1249, 1293, 1275, 1274, 1300, 1261, 1334, 1252, 1379, 1250, 1416, 1250, 1450, 1249, 1480, 1254, 1523, 1274, 1570, 1291, 1612, 1289, 1646]],
+  ["COMET", 31, [1089, 636, 1105, 687, 1112, 740, 1118, 844, 1118, 925, 1116, 990, 1128, 1031, 1143, 1080, 1145, 1137, 1145, 1192, 1147, 1258, 1146, 1312]],
+  ["SUPERSTAR", 84, [1719, 937, 1772, 994, 1819, 1055, 1878, 1125, 1934, 1177, 1978, 1204, 2032, 1238]],
   ["ELKHORN", 17, [954, 1090, 976, 1122, 1011, 1161, 1042, 1186, 1109, 1219, 1160, 1236, 1192, 1265, 1221, 1298]],
   ["LOWER BROADWAY", 75, [650, 662, 629, 717, 589, 832, 571, 892, 549, 953, 525, 1015]],
-  ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]]
+  ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]],
+  ["BIG BLUE", 19, [848, 221, 822, 269, 784, 321, 752, 361, 735, 396, 710, 439, 669, 532, 635, 603, 631, 620]]
 ];
 
+var racesplits = [
+  [3.182, 5.254, 7.178, 9.137, 10.812, 12.356, 13.957, 15.42, 16.916, 18.224, 19.812, 21.587, 23.77, 25.857, 27.798, 29.603, 31.244, 32.844, 34.86, 36.811, 39.363, 42.396, 45.232, 47.977, 51.112, 53.734, 55.948, 57.952, 59.86, 61.563, 63.779]
+];
+
+var multipliers = [0.94, 1, 1.06, 1.12, 1.18, 2000000000];
+var tiers = ["S", "A", "B", "C", "D", "F"];
 
 //var zooms = [1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 2, 1, 2, 2, 4, 1, 2, 2, 1, 2];
 var zooms = [];
@@ -418,6 +441,7 @@ function runProgram(num, trailInd, raceInd) {
           allText = allText.split("\n");
 
 
+
           var ind = 0;
 
           for (var i = 0 ; i < allText.length ; i++) {
@@ -453,6 +477,8 @@ function runProgram(num, trailInd, raceInd) {
           len = parseInt(allText[ind]);
 
           ind++;
+
+          console.log("lift count: " + len);
 
           for (var i = 0 ; i < len ; i++) {
             var line = allText[ind].split(" ");
@@ -743,7 +769,9 @@ function runProgram(num, trailInd, raceInd) {
         var el1 = getElevation(lx/GRIDSCALE, grid[0].length + ly/GRIDSCALE)*ELFA*(XF/2.3);
         var el2 = getElevation(x/GRIDSCALE, grid[0].length + y/GRIDSCALE)*ELFA*(XF/2.3);
 
-        //console.log(Math.atan((el1 - el2)/()
+        var atval = Math.atan((el1 - el2)/ (Math.sqrt((rpos[i+1][0]-rpos[i][0])*(rpos[i+1][0]-rpos[i][0])+(rpos[i+1][1]-rpos[i][1])*(rpos[i+1][1]-rpos[i][1]))));
+
+        //console.log(Math.atan((el1 - el2)/ (Math.sqrt((rpos[i+1][0]-rpos[i][0])*(rpos[i+1][0]-rpos[i][0])+(rpos[i+1][1]-rpos[i][1])*(rpos[i+1][1]-rpos[i][1])))));
 
         var ang = Math.atan((rpos[i+1][1]-rpos[i][1])/(rpos[i+1][0]-rpos[i][0]));
         if (rpos[i][0] < rpos[i+1][0]) {
@@ -752,18 +780,19 @@ function runProgram(num, trailInd, raceInd) {
         ang += Math.PI/2;
 
         if (j < segs-2) {
-          SIDE = 4.5 / zooms[num];
+          SIDE = Math.min(4.5/zooms[num], (4.5/zooms[num])*(atval / 0.05));
+          //SIDE = 4.5 / zooms[num];
         }
         else {
           SIDE = 375 / GRIDSCALE;
         }
-        sloms.push([x + Math.cos(ang) * SIDE * GRIDSCALE, y + Math.sin(ang) * SIDE * GRIDSCALE, x - Math.cos(ang) * SIDE * GRIDSCALE, y - Math.sin(ang) * SIDE * GRIDSCALE, 2]);
+
+          sloms.push([x + Math.cos(ang) * SIDE * GRIDSCALE, y + Math.sin(ang) * SIDE * GRIDSCALE, x - Math.cos(ang) * SIDE * GRIDSCALE, y - Math.sin(ang) * SIDE * GRIDSCALE, 2]);
 
         left = 1;
 
       }
     }
-
 
 
     var camx = lifts[0][3] * GRIDSCALE;
@@ -917,6 +946,10 @@ function runProgram(num, trailInd, raceInd) {
         if (j%2 == 1) {
           cx = sloms[j][2];
           cy = sloms[j][3];
+        }
+        if (j == sloms.length - 1) {
+          cx = (sloms[j][0]+sloms[j][2])/2;
+          cy = (sloms[j][1]+sloms[j][3])/2;
         }
         else if (j == 0 || j == sloms.length-1) {
           cx = (sloms[j][0] + sloms[j][2])/2;
@@ -1826,6 +1859,7 @@ function runProgram(num, trailInd, raceInd) {
 
         //if (z1 >= 6000 || z2 >= 6000 || z3 >= 6000 || z4 >= 6000) continue;
 
+      //  console.log(i + " " + j);
         var el = elev[i][j];
 
         if (i == CHUNK * 24 && j == CHUNK * 24) {
@@ -2090,8 +2124,14 @@ function runProgram(num, trailInd, raceInd) {
     var time = -starting;
     var finalTime = 0;
     var pentime = 0;
+    var splittime = 0;
+    var splits = [];
+    var move = 0;
+    var pressed2 = false;
 
     function animate() {
+      renderer.setSize(window.innerWidth, window.innerHeight - 50);
+
       if (lastCall != -1) {
         var diff = (Date.now() - lastCall) / 1000;
         time += diff;
@@ -2120,6 +2160,84 @@ function runProgram(num, trailInd, raceInd) {
       if (avg == 0) {
         avg = 60;
       }
+
+      renderer.render(scene, camera);
+
+      move = 1.6 * (FPFAC / avg);
+      //move = 0;
+
+      console.log(pressed2);
+
+      if (keys[81] && ridingLift) {
+        move = 72 * (FPFAC / avg);
+        //move = 72;
+      }
+
+      if (keys[81] && !pressed2) {
+        pressed2 = true;
+      }
+      else if (pressed2 && !keys[81]) {
+        pressed2 = false;
+      }
+
+      for (var i = 0 ; i < chairliftPos.length ; i++) {
+        for (var j = 0 ; j < chairliftPos[i].length ; j++) {
+        //  console.log(move);
+
+          chairliftPos[i][j][5] += move;
+
+          while (chairliftPos[i][j][5] >= dsts[i][chairliftPos[i][j][4]]) {
+            chairliftPos[i][j][5] -= dsts[i][chairliftPos[i][j][4]];
+            chairliftPos[i][j][4] = (chairliftPos[i][j][4]+1)%dsts[i].length;
+          }
+
+          var ox = chairliftPos[i][j][1];
+          var oy = chairliftPos[i][j][2];
+          var oz = chairliftPos[i][j][3];
+
+          chairliftPos[i][j][1] = totalPositions[i][chairliftPos[i][j][4]][0] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][0] - totalPositions[i][chairliftPos[i][j][4]][0]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
+          chairliftPos[i][j][2] = totalPositions[i][chairliftPos[i][j][4]][1] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][1] - totalPositions[i][chairliftPos[i][j][4]][1]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
+          chairliftPos[i][j][3] = totalPositions[i][chairliftPos[i][j][4]][2] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][2] - totalPositions[i][chairliftPos[i][j][4]][2]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
+
+          chairliftPos[i][j][0].translate(chairliftPos[i][j][1] - ox, chairliftPos[i][j][3] - oz, chairliftPos[i][j][2] - oy);
+
+          chairliftPos[i][j][0].translate(-chairliftPos[i][j][1], -chairliftPos[i][j][3], -chairliftPos[i][j][2]);
+
+          var orot = chairliftPos[i][j][6];
+          var nr = totalAngles[i][chairliftPos[i][j][4]];
+
+          chairliftPos[i][j][0].rotateY(nr - orot);
+
+          if (ridingLift && i == liftChosen && j == choice) {
+            roty += orot - nr;
+          }
+
+          chairliftPos[i][j][6] = nr;
+
+          chairliftPos[i][j][0].translate(chairliftPos[i][j][1], chairliftPos[i][j][3], chairliftPos[i][j][2]);
+
+          /*var oox = chairliftPos[i][j][1];
+          var ooy = chairliftPos[i][j][2];
+          var ooz = chairliftPos[i][j][3];
+
+          //chairliftPos[i][j][0].translate(-chairliftPos[i][j][1], -chairliftPos[i][j][3], -chairliftPos[i][j][2]);
+          chairliftPos[i][j][0].position.x -= oox;
+          chairliftPos[i][j][0].position.z -= ooy;
+          chairliftPos[i][j][0].position.y -= ooz;
+          chairliftPos[i][j][0].rotation.x = Math.PI / 400;
+          chairliftPos[i][j][0].position.x += oox;
+          chairliftPos[i][j][0].position.z += ooy;
+          chairliftPos[i][j][0].position.y += ooz;*/
+
+
+          //chairliftPos[i][j][0].translate(chairliftPos[i][j][1], chairliftPos[i][j][3], chairliftPos[i][j][2]);
+
+        }
+
+      }
+
+
+
 
       TURN = 0.15 * (FPFAC / avg);
 
@@ -2215,6 +2333,7 @@ function runProgram(num, trailInd, raceInd) {
           document.getElementById("top").innerHTML = "Ready... Set... Go!";
         }
         else if (finalTime > 0) {
+          console.log(splits);
           document.getElementById("top").innerHTML = "You finished the race with a final time of " + (parseInt(finalTime*10)/10) + " seconds! Press O to go back to the menu.";
         }
         else if (pentime > 0) {
@@ -2222,11 +2341,21 @@ function runProgram(num, trailInd, raceInd) {
           document.getElementById("top").innerHTML = "You missed a slalom pole, so you have been given a 5 second penalty.";
         }
         else {
-          var tst = (parseInt(time*10)/10);
+          var tst = (parseInt(time*100)/100);
           if (tst % 1 == 0) {
             tst = tst + ".0";
           }
-          document.getElementById("top").innerHTML = "Time taken: " + tst + " seconds";
+          //document.getElementById("top").innerHTML = "Time taken: " + tst + " seconds";
+
+          splittime -= 3;
+          var tier = "F";
+          for (var j = multipliers.length - 1 ; j >= 0 ; j--) {
+            if (splits[splits.length - 1] <= racesplits[raceInd][splits.length-1] * multipliers[j]) {
+              tier = tiers[j];
+            }
+          }
+          document.getElementById("top").innerHTML = "Time taken: " + (tst) + "s    " + tier + " Tier";
+
         }
       }
       else if (countdown > 0) {
@@ -2244,6 +2373,8 @@ function runProgram(num, trailInd, raceInd) {
           if (f) {
             document.getElementById("top").innerHTML = "Level cleared! Press O to go back to the menu.";
             success = true;
+            document.getElementById("clear").innerHTML = trailInd;
+            console.log("INDEX: " + trailInd);
           }
           else {
             document.getElementById("top").innerHTML = "You didn't get all the checkpoints. Press R to restart the level, and press O to quit.";
@@ -2334,7 +2465,9 @@ function runProgram(num, trailInd, raceInd) {
       }
 
 
-
+      if (ridingLift) {
+        document.getElementById("riding").innerHTML = num;
+      }
 
       //var canvas = document.getElementById("three").firstChild.getContext('2d');
       //canvas.fillStyle = 'rgb(255, 0, 0)';
@@ -2346,73 +2479,23 @@ function runProgram(num, trailInd, raceInd) {
         ridingLift = false;
       }
 
-      var move = 1.6 * (FPFAC / avg);
-      if (keys[81] && ridingLift) {
-        move = 72 * (FPFAC / avg);
-      }
 
 
 
-      for (var i = 0 ; i < chairliftPos.length ; i++) {
-        for (var j = 0 ; j < chairliftPos[i].length ; j++) {
-
-          chairliftPos[i][j][5] += move;
-
-          while (chairliftPos[i][j][5] >= dsts[i][chairliftPos[i][j][4]]) {
-            chairliftPos[i][j][5] -= dsts[i][chairliftPos[i][j][4]];
-            chairliftPos[i][j][4] = (chairliftPos[i][j][4]+1)%dsts[i].length;
-          }
-
-          var ox = chairliftPos[i][j][1];
-          var oy = chairliftPos[i][j][2];
-          var oz = chairliftPos[i][j][3];
-
-          chairliftPos[i][j][1] = totalPositions[i][chairliftPos[i][j][4]][0] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][0] - totalPositions[i][chairliftPos[i][j][4]][0]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
-          chairliftPos[i][j][2] = totalPositions[i][chairliftPos[i][j][4]][1] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][1] - totalPositions[i][chairliftPos[i][j][4]][1]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
-          chairliftPos[i][j][3] = totalPositions[i][chairliftPos[i][j][4]][2] + (totalPositions[i][(chairliftPos[i][j][4]+1)%dsts[i].length][2] - totalPositions[i][chairliftPos[i][j][4]][2]) * (chairliftPos[i][j][5] / dsts[i][chairliftPos[i][j][4]]);
-
-          chairliftPos[i][j][0].translate(chairliftPos[i][j][1] - ox, chairliftPos[i][j][3] - oz, chairliftPos[i][j][2] - oy);
-
-          chairliftPos[i][j][0].translate(-chairliftPos[i][j][1], -chairliftPos[i][j][3], -chairliftPos[i][j][2]);
-
-          var orot = chairliftPos[i][j][6];
-          var nr = totalAngles[i][chairliftPos[i][j][4]];
-
-          chairliftPos[i][j][0].rotateY(nr - orot);
-
-          if (ridingLift && i == liftChosen && j == choice) {
-            roty += orot - nr;
-          }
-
-          chairliftPos[i][j][6] = nr;
-
-          chairliftPos[i][j][0].translate(chairliftPos[i][j][1], chairliftPos[i][j][3], chairliftPos[i][j][2]);
-
-          /*var oox = chairliftPos[i][j][1];
-          var ooy = chairliftPos[i][j][2];
-          var ooz = chairliftPos[i][j][3];
-
-          //chairliftPos[i][j][0].translate(-chairliftPos[i][j][1], -chairliftPos[i][j][3], -chairliftPos[i][j][2]);
-          chairliftPos[i][j][0].position.x -= oox;
-          chairliftPos[i][j][0].position.z -= ooy;
-          chairliftPos[i][j][0].position.y -= ooz;
-          chairliftPos[i][j][0].rotation.x = Math.PI / 400;
-          chairliftPos[i][j][0].position.x += oox;
-          chairliftPos[i][j][0].position.z += ooy;
-          chairliftPos[i][j][0].position.y += ooz;*/
 
 
-          //chairliftPos[i][j][0].translate(chairliftPos[i][j][1], chairliftPos[i][j][3], chairliftPos[i][j][2]);
 
-        }
 
-      }
+
+
 
       if (ridingLift) {
-        camx = chairliftPos[liftChosen][choice][1] + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
-        camy = chairliftPos[liftChosen][choice][2] +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
+        camx = chairliftPos[liftChosen][choice][1];// + Math.cos(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
+        camy = chairliftPos[liftChosen][choice][2];// +  Math.sin(Math.PI - chairliftPos[liftChosen][choice][6]) * 73;
         //camz =
       }
+
+
 
 
       friction = FLATFRICTION;
@@ -2440,7 +2523,6 @@ function runProgram(num, trailInd, raceInd) {
 
       var UF = 80;
 
-      renderer.render(scene, camera);
 
       var elements = scene.children;
 
@@ -2577,7 +2659,7 @@ function runProgram(num, trailInd, raceInd) {
 
       if (starting <= 0) {
 
-        playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL;
+        playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL * (FPFAC / avg);
 
 
         playerSpeed /= friction;
@@ -2672,6 +2754,8 @@ function runProgram(num, trailInd, raceInd) {
       else {
 
         setTimeout(animate, 1000/60);
+
+
       }
 
       if (trailInd != -1) {
@@ -2808,6 +2892,9 @@ function runProgram(num, trailInd, raceInd) {
                 else {
                   console.log("SUCCESS " + i);
                 }
+
+                splits.push(time);
+                splittime = 100;
               }
             }
             else if (i == sloms.length - 1) {
@@ -2819,6 +2906,8 @@ function runProgram(num, trailInd, raceInd) {
           }
         }
       }
+
+
 
     }
 
@@ -2862,6 +2951,7 @@ function runProgram(num, trailInd, raceInd) {
       document.getElementById("game").height = 270 + 50 * 207 + 50;
 
       document.getElementById("three").removeChild(renderer.domElement);
+      document.getElementById("three").innerHTML = "";
       //num++;
     }
 
@@ -2885,11 +2975,14 @@ var num = -1;
 
 function aboutRun() {
 
-  document.getElementById("game").width = 0;
-  document.getElementById("game").height = 0;
+  //document.getElementById("game").width = 0;
+  //document.getElementById("game").height = 0;
+
+  document.getElementById("game").innerHTML = "";
 
   document.getElementById("selimg").width = window.innerWidth;
   document.getElementById("selimg").height = (imgs[num+1].height/imgs[num+1].width)*window.innerWidth;
+
   var g = document.getElementById("selimg").getContext('2d');
   g.fillStyle = 'rgb(255, 0, 0)';
   g.drawImage(imgs[num+1], 0, 0, window.innerWidth, (imgs[num+1].height/imgs[num+1].width)*window.innerWidth);
@@ -2901,6 +2994,8 @@ function aboutRun() {
   g.fillStyle = 'rgb(0, 0, 0)';
   g.font = '18px Avenir';
   g.fillText("Click on the map to select a starting location", window.innerWidth*0.37, 20);
+
+  console.log(document.getElementById("game"));
   //runProgram(num);
 }
 
@@ -2929,14 +3024,17 @@ elem.addEventListener('mousedown', function(event) {
 
   if (y >= 165 && y <= 207) {
     var wd = (window.innerWidth*0.3-60);
-    if (x >= window.innerWidth*0.05 && x <= window.innerWidth*0.05 + wd) {
+    if (x >= 30 && x <= window.innerWidth*0.05 + wd) {
       mountSel = 0;
     }
-    if (x >= window.innerWidth*0.33 + 30 && x <= window.innerWidth * 0.33 + 30 + wd) {
+    if (x >= window.innerWidth*0.25 + 30 && x <= window.innerWidth * 0.33 + 30 + wd) {
       mountSel = 1;
     }
-    if (x >= window.innerWidth*0.67 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+    if (x >= window.innerWidth*0.5 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
       mountSel = 2;
+    }
+    if (x >= window.innerWidth*0.75 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+      mountSel = 3;
     }
   }
 

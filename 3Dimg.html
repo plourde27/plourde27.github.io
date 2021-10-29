@@ -17,6 +17,20 @@
         top: 33px;
         left: 0px;
       }
+      #achbox {
+        position: absolute;
+        bottom: 50px;
+        margin-left: 30%;
+        margin-right: 30%;
+        width: 40%;
+        background-color: rgb(200, 120, 50, 0.8);
+        font-size: 20px;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-radius: 10px;
+        font-family: 'Avenir';
+      }
     </style>
     <script src="3Dimg.js" type="module">
     </script>
@@ -25,8 +39,19 @@
   </head>
   <body>
     <!--<canvas id="topbar" display="block" margin="0 auto"></canvas>!-->
+    <audio id="main" src="main.m4a" loop="loop"></audio>
     <div id="result" hidden=true></div>
+    <div id="riding" hidden=true></div>
     <div id="top"></div>
+    <!--<div id="achbox" style="margin-bottom: 80px">Achivement Progressed: Explorer (2 / 27)</div>
+    <div id="achbox" style="margin-bottom: 80px">Achivement Advanced: Explorer (2 / 27)</div>
+    <div id="achbox" style="margin-bottom: 160px">Achivement Advanced: Explorer (2 / 27)</div>
+    <div id="achbox" style="margin-bottom: 240px">Achivement Advanced: Explorer (2 / 27)</div>
+!-->
+
+<div id="boxes">
+</div>
+  <div id="clear" hidden=true></div>
     <canvas id="selimg"></canvas>
     <div id="three"></div>
     <canvas id="game" display="block" margin="0 auto"></canvas>
@@ -34,10 +59,13 @@
     <div id="extra" hidden=true></div>
     <div id="extra2" hidden=true>0 0</div>
     <div id="pos" hidden=true></div>
+
     <canvas id="minimap" width=0 height=0></canvas>
+
     <img id="1" src="pixels/m1i.png">
     <img id="2" src="pixels/m2i.png">
     <img id="3" src="pixels/m3i.png">
+
     <img id="4" src="pixels/m4i.png">
     <img id="5" src="pixels/m5i.png">
     <img id="6" src="pixels/m6i.png">
@@ -136,6 +164,7 @@
     <img id="99" src="pixels/m99i.png">
     <img id="100" src="pixels/m100i.png">
     <img id="101" src="pixels/m101i.png">
+
     <img id="102" src="pixels/m102i.png">
     <img id="103" src="pixels/m103i.png">
     <img id="104" src="pixels/m104i.png">
@@ -249,10 +278,23 @@
 
 
 
+
     <div id="num" hidden=true>
 
 
+
     <script>
+
+    var playSong = function(songName) {
+      var song = document.getElementById(songName);
+      song.currentTime = 0;
+      song.play();
+    };
+    var pauseSong = function(songName) {
+      document.getElementById(songName).pause();
+    };
+
+
 
     var comp = [];
     for (var i = 0 ; i < 500 ; i++) {
@@ -483,25 +525,100 @@
       ["KARYATIS WAY", 66, 1, [1527, 522, 1531, 508, 1482, 500, 1486, 491, 1419, 484, 1420, 467, 1371, 482, 1354, 474, 1435, 627, 1414, 628, 1416, 696, 1406, 696, 1387, 746, 1382, 728, 1331, 771, 1330, 760, 1278, 827, 1267, 827, 1289, 910, 1286, 918, 1356, 960, 1350, 971, 1396, 1051, 1373, 1048]],
       ["ARCADIAN GATE", 66, 2, [909, 434, 904, 424, 840, 477, 831, 462, 597, 546, 596, 528, 370, 687, 365, 667, 223, 835, 201, 835]],
       ["SUPERSTAR", 84, 3, [1713, 947, 1732, 926, 1764, 1004, 1784, 984, 1804, 1053, 1818, 1039, 1900, 1154, 1912, 1141, 2015, 1234, 2035, 1190]],
-      ["CASCADE", 84, 4, [2008, 382, 1996, 383, 2020, 463, 1996, 464, 2029, 532, 2007, 535, 2035, 664, 2018, 668, 2065, 735, 2055, 767, 2109, 774, 2110, 798, 2136, 819, 2120, 816, 2120, 958, 2106, 956, 2099, 1178, 2074, 1194]]
+      ["CASCADE", 84, 4, [2008, 382, 1996, 383, 2020, 463, 1996, 464, 2029, 532, 2007, 535, 2035, 664, 2018, 668, 2065, 735, 2055, 767, 2109, 774, 2110, 798, 2136, 819, 2120, 816, 2120, 958, 2106, 956, 2099, 1178, 2074, 1194]],
+      ["MILKY WAY", 31, 1, [931, 317, 935, 302, 623, 378, 615, 368, 482, 737, 467, 739, 473, 809, 458, 807, 476, 880, 465, 887, 806, 1158, 802, 1175, 1086, 1307, 1065, 1305]],
+      ["MORNING STAR", 31, 2, [912, 341, 931, 361, 732, 528, 749, 550, 495, 763, 527, 778]],
+      ["SOUTHERN CROSS", 31, 2, [1098, 472, 1092, 463, 1051, 639, 1041, 620, 844, 734, 823, 753, 992, 975, 972, 978, 978, 1031, 972, 1016, 802, 1157, 802, 1172, 1086, 1300, 1063, 1302]],
+      ["COMET", 31, 4, [1091, 467, 1097, 471, 1080, 639, 1097, 633, 1104, 996, 1131, 990, 1133, 1109, 1171, 1113, 1132, 1314, 1170, 1321]],
+      ["ROCKET", 31, 3, [1252, 452, 1273, 456, 1239, 569, 1261, 571, 1193, 963, 1219, 968, 1155, 1312, 1178, 1312]],
+      ["GALAXY", 31, 3, [1393, 415, 1390, 401, 1372, 437, 1384, 431, 1362, 630, 1395, 631, 1326, 1040, 1343, 1037, 1313, 1170, 1337, 1169, 1325, 1297, 1345, 1303]],
+      ["NORTH STAR", 31, 2, [1374, 444, 1391, 438, 1415, 515, 1422, 509, 1524, 646, 1549, 649, 1491, 939, 1507, 942, 1355, 1284, 1364, 1298]],
+      ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
+      ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
+      ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
+      ["RIDGE RUN", 68, 2, [2187, 221, 2205, 217, 2202, 264, 2211, 263, 2206, 314, 2218, 315, 2203, 428, 2220, 423, 2256, 472, 2263, 463, 2321, 538, 2330, 537, 2326, 602, 2337, 609, 2302, 657, 2312, 673, 2218, 698, 2218, 714]],
+      ["BLUE OX", 192, 3, [1640, 1740, 1657, 1737, 1652, 1795, 1665, 1795, 1679, 1881, 1685, 1881, 1879, 2067, 1880, 2060, 1990, 2110, 1996, 2103]],
+      ["RIVA RIDGE", 192, 3, [2138, 1517, 2150, 1516, 2156, 1561, 2171, 1567, 2148, 1632, 2164, 1637, 2132, 1717, 2141, 1717, 2152, 1783, 2159, 1780, 2270, 1942, 2284, 1929, 2339, 2007, 2362, 1982, 2371, 2047, 2386, 2050, 2361, 2153, 2375, 2153, 2394, 2272, 2402, 2272, 2436, 2473, 2455, 2467]],
+      ["CHOPSTIX", 192, 2, [1288, 1472, 1349, 1507, 1368, 1341, 1476, 1417, 1545, 1205, 1579, 1226, 1539, 1076, 1602, 1076, 1548, 962, 1587, 962, 1522, 890, 1570, 920]],
+      ["LOVER'S LEAP", 192, 3, [1468, 216, 1477, 215, 1496, 282, 1519, 282, 1506, 325, 1534, 364, 1465, 377, 1482, 418, 1395, 446, 1404, 453, 1354, 538, 1364, 540]],
+      ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]]
     ];
 
     var races = [
-      ["GREEK PEAK", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
-      ["GREEK PEAK", 66, [1382, 751, 1360, 785, 1339, 821, 1329, 856, 1323, 880, 1319, 904, 1319, 934]],
-      ["LABRADOR", 87, [662, 495, 697, 545, 744, 624, 797, 705, 830, 751, 879, 818, 947, 919, 989, 986, 1021, 1041]],
-      ["GORE MOUNTAIN", 62, [1403, 995, 1385, 1031, 1346, 1097, 1328, 1135, 1341, 1186, 1341, 1228, 1327, 1249, 1293, 1275, 1274, 1300, 1261, 1334, 1252, 1379, 1250, 1416, 1250, 1450, 1249, 1480, 1254, 1523, 1274, 1570, 1291, 1612, 1289, 1646]],
-      ["BRISTOL MOUNTAIN", 31, [1089, 636, 1105, 687, 1112, 740, 1118, 844, 1118, 925, 1116, 990, 1128, 1031, 1143, 1080, 1145, 1137, 1145, 1192, 1147, 1258, 1146, 1312]],
-      ["KILLINGTON", 84, [1719, 937, 1772, 994, 1819, 1055, 1878, 1125, 1934, 1177, 1978, 1204, 2032, 1238]],
+      ["ODYSSEY", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
+      ["CRISTY'S RUN", 66, [1382, 751, 1360, 785, 1339, 821, 1329, 856, 1323, 880, 1319, 904, 1319, 934]],
+      ["JACOPIE", 87, [662, 495, 697, 545, 744, 624, 797, 705, 830, 751, 879, 818, 947, 919, 989, 986, 1021, 1041]],
+      ["ECHO", 62, [1403, 995, 1385, 1031, 1346, 1097, 1328, 1135, 1341, 1186, 1341, 1228, 1327, 1249, 1293, 1275, 1274, 1300, 1261, 1334, 1252, 1379, 1250, 1416, 1250, 1450, 1249, 1480, 1254, 1523, 1274, 1570, 1291, 1612, 1289, 1646]],
+      ["COMET", 31, [1089, 636, 1105, 687, 1112, 740, 1118, 844, 1118, 925, 1116, 990, 1128, 1031, 1143, 1080, 1145, 1137, 1145, 1192, 1147, 1258, 1146, 1312]],
+      ["SUPERSTAR", 84, [1719, 937, 1772, 994, 1819, 1055, 1878, 1125, 1934, 1177, 1978, 1204, 2032, 1238]],
       ["ELKHORN", 17, [954, 1090, 976, 1122, 1011, 1161, 1042, 1186, 1109, 1219, 1160, 1236, 1192, 1265, 1221, 1298]],
       ["LOWER BROADWAY", 75, [650, 662, 629, 717, 589, 832, 571, 892, 549, 953, 525, 1015]],
-      ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]]
+      ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]],
+      ["BIG BLUE", 19, [848, 221, 822, 269, 784, 321, 752, 361, 735, 396, 710, 439, 669, 532, 635, 603, 631, 620]]
     ];
+
+    //odyssey: 63.9
+
+    var achievements = [
+      ["EXPLORER", "Ride at least one ski lift at least 10 different ski mountains", 0, 10],
+      ["TOURIST", "Ride at least one ski lift from at least one ski mountain from each of the 50 states (excluding states with no ski mountains in the game)", 0, -1],
+      ["ULTIMATE EXPLORER", "Ride at least one ski lift at every ski mountain in the game", 0, stats.length],
+      ["CHAMPION", "Reach Level 27", 1, 27],
+      ["GOOD START", "Achieve your first B Tier result in a race", 0, 1],
+      ["TIERS OF JOY", "Achieve an S Tier result in 5 distinct races", 0, 5],
+      ["GRANDMASTER", "Achieve an S Tier result in every race in the game", 0, races.length],
+      ["GOING GREEN", "Complete 10 distinct Easier trails", 0, 10],
+      ["FEELING BLUE", "Complete 10 distinct More Difficult trails", 0, 10],
+      ["BLACKOUT", "Complete 10 distinct Most Difficult trails", 0, 10],
+      ["DAREDEVIL", "Complete 10 distinct Experts Only trails", 0, 10],
+      ["LEVEL MANIAC", "Complete every trail in the game", 0, trails.length],
+      ["RECKLESS RACING", "Miss at least one slalom pole, but still achieve at least a B Tier result in a race", 0, 1],
+      ["COMEBACK KID", "Achieve at least a B Tier result in a race after having an F Tier split earlier in the same race", 0, 1],
+      ["BEAST OF THE EAST", "Complete every East Coast trail in the game", 0, -1],
+      ["BEST OF THE WEST", "Complete every West Coast (including Rocky Mountain ski areas) trail in the game", 0, -1],
+      ["CORNFIELDS", "Complete every Midwest trail in the game", 0, -1]
+    ];
+
+
+
+    var skied = [];
+    for (var i = 0 ; i < stats.length ; i ++) {
+      skied.push(false);
+    }
 
 
     var imgs = [];
     for (img of document.getElementsByTagName('img')) {
       imgs[img.id] = img;
+    }
+
+    var hashes = [];
+    var vanishtimes = [];
+
+    function updateAchievements() {
+      //Explorer, Ultimate Explorer
+      var answer = 0;
+      for (var i = 0 ; i < skied.length ; i++) {
+        if (skied[i]) {
+          answer++;
+        }
+      }
+
+      achievements[0][2] = answer;
+      achievements[2][2] = answer;
+
+      //Trails
+      achievements[7][2] = 0;
+      achievements[8][2] = 0;
+      achievements[9][2] = 0;
+      achievements[10][2] = 0;
+      achievements[11][2] = 0;
+      for (var i = 0 ; i < trails.length ; i++) {
+        if (comp[i]) {
+          achievements[11][2]++;
+          achievements[trails[i][2] + 6][2]++;
+        }
+      }
     }
 
 
@@ -511,6 +628,11 @@
     var mountSel = 0;
 
     function drawMenu() {
+
+
+      document.getElementById("game").width = window.innerWidth;
+      document.getElementById("game").height = 50*207 + 270;
+
       var canvas = document.getElementById("game");
 
 
@@ -531,23 +653,30 @@
       if (mountSel == 0) {
         g.fillStyle = 'rgb(0, 0, 200, 0.25)';
       }
-      g.fillRect(window.innerWidth*0.05, 165, window.innerWidth*0.3 - 60, 42);
+      g.fillRect(30, 165, window.innerWidth*0.25 - 60, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 1) {
         g.fillStyle = 'rgb(0, 200, 120, 0.5)';
       }
-      g.fillRect(window.innerWidth*0.33 + 30, 165, window.innerWidth*0.3 - 60, 42);
+      g.fillRect(window.innerWidth*0.25 + 30, 165, window.innerWidth*0.25 - 60, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 2) {
         g.fillStyle = 'rgb(200, 0, 0, 0.25)';
       }
-      g.fillRect(window.innerWidth*0.67 + 30, 165, window.innerWidth*0.3 - 60, 42);
+      g.fillRect(window.innerWidth*0.5 + 30, 165, window.innerWidth*0.25 - 60, 42);
+      g.fillStyle = 'rgb(100, 100, 100, 0.25)';
+      if (mountSel == 3) {
+        g.fillStyle = 'rgb(200, 150, 0, 0.25)';
+      }
+      g.fillRect(window.innerWidth*0.75 + 30, 165, window.innerWidth*0.25 - 60, 42);
 
       g.fillStyle = 'rgb(0, 0, 0)';
       g.font = '24px Avenir';
-      g.fillText("Sandbox Mode", window.innerWidth*0.167 - 70, 196);
-      g.fillText("Levels", window.innerWidth*0.5 - 70, 196);
-      g.fillText("Racing", window.innerWidth*0.833 - 70, 196);
+      g.fillText("Sandbox Mode", window.innerWidth*0.125 - 90, 196);
+      g.fillText("Levels", window.innerWidth*0.375 - 45, 196);
+      g.fillText("Racing", window.innerWidth*0.625 - 45, 196);
+      g.fillText("Achievements", window.innerWidth*0.875 - 75, 196);
+
 
 
 
@@ -576,6 +705,7 @@
         g.fillText("Number of Lifts", window.innerWidth*0.81, 234);
       }
       else if (mountSel == 1) {
+        var wds = ["Easier", "More Difficult", "Most Difficult", "Extremely Difficult"];
         for (var i = 0 ; i < trails.length ; i++) {
           g.fillStyle = 'rgb(0, 200, 120, 0.5)';
           if (!comp[i]) {
@@ -588,14 +718,60 @@
 
           g.font = '21px Avenir';
           g.fillText(stats[trails[i][1]-1][0], window.innerWidth * 0.38, i*50 + 270 + 4);
+
+          if (trails[i][2] == 1) {
+            g.fillStyle = 'rgba(0, 200, 0, 0.7)';
+            g.beginPath();
+            g.arc(window.innerWidth*0.59, i*50 + 266, 12, 12, 0, 2*Math.PI);
+            g.fill();
+          }
+          else if (trails[i][2] == 2) {
+            g.fillStyle = 'rgba(0, 0, 200, 0.7)';
+            g.fillRect(window.innerWidth*0.59 - 10, i*50 + 256, 20, 20);
+          }
+          else if (trails[i][2] == 3) {
+            g.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            var DH = 12;
+            var DW = 8;
+            g.beginPath();
+            g.moveTo(window.innerWidth*0.59, i*50 + 266 - DH);
+            g.lineTo(window.innerWidth*0.59 + DW, i*50 + 266);
+            g.lineTo(window.innerWidth*0.59, i*50 + 266 + DH);
+            g.lineTo(window.innerWidth*0.59 - DW, i*50 + 266);
+            g.fill();
+          }
+          else {
+            g.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            var DH = 12;
+            var DW = 8;
+            var SP = 6;
+            g.beginPath();
+            g.moveTo(window.innerWidth*0.59 - SP, i*50 + 266 - DH);
+            g.lineTo(window.innerWidth*0.59 + DW - SP, i*50 + 266);
+            g.lineTo(window.innerWidth*0.59 - SP, i*50 + 266 + DH);
+            g.lineTo(window.innerWidth*0.59 - DW - SP, i*50 + 266);
+            g.fill();
+            g.beginPath();
+            g.moveTo(window.innerWidth*0.59 + SP, i*50 + 266 - DH);
+            g.lineTo(window.innerWidth*0.59 + DW + SP, i*50 + 266);
+            g.lineTo(window.innerWidth*0.59 + SP, i*50 + 266 + DH);
+            g.lineTo(window.innerWidth*0.59 - DW + SP, i*50 + 266);
+            g.fill();
+          }
+
+          g.fillStyle = 'rgb(0, 0, 0)';
+          g.fillText(wds[trails[i][2] - 1], window.innerWidth*0.62, i*50 + 274);
         }
 
         g.fillStyle = 'rgb(0, 0, 0)';
         g.font = '21px Avenir';
         g.fillText("Trail Name", window.innerWidth*0.07, 234);
         g.fillText("Mountain Name", window.innerWidth*0.38, 234);
+        g.fillText("Trail Difficulty", window.innerWidth*0.62, 234);
+
+
       }
-      else {
+      else if (mountSel == 2) {
         for (var i = 0 ; i < races.length ; i++) {
           g.fillStyle = 'rgb(100, 100, 100, 0.25)';
 
@@ -620,6 +796,91 @@
         g.fillText("Mountain Name", window.innerWidth*0.38, 234);
         g.fillText("Best Time", window.innerWidth*0.63, 234);
       }
+      else {
+        updateAchievements();
+
+        var oldAchievements = [];
+        for (var i = 0 ; i < achievements.length ; i++) {
+          oldAchievements.push(achievements[i]);
+        }
+
+        achievements.sort(function(a, b) { return b[2]/b[3] - a[2]/a[3]});
+
+        for (var i = 0 ; i < achievements.length ; i++) {
+          g.fillStyle = 'rgb(100, 100, 100, 0.25)';
+          var sz = 100;
+          g.fillRect(window.innerWidth * 0.05, i*sz + 245, window.innerWidth*0.9, sz-10, 5);
+          g.fillStyle = 'rgb(0, 0, 0)';
+          g.font = '26px AvenirNext-Bold';
+          g.fillText(achievements[i][0], window.innerWidth * 0.07, i*sz + 245 + sz/2 + 7);
+          g.font = '18px Avenir';
+          var all = achievements[i][1];
+          var total = "";
+          var new_str = "";
+          maxw = 440;
+          for (var j = 0 ; j < all.length ; j++) {
+            new_str += all[j];
+            var wd = g.measureText(new_str).width;
+            if (wd >= maxw && all[j] == " ") {
+              total += new_str + "\n";
+              new_str = "";
+            }
+          }
+          total += new_str;
+          var len = total.split("\n").length;
+
+          for (var j = 0 ; j < len ; j++) {
+            g.fillText(total.split("\n")[j], window.innerWidth*0.33, i*sz + 245 + sz/2 + (j - (len-1)/2) * 25);
+          }
+
+          var val = achievements[i][2] / achievements[i][3];
+          console.log(val);
+
+          g.fillStyle = 'rgba(240, 240, 240, 1)';
+          var ht = 12;
+          g.fillRect(window.innerWidth*0.74, i*sz + 245 + sz/2 - ht/2, window.innerWidth*0.19, ht);
+          g.beginPath();
+          g.arc(window.innerWidth*0.74, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.fill();
+          g.beginPath();
+          g.arc(window.innerWidth*0.93, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.fill();
+          var left = window.innerWidth*0.74 + ht/2;
+          var right = window.innerWidth*0.93 - ht/2;
+          var ans = ht/2 + ((right - left) * val) + (ht/2)*val;
+
+          var col = 'rgb(' + parseInt(Math.max(50, 50 + (1 - val*2) * 150)) + ',' + parseInt(val*255) + ',0)';
+
+          g.fillStyle = col;
+          g.beginPath();
+          g.arc(window.innerWidth*0.74, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.fill();
+          if (val == 1) {
+            g.beginPath();
+            g.arc(window.innerWidth*0.93, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+            g.fill();
+          }
+          g.fillRect(window.innerWidth*0.74, i*sz + 245 + sz/2 - ht/2, ans, ht);
+          /*g.font = '21px Avenir';
+          g.fillText(stats[races[i][1]-1][0], window.innerWidth * 0.38, i*50 + 270 + 4);
+
+          g.font = '21px AvenirNext-Bold';
+
+          if (times[i] != -1) {
+            g.fillText(times[i] + "s", window.innerWidth * 0.63, i*50 + 270 + 4);
+          }*/
+        }
+
+        g.fillStyle = 'rgb(0, 0, 0)';
+        g.font = '20px Avenir';
+        g.fillText("Achievement Name", window.innerWidth*0.07, 234);
+        g.fillText("Description", window.innerWidth*0.37, 234);
+        g.fillText("Progress", window.innerWidth*0.78, 234);
+
+        for (var i = 0 ; i < achievements.length ; i++) {
+          achievements[i] = oldAchievements[i];
+        }
+      }
     };
 
 
@@ -638,9 +899,14 @@
        document.getElementById("selimg").height = 0;
 
      function animate2() {
+       if (document.getElementById("clear").innerHTML != "") {
+         //console.log("COMP CLEARED!!!");
+         comp[parseInt(document.getElementById("clear").innerHTML)] = true;
+         document.getElementById("clear").innerHTML = "";
+
+       }
        if (document.getElementById("result").innerHTML) {
          if (document.getElementById("result").innerHTML != -1) {
-           console.log(document.getElementById("result").innerHTML);
            if (document.getElementById("result").innerHTML.split(" ")[0] == "Time") {
              if (times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] == -1) {
                times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] = 1000000000;
@@ -694,9 +960,7 @@
 
          g.translate(IW/2, IW/2);
          nr = parseFloat(document.getElementById("pos").innerHTML.split(" ")[2]);
-         //console.log("Angle: ");
-         //console.log(nr);
-         //console.log(nr-orot);
+
 
          g.rotate(nr);
         //g.rotate(Math.PI/4);
@@ -732,24 +996,77 @@
          //g.fillRect(0, 0, 200, 200);
 
        }
+       var ride = parseInt(document.getElementById("riding").innerHTML);
+
+       if (ride != NaN) {
+         skied[ride] = true;
+       }
+
+       var old = [];
+       for (var i = 0 ; i < achievements.length ; i++) {
+         old.push(achievements[i].slice());
+       }
+       updateAchievements();
+       console.log(comp);
+       console.log("Checking");
+       for (var i = 0 ; i < achievements.length ; i++) {
+         if (achievements[i][2] != old[i][2]) {
+           console.log("DIFFERENT");
+           var hash = parseInt(Math.random()*1000000000);
+           //pos.push( = (1+hashes.length) * 80;
+           hashes.push(i);
+           vanishtimes.push(100);
+         }
+       }
+
+       console.log(hashes);
+       console.log(vanishtimes);
+       console.log(document.getElementById("boxes").innerHTML);
+       document.getElementById("boxes").innerHTML = "";
+
+       var j = 80;
+       for (var i = hashes.length - 1 ; i >= 0 ; i--) {
+         vanishtimes[i] -= 0.3;
+         if (vanishtimes[i] < 0) {
+           hashes.splice(i, 1);
+           vanishtimes.splice(i, 1);
+           continue;
+         }
+         document.getElementById("boxes").innerHTML += "<div id=\"achbox\" style=\"margin-bottom: " + j + "px\">Achivement Advanced: " + achievements[hashes[i]][0] + " (" + achievements[hashes[i]][2] + " / " + achievements[hashes[i]][3] + ")</div>"
+         j += 80;
+       }
+
        window.requestAnimationFrame(animate2);
        if (document.getElementById("extra").innerHTML == "Loaded Lifts") {
-         document.getElementById("extra").innerHTML = "";
+         //document.getElementById("extra").innerHTML = "";
          //document.getElementById("game").width = 0;
          //document.getElementById("game").height = 0;
-         loaded = true;
+         if (!loaded) {
+           //playSong("main");
+           loaded = true;
+         }
+
        }
        else {
-
-
-                  document.getElementById("game").width = window.innerWidth;
-                  document.getElementById("game").height = 50*207 + 270;
-
-         drawMenu();
-
-         document.getElementById("extra").innerHTML = "";
-
+         //if (loaded) {
+           pauseSong("main");
+           //loaded = false;
+         //}
        }
+
+
+       if (!loaded && document.getElementById("selimg").width == 0) {
+         drawMenu();
+       }
+       else {
+         document.getElementById("game").innerHTML = "";
+         document.getElementById("game").width = 0;
+         document.getElementById("game").height = 0;
+       }
+
+        //document.getElementById("extra").innerHTML = "";
+
+
 
        tick++;
        /*if (loaded) {
@@ -813,18 +1130,21 @@
       var y = event.pageY - etop;
       //mouseY = y;
       if (y >= 165 && y <= 207) {
-        var wd = (window.innerWidth*0.3-60);
-        if (x >= window.innerWidth*0.05 && x <= window.innerWidth*0.05 + wd) {
+        var wd = (window.innerWidth*0.25-60);
+        if (x >= 30 && x <= 30 + wd) {
           mountSel = 0;
         }
-        if (x >= window.innerWidth*0.33 + 30 && x <= window.innerWidth * 0.33 + 30 + wd) {
+        if (x >= window.innerWidth*0.25 + 30 && x <= window.innerWidth * 0.25 + 30 + wd) {
           mountSel = 1;
         }
-        if (x >= window.innerWidth*0.67 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+        if (x >= window.innerWidth*0.5 + 30 && x <= window.innerWidth * 0.5 + 30 + wd) {
           mountSel = 2;
         }
+        if (x >= window.innerWidth*0.75 + 30 && x <= window.innerWidth * 0.75 + 30 + wd) {
+          mountSel = 3;
+        }
       }
-      console.log(mountSel);
+
     });
 
 
