@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>3D</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap" rel="stylesheet">
     <style>
       body {margin: 0; }
       canvas {display: block; }
@@ -16,6 +19,20 @@
         position: absolute;
         top: 33px;
         left: 0px;
+      }
+      #tut {
+        text-align: center;
+        font-family: 'Avenir';
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 32px;
+      }
+      #race {
+        text-align: center;
+        font-family: 'Avenir';
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 36px;
       }
       #achbox {
         position: absolute;
@@ -43,6 +60,8 @@
     <div id="result" hidden=true></div>
     <div id="riding" hidden=true></div>
     <div id="top"></div>
+    <div id="tut"></div>
+    <div id="race"></div>
     <!--<div id="achbox" style="margin-bottom: 80px">Achivement Progressed: Explorer (2 / 27)</div>
     <div id="achbox" style="margin-bottom: 80px">Achivement Advanced: Explorer (2 / 27)</div>
     <div id="achbox" style="margin-bottom: 160px">Achivement Advanced: Explorer (2 / 27)</div>
@@ -59,6 +78,7 @@
     <div id="extra" hidden=true></div>
     <div id="extra2" hidden=true>0 0</div>
     <div id="pos" hidden=true></div>
+    <div id="mtn" hidden=true></div>
 
     <canvas id="minimap" width=0 height=0></canvas>
 
@@ -372,7 +392,7 @@
       ["ELDORA", "Eldora, CO", 1400, 65, 10, 58, 632, 1161, 1169, 521, 2],
       ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 59, 1272, 1149, 970, 514, 1],
       ["GIANTS RIDGE", "Biwabik, MN", 500, 35, 7, 60, 853, 758, 702, 244, 1],
-      ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 61, 14, 1171, 1699, 905, 752, 2],
+      ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 61, 1171, 1699, 905, 752, 2],
       ["GRAND TARGHEE", "Alta, WY", 2270, 97, 5, 62, 1121, 1608, 1571, 890, 2],
       ["GRANITE PEAK", "Wausau, WI", 700, 58, 5, 63, 800, 1117, 1053, 443, 1],
       ["GREAT DIVIDE", "Marysville, MT", 1580, 110, 6, 64, 1473, 1565, 1670, 1470, 2],
@@ -533,15 +553,24 @@
       ["ROCKET", 31, 3, [1252, 452, 1273, 456, 1239, 569, 1261, 571, 1193, 963, 1219, 968, 1155, 1312, 1178, 1312]],
       ["GALAXY", 31, 3, [1393, 415, 1390, 401, 1372, 437, 1384, 431, 1362, 630, 1395, 631, 1326, 1040, 1343, 1037, 1313, 1170, 1337, 1169, 1325, 1297, 1345, 1303]],
       ["NORTH STAR", 31, 2, [1374, 444, 1391, 438, 1415, 515, 1422, 509, 1524, 646, 1549, 649, 1491, 939, 1507, 942, 1355, 1284, 1364, 1298]],
-      ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
-      ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
-      ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
       ["RIDGE RUN", 68, 2, [2187, 221, 2205, 217, 2202, 264, 2211, 263, 2206, 314, 2218, 315, 2203, 428, 2220, 423, 2256, 472, 2263, 463, 2321, 538, 2330, 537, 2326, 602, 2337, 609, 2302, 657, 2312, 673, 2218, 698, 2218, 714]],
       ["BLUE OX", 192, 3, [1640, 1740, 1657, 1737, 1652, 1795, 1665, 1795, 1679, 1881, 1685, 1881, 1879, 2067, 1880, 2060, 1990, 2110, 1996, 2103]],
       ["RIVA RIDGE", 192, 3, [2138, 1517, 2150, 1516, 2156, 1561, 2171, 1567, 2148, 1632, 2164, 1637, 2132, 1717, 2141, 1717, 2152, 1783, 2159, 1780, 2270, 1942, 2284, 1929, 2339, 2007, 2362, 1982, 2371, 2047, 2386, 2050, 2361, 2153, 2375, 2153, 2394, 2272, 2402, 2272, 2436, 2473, 2455, 2467]],
       ["CHOPSTIX", 192, 2, [1288, 1472, 1349, 1507, 1368, 1341, 1476, 1417, 1545, 1205, 1579, 1226, 1539, 1076, 1602, 1076, 1548, 962, 1587, 962, 1522, 890, 1570, 920]],
       ["LOVER'S LEAP", 192, 3, [1468, 216, 1477, 215, 1496, 282, 1519, 282, 1506, 325, 1534, 364, 1465, 377, 1482, 418, 1395, 446, 1404, 453, 1354, 538, 1364, 540]],
-      ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]]
+      ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]],
+      ["GOLD COAST", 165, 2, [2581, 410, 2620, 422, 2544, 501, 2568, 501, 2565, 573, 2590, 587, 2569, 625, 2584, 634, 2480, 683, 2501, 703, 2457, 727, 2500, 739, 2431, 816, 2446, 832, 2382, 846, 2382, 877]],
+      ["WOMEN'S DOWNHILL", 165, 3, [1916, 1467, 1934, 1438, 1960, 1489, 1977, 1463, 2013, 1514, 2029, 1487, 2061, 1540, 2083, 1522, 2107, 1583, 2126, 1564, 2169, 1632, 2193, 1613, 2210, 1672, 2228, 1652, 2259, 1715, 2278, 1687, 2317, 1762, 2333, 1730, 2362, 1794, 2381, 1769, 2385, 1811, 2404, 1785]],
+      ["REUTER'S", 165, 2, [2814, 753, 2814, 733, 2853, 745, 2854, 734, 2885, 748, 2888, 737, 2933, 765, 2939, 752, 2986, 771, 2989, 754, 3021, 776, 3025, 756, 3051, 779, 3052, 759, 3073, 782, 3073, 763]],
+      ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
+      ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
+      ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
+      ["BURNOUT", 124, 3, [1894, 228, 1901, 223, 1953, 284, 1965, 276, 2037, 351, 2049, 337, 2125, 433, 2136, 420, 2215, 527, 2222, 517, 2247, 573, 2263, 575, 2235, 656, 2243, 659, 2217, 708, 2222, 710, 2203, 771, 2221, 770, 2235, 818, 2253, 806]],
+      ["LUMBERJACK", 124, 1, [1481, 539, 1502, 560, 1429, 635, 1443, 643, 1367, 723, 1371, 732, 1264, 851, 1271, 868, 1164, 984, 1172, 993, 1070, 1058, 1077, 1067, 1003, 1116, 1008, 1126, 918, 1169, 923, 1178, 859, 1210, 865, 1224, 803, 1277, 813, 1280, 810, 1380, 826, 1387]],
+      ["GOOSENECK", 124, 3, [1819, 1195, 1827, 1199, 1801, 1273, 1811, 1277, 1782, 1346, 1792, 1351, 1755, 1432, 1766, 1434, 1729, 1535, 1746, 1548, 1706, 1631, 1726, 1639, 1667, 1772, 1678, 1781]],
+      ["RAINBOW RIDGE", 72, 1, [948, 1077, 965, 1059, 1004, 1120, 1016, 1120, 1086, 1248, 1097, 1247, 1146, 1385, 1165, 1379, 1183, 1501, 1209, 1499, 1231, 1588, 1242, 1583, 1277, 1628, 1297, 1618, 1287, 1691, 1291, 1716, 1193, 1706, 1194, 1721, 1081, 1735, 1081, 1748, 947, 1743, 942, 1754, 870, 1697, 871, 1713, 812, 1724, 819, 1739, 781, 1773, 796, 1782, 773, 1845, 787, 1846, 780, 1924, 792, 1924, 786, 1985, 795, 1982, 794, 2035, 807, 2049, 718, 2097, 719, 2109, 655, 2115, 660, 2124, 657,2194, 668, 2186, 754, 2228, 762, 2219, 827, 2256, 831, 2233]],
+      ["HIGH GRADE", 72, 2, [934, 1051, 934, 1069, 874, 1057, 876, 1070, 828, 1103, 850, 1103, 826, 1168, 876, 1170, 851, 1253, 885, 1261, 855, 1332, 874, 1340, 845, 1412, 882, 1412, 872, 1500, 895, 1504, 861, 1588, 871, 1594, 826, 1658, 836, 1667, 785, 1710, 809, 1716, 778, 1750, 798, 1750]],
+      ["CEDAR RIDGE", 72, 3, [1029, 1885, 1034, 1890, 980, 1937, 988, 1950, 930, 2020, 942, 2029, 886, 2095, 902, 2096, 870, 2145, 892, 2145, 885, 2193, 909, 2191]]
     ];
 
     var races = [
@@ -579,7 +608,13 @@
       ["CORNFIELDS", "Complete every Midwest trail in the game", 0, -1]
     ];
 
-
+    var pac = ["AK", "CA", "HI", "OR", "WA"]; //red
+    var south = ["AL", "DE", "FL", "GA", "KY", "LA", "MD", "NC", "PA", "SC", "VA", "WV"]; //green
+    var east = ["CT", "ME", "MA", "NH", "NJ", "NY", "RI", "VT"]; //blue
+    var rock = ["AZ", "CO", "ID", "MT", "NV", "NM", "UT", "WY"]; //orange
+    var mw = ["IL", "IN", "IA", "KS", "MI", "MN", "MO", "NE", "ND", "OH", "OK", "SD", "TN", "TX", "WI"]; //purple
+    var reg = [pac, south, east, rock, mw];
+    var regcol = [[255,0,0],[0,255,0],[0,0,255],[200,150,0],[200,0,200]];
 
     var skied = [];
     for (var i = 0 ; i < stats.length ; i ++) {
@@ -599,10 +634,32 @@
       //Explorer, Ultimate Explorer
       var answer = 0;
       for (var i = 0 ; i < skied.length ; i++) {
-        if (skied[i]) {
+        if (skied[stats[i][5]]) {
           answer++;
         }
       }
+
+      /*
+      var achievements = [
+        ["EXPLORER", "Ride at least one ski lift at least 10 different ski mountains", 0, 10],
+        ["TOURIST", "Ride at least one ski lift from at least one ski mountain from each of the 50 states (excluding states with no ski mountains in the game)", 0, -1],
+        ["ULTIMATE EXPLORER", "Ride at least one ski lift at every ski mountain in the game", 0, stats.length],
+        ["CHAMPION", "Reach Level 27", 1, 27],
+        ["GOOD START", "Achieve your first B Tier result in a race", 0, 1],
+        ["TIERS OF JOY", "Achieve an S Tier result in 5 distinct races", 0, 5],
+        ["GRANDMASTER", "Achieve an S Tier result in every race in the game", 0, races.length],
+        ["GOING GREEN", "Complete 10 distinct Easier trails", 0, 10],
+        ["FEELING BLUE", "Complete 10 distinct More Difficult trails", 0, 10],
+        ["BLACKOUT", "Complete 10 distinct Most Difficult trails", 0, 10],
+        ["DAREDEVIL", "Complete 10 distinct Experts Only trails", 0, 10],
+        ["LEVEL MANIAC", "Complete every trail in the game", 0, trails.length],
+        ["RECKLESS RACING", "Miss at least one slalom pole, but still achieve at least a B Tier result in a race", 0, 1],
+        ["COMEBACK KID", "Achieve at least a B Tier result in a race after having an F Tier split earlier in the same race", 0, 1],
+        ["BEAST OF THE EAST", "Complete every East Coast trail in the game", 0, -1],
+        ["BEST OF THE WEST", "Complete every West Coast (including Rocky Mountain ski areas) trail in the game", 0, -1],
+        ["CORNFIELDS", "Complete every Midwest trail in the game", 0, -1]
+      ];
+      */
 
       achievements[0][2] = answer;
       achievements[2][2] = answer;
@@ -613,75 +670,197 @@
       achievements[9][2] = 0;
       achievements[10][2] = 0;
       achievements[11][2] = 0;
+
+      achievements[4][2] = 0;
+      for (var i = 0 ; i < races.length ; i++) {
+        if (races[i][110] >= 4) {
+          achievements[4][2] = 1;
+        }
+      }
+      achievements[5][2] = 0;
+      achievements[6][2] = 0;
+      achievements[12][2] = 0;
+      achievements[13][2] = 0;
+      for (var i = 0 ; i < races.length ; i++) {
+        if (races[i][110] == 6) {
+          achievements[5][2] ++;
+          achievements[6][2] ++;
+
+        }
+
+        if (races[i][111]) {
+          achievements[12][2] = 1;
+        }
+        if (races[i][112]) {
+          achievements[13][2] = 1;
+        }
+
+      }
       for (var i = 0 ; i < trails.length ; i++) {
         if (comp[i]) {
           achievements[11][2]++;
           achievements[trails[i][2] + 6][2]++;
         }
       }
+
+      achievements[14][3] = 0;
+      achievements[14][2] = 0;
+      achievements[15][3] = 0;
+      achievements[15][2] = 0;
+      achievements[16][3] = 0;
+      achievements[16][2] = 0;
+
+
+
+      for (var i = 0 ; i < trails.length ; i++) {
+        var mtn = trails[i][1]-1;
+        var rg = stats[mtn][110];
+        //console.log(trails[i][0] + " " + stats[mtn][0] + " " + rg);
+        if ((rg == 1 || rg == 2)) {
+          achievements[14][3]++;
+          if (comp[i]) {
+            achievements[14][2]++;
+          }
+        }
+        if ((rg == 0 || rg == 3)) {
+          achievements[15][3]++;
+          if (comp[i]) {
+            achievements[15][2]++;
+          }
+        }
+        if ((rg == 4)) {
+          achievements[16][3]++;
+          if (comp[i]) {
+            achievements[16][2]++;
+          }
+        }
+      }
+
+      //console.log(achievements[13][2] + " " + achievements[14][2] + " " + achievements[15][2]);
+      //console.log(achievements[13][3] + " " + achievements[14][3] + " " + achievements[15][3]);
+
+      achievements[1][3] = 0;
+      achievements[1][2] = 0;
+
+      var states = [];
+      var cstates = [];
+
+      for (var i = 0 ; i < stats.length ; i++) {
+        state = stats[i][1].split(", ")[1];
+        states.push(state);
+        if (skied[stats[i][5]]) {
+          cstates.push(state);
+        }
+      }
+
+      states.sort();
+      cstates.sort();
+
+
+      for (var i = 0 ; i < states.length ; i++) {
+        if (i==0 || (i>0 && states[i] != states[i-1])) {
+          achievements[1][3]++;
+        }
+      }
+
+      for (var i = 0 ; i < cstates.length ; i++) {
+        if (i==0 || (i>0 && cstates[i] != cstates[i-1])) {
+          achievements[1][2]++;
+        }
+      }
+
     }
 
 
 
     var canvas = document.getElementById("game");
 
-    var mountSel = 0;
+    var mountSel = -1;
+
+    for (var i = 0 ; i < stats.length ; i++) {
+      var state = stats[i][1].split(", ")[1];
+      var match = 0;
+      for (var j = 0  ; j < reg.length ; j++) {
+        for (var k = 0 ; k < reg[j].length ; k++) {
+          if (reg[j][k] == state) {
+            match = j;
+          }
+        }
+      }
+      stats[i][110] = match;
+    }
+
 
     function drawMenu() {
 
 
+
       document.getElementById("game").width = window.innerWidth;
-      document.getElementById("game").height = 50*207 + 270;
+      document.getElementById("game").height = 60*207 + 300;
 
       var canvas = document.getElementById("game");
 
 
       canvas.width = window.innerWidth;
-      canvas.height = 50*207 + 270;
+      canvas.height = 60*207 + 300;
       //var processingInstance = new Processing(canvas, programCode);
 
       var g = canvas.getContext('2d');
 
       g.fillStyle = 'rgb(150, 150, 0)';
-      g.font = '90px Avenir';
-      g.fillText("Ultimate Ski Race 3D", window.innerWidth / 2 - 410, 100);
+      g.font = '90px Shippori Antique B1';
+      g.textAlign = 'center';
+      g.fillText("Ultimate Ski Race 3D", window.innerWidth / 2, 100);
       g.font = '24px Avenir';
       g.fillStyle = 'rgb(0, 0, 0)';
-      g.fillText("October 28 Pre-Release Version", window.innerWidth / 2 - 140, 146);
+      g.fillText("November 15 Pre-Release Version", window.innerWidth / 2, 146);
+      g.textAlign = 'left';
 
+      g.fillStyle = 'rgb(100, 100, 100, 0.25)';
+      if (mountSel == -1) {
+        g.fillStyle = 'rgb(200, 0, 0, 0.25)';
+      }
+      g.fillRect(0, 165, window.innerWidth*0.2, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 0) {
         g.fillStyle = 'rgb(0, 0, 200, 0.25)';
       }
-      g.fillRect(30, 165, window.innerWidth*0.25 - 60, 42);
+      g.fillRect(window.innerWidth*0.2, 165, window.innerWidth*0.2, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 1) {
         g.fillStyle = 'rgb(0, 200, 120, 0.5)';
       }
-      g.fillRect(window.innerWidth*0.25 + 30, 165, window.innerWidth*0.25 - 60, 42);
+      g.fillRect(window.innerWidth*0.4, 165, window.innerWidth*0.2, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 2) {
-        g.fillStyle = 'rgb(200, 0, 0, 0.25)';
+        g.fillStyle = 'rgb(200, 0, 200, 0.25)';
       }
-      g.fillRect(window.innerWidth*0.5 + 30, 165, window.innerWidth*0.25 - 60, 42);
+      g.fillRect(window.innerWidth*0.6, 165, window.innerWidth*0.2, 42);
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
       if (mountSel == 3) {
         g.fillStyle = 'rgb(200, 150, 0, 0.25)';
       }
-      g.fillRect(window.innerWidth*0.75 + 30, 165, window.innerWidth*0.25 - 60, 42);
+      g.fillRect(window.innerWidth*0.8, 165, window.innerWidth*0.2, 42);
 
       g.fillStyle = 'rgb(0, 0, 0)';
       g.font = '24px Avenir';
-      g.fillText("Sandbox Mode", window.innerWidth*0.125 - 90, 196);
-      g.fillText("Levels", window.innerWidth*0.375 - 45, 196);
-      g.fillText("Racing", window.innerWidth*0.625 - 45, 196);
-      g.fillText("Achievements", window.innerWidth*0.875 - 75, 196);
+      g.textAlign = 'center';
+      g.fillText("Homepage", window.innerWidth*0.1, 196);
+      g.fillText("Sandbox Mode", window.innerWidth*0.3, 196);
+      g.fillText("Levels", window.innerWidth*0.5, 196);
+      g.fillText("Racing", window.innerWidth*0.7, 196);
+      g.fillText("Achievements", window.innerWidth*0.9, 196);
+      g.textAlign = 'left';
 
 
+      document.getElementById("game").style.cursor = "auto";
 
+      if (drawY >= 165 && drawY <= 207) {
+        document.getElementById("game").style.cursor = "pointer";
+      }
 
       if (mountSel == 0) {
-        for (var i = 0  ; i < stats.length ; i++) {
+        /*for (var i = 0  ; i < stats.length ; i++) {
           g.fillStyle = 'rgb(0, 0, 200, 0.25)';
           g.fillRect(window.innerWidth * 0.05, i*50 + 245, window.innerWidth*0.9, 42, 5);
           g.fillStyle = 'rgb(0, 0, 0)';
@@ -695,49 +874,144 @@
           g.fillText(stats[i][4], window.innerWidth * 0.84, i*50 + 270 + 4);
 
         }
+*/
+        var mults = [0.09, 0.42, 0.58, 0.73, 0.89];
+        var wds = ["Mountain Name", "Location", "Vertical Drop (Feet)", "Number of Trails", "Number of Lifts"];
+        var sorts = [
+          function(a, b) {
+            var x = b[0];
+            var y = a[0];
+            if (x < y) {
+              return 1;
+            }
+            else if (x > y) {
+              return -1;
+            }
+            else {
+              return 0;
+            }
+          },
+          function(a, b) {
+            var x = b[1].split(", ")[1];
+            var y = a[1].split(", ")[1];
+            if (x < y) {
+              return 1;
+            }
+            else if (x > y) {
+              return -1;
+            }
+            else {
+              return 0;
+            }
+          },
+          function(a, b) {return b[2] - a[2];},
+          function(a, b) {return b[3] - a[3];},
+          function(a, b) {return b[4] - a[4];}
+        ];
+        var cc = 0;
+        var lst = -1;
 
-        g.fillStyle = 'rgb(0, 0, 0)';
-        g.font = '21px Avenir';
-        g.fillText("Mountain Name", window.innerWidth*0.07, 234);
-        g.fillText("Location", window.innerWidth*0.38, 234);
-        g.fillText("Vertical Drop (Feet)", window.innerWidth*0.52, 234);
-        g.fillText("Number of Trails", window.innerWidth*0.67, 234);
-        g.fillText("Number of Lifts", window.innerWidth*0.81, 234);
+        g.textAlign = 'center';
+
+
+
+        for (var i = 0 ; i < mults.length ; i++) {
+          var W = 196;
+          g.fillStyle = 'rgb(200,200,200,0.5)';
+
+          if (drawX >= window.innerWidth*mults[i] - W/2 && drawX <= window.innerWidth*mults[i] + W/2 && drawY >= 223 && drawY <= 263) {
+            g.fillRect(window.innerWidth*mults[i] - W/2 - 4, 220, W+8, 46);
+            document.getElementById("game").style.cursor = "pointer";
+            if (clicked==0) {
+              stats.sort(sorts[i]);
+            }
+          }
+          else {
+            g.fillRect(window.innerWidth*mults[i] - W/2, 223, W, 40);
+          }
+
+          g.fillStyle = 'rgb(0, 0, 0)';
+          g.font = '21px Avenir';
+          g.fillText(wds[i], window.innerWidth*mults[i], 250);
+
+        }
+
+
+        for (var i = 0 ; i < stats.length ; i++) {
+          var state = stats[i][1].split(", ")[1];
+          var match = stats[i][110];
+          var std = [200, 200, 200];
+          var fac = 0.25;
+          g.fillStyle = 'rgb(' + (regcol[match][0]*fac+std[0]*(1-fac)) + ',' + (regcol[match][1]*fac+std[1]*(1-fac)) + ',' + (regcol[match][2]*fac+std[2]*(1-fac)) + ',0.3)';
+          if (drawY >= i*60 + 279 && drawY <= i*60 + 331) {
+            g.fillRect(0, i*60 + 268, window.innerWidth, 66, 5);
+            document.getElementById("game").style.cursor = "pointer";
+            document.getElementById("mtn").innerHTML = stats[i][5];
+          }
+          else {
+            g.fillRect(0, i*60 + 275, window.innerWidth, 52, 5);
+          }
+          g.fillStyle = 'rgb(0, 0, 0)';
+          g.font = '29px AvenirNext-Bold';
+          g.textAlign = 'left';
+          g.fillText(stats[i][0], window.innerWidth * 0.04, i*60 + 305 + 8);
+          g.textAlign = 'center';
+          g.font = '21px Avenir';
+          g.fillText(stats[i][1], window.innerWidth * mults[1], i*60 + 305 + 4);
+          g.fillText(stats[i][2], window.innerWidth * mults[2], i*60 + 305 + 4);
+          g.fillText(stats[i][3], window.innerWidth * mults[3], i*60 + 305 + 4);
+          g.fillText(stats[i][4], window.innerWidth * mults[4], i*60 + 305 + 4);
+             }
       }
       else if (mountSel == 1) {
         var wds = ["Easier", "More Difficult", "Most Difficult", "Extremely Difficult"];
         for (var i = 0 ; i < trails.length ; i++) {
+
           g.fillStyle = 'rgb(0, 200, 120, 0.5)';
           if (!comp[i]) {
             g.fillStyle = 'rgb(100, 100, 100, 0.25)';
           }
-          g.fillRect(window.innerWidth * 0.05, i*50 + 245, window.innerWidth*0.9, 42, 5);
+          if (drawY >= i*60 + 279 && drawY <= i*60 + 331) {
+            document.getElementById("game").style.cursor = "pointer";
+            g.fillRect(0, i*60 + 268, window.innerWidth, 66, 5);
+          }
+          else {
+            g.fillRect(0, i*60 + 275, window.innerWidth, 52, 5);
+          }
           g.fillStyle = 'rgb(0, 0, 0)';
-          g.font = '26px AvenirNext-Bold';
-          g.fillText(trails[i][0], window.innerWidth * 0.07, i*50 + 270 + 7);
+          g.font = '29px AvenirNext-Bold';
+          g.fillText(trails[i][0], window.innerWidth * 0.04, i*60 + 305 + 8);
 
           g.font = '21px Avenir';
-          g.fillText(stats[trails[i][1]-1][0], window.innerWidth * 0.38, i*50 + 270 + 4);
+          g.textAlign = 'center';
+          var ind = 0;
+          for (var k = 0 ; k < stats.length ; k++) {
+            if (stats[k][5] == trails[i][1]-1) {
+              ind = k;
+            }
+          }
+          g.fillText(stats[ind][0], window.innerWidth * 0.48, i*60 + 305 + 4);
+          g.textAlign = 'left';
 
           if (trails[i][2] == 1) {
             g.fillStyle = 'rgba(0, 200, 0, 0.7)';
             g.beginPath();
-            g.arc(window.innerWidth*0.59, i*50 + 266, 12, 12, 0, 2*Math.PI);
+            g.arc(window.innerWidth*0.72, i*60 + 301, 12, 12, 0, 2*Math.PI);
             g.fill();
           }
           else if (trails[i][2] == 2) {
             g.fillStyle = 'rgba(0, 0, 200, 0.7)';
-            g.fillRect(window.innerWidth*0.59 - 10, i*50 + 256, 20, 20);
+            g.fillRect(window.innerWidth*0.72 - 10, i*60 + 291, 20, 20);
           }
           else if (trails[i][2] == 3) {
             g.fillStyle = 'rgba(0, 0, 0, 0.7)';
             var DH = 12;
             var DW = 8;
             g.beginPath();
-            g.moveTo(window.innerWidth*0.59, i*50 + 266 - DH);
-            g.lineTo(window.innerWidth*0.59 + DW, i*50 + 266);
-            g.lineTo(window.innerWidth*0.59, i*50 + 266 + DH);
-            g.lineTo(window.innerWidth*0.59 - DW, i*50 + 266);
+            g.moveTo(window.innerWidth*0.72, i*60 + 301 - DH);
+            g.lineTo(window.innerWidth*0.72 + DW, i*60 + 301);
+            g.lineTo(window.innerWidth*0.72, i*60 + 301 + DH);
+            g.lineTo(window.innerWidth*0.72 - DW, i*60 + 301);
             g.fill();
           }
           else {
@@ -746,57 +1020,81 @@
             var DW = 8;
             var SP = 6;
             g.beginPath();
-            g.moveTo(window.innerWidth*0.59 - SP, i*50 + 266 - DH);
-            g.lineTo(window.innerWidth*0.59 + DW - SP, i*50 + 266);
-            g.lineTo(window.innerWidth*0.59 - SP, i*50 + 266 + DH);
-            g.lineTo(window.innerWidth*0.59 - DW - SP, i*50 + 266);
+            g.moveTo(window.innerWidth*0.72 - SP, i*60 + 301 - DH);
+            g.lineTo(window.innerWidth*0.72 + DW - SP, i*60 + 301);
+            g.lineTo(window.innerWidth*0.72 - SP, i*60 + 301 + DH);
+            g.lineTo(window.innerWidth*0.72 - DW - SP, i*60 + 301);
             g.fill();
             g.beginPath();
-            g.moveTo(window.innerWidth*0.59 + SP, i*50 + 266 - DH);
-            g.lineTo(window.innerWidth*0.59 + DW + SP, i*50 + 266);
-            g.lineTo(window.innerWidth*0.59 + SP, i*50 + 266 + DH);
-            g.lineTo(window.innerWidth*0.59 - DW + SP, i*50 + 266);
+            g.moveTo(window.innerWidth*0.72 + SP, i*60 + 301 - DH);
+            g.lineTo(window.innerWidth*0.72 + DW + SP, i*60 + 301);
+            g.lineTo(window.innerWidth*0.72 + SP, i*60 + 301 + DH);
+            g.lineTo(window.innerWidth*0.72 - DW + SP, i*60 + 301);
             g.fill();
           }
 
           g.fillStyle = 'rgb(0, 0, 0)';
-          g.fillText(wds[trails[i][2] - 1], window.innerWidth*0.62, i*50 + 274);
+          g.fillText(wds[trails[i][2] - 1], window.innerWidth*0.75, i*60 + 309);
         }
 
         g.fillStyle = 'rgb(0, 0, 0)';
         g.font = '21px Avenir';
-        g.fillText("Trail Name", window.innerWidth*0.07, 234);
-        g.fillText("Mountain Name", window.innerWidth*0.38, 234);
-        g.fillText("Trail Difficulty", window.innerWidth*0.62, 234);
+        g.fillText("Trail Name", window.innerWidth*0.07, 250);
+        g.fillText("Mountain Name", window.innerWidth*0.42, 250);
+        g.fillText("Trail Difficulty", window.innerWidth*0.72, 250);
 
 
       }
       else if (mountSel == 2) {
         for (var i = 0 ; i < races.length ; i++) {
+
+
           g.fillStyle = 'rgb(100, 100, 100, 0.25)';
 
-          g.fillRect(window.innerWidth * 0.05, i*50 + 245, window.innerWidth*0.9, 42, 5);
+          if (drawY >= i*60 + 279 && drawY <= i*60 + 331) {
+            document.getElementById("game").style.cursor = "pointer";
+            g.fillRect(0, i*60 + 268, window.innerWidth, 66, 5);
+          }
+          else {
+            g.fillRect(0, i*60 + 275, window.innerWidth, 52, 5);
+          }
           g.fillStyle = 'rgb(0, 0, 0)';
-          g.font = '26px AvenirNext-Bold';
-          g.fillText(races[i][0], window.innerWidth * 0.07, i*50 + 270 + 7);
-
+          g.font = '29px AvenirNext-Bold';
+          g.fillText(races[i][0], window.innerWidth * 0.07, i*60 + 305 + 8);
           g.font = '21px Avenir';
-          g.fillText(stats[races[i][1]-1][0], window.innerWidth * 0.38, i*50 + 270 + 4);
+
+          var ind = 0;
+          for (var k = 0 ; k < stats.length ; k++) {
+            if (stats[k][5] == trails[i][1]-1) {
+              ind = k;
+            }
+          }
+          g.fillText(stats[ind][0], window.innerWidth * 0.38, i*60 + 305 + 4);
 
           g.font = '21px AvenirNext-Bold';
 
           if (times[i] != -1) {
-            g.fillText(times[i] + "s", window.innerWidth * 0.63, i*50 + 270 + 4);
+            g.fillText(times[i] + "s", window.innerWidth * 0.65, i*60 + 305 + 4);
+            var trs = ["", "F", "D", "C", "B", "A", "S"];
+            g.font = '21px Avenir';
+            var cols = [[],[200,0,0],[150,50,0],[120,120,0],[60,180,0],[20,200,0],[20,250,120]];
+            g.fillStyle = 'rgb(' + cols[races[i][110]][0] + ',' + cols[races[i][110]][1] + ',' + cols[races[i][110]][2] + ', 0.5)';
+
+            if (races[i][110]) {
+              g.fillText(trs[races[i][110]] + " Tier", window.innerWidth * 0.78, i*60 + 305 + 4);
+            }
           }
         }
 
         g.fillStyle = 'rgb(0, 0, 0)';
         g.font = '21px Avenir';
-        g.fillText("Trail Name", window.innerWidth*0.07, 234);
-        g.fillText("Mountain Name", window.innerWidth*0.38, 234);
-        g.fillText("Best Time", window.innerWidth*0.63, 234);
+        g.fillText("Trail Name", window.innerWidth*0.07, 250);
+        g.fillText("Mountain Name", window.innerWidth*0.38, 250);
+        g.fillText("Best Time", window.innerWidth*0.65, 250);
+        g.fillText("Best Result", window.innerWidth*0.78, 250);
+
       }
-      else {
+      else if (mountSel == 3) {
         updateAchievements();
 
         var oldAchievements = [];
@@ -809,10 +1107,16 @@
         for (var i = 0 ; i < achievements.length ; i++) {
           g.fillStyle = 'rgb(100, 100, 100, 0.25)';
           var sz = 100;
-          g.fillRect(window.innerWidth * 0.05, i*sz + 245, window.innerWidth*0.9, sz-10, 5);
+          if (drawY >= 275 + i*sz && drawY <= 275 + i*sz + (sz-10)) {
+            document.getElementById("game").style.cursor = "pointer";
+            g.fillRect(0, i*sz + 268, window.innerWidth, sz+4, 5);
+          }
+          else {
+            g.fillRect(0, i*sz + 275, window.innerWidth, sz-10, 5);
+          }
           g.fillStyle = 'rgb(0, 0, 0)';
-          g.font = '26px AvenirNext-Bold';
-          g.fillText(achievements[i][0], window.innerWidth * 0.07, i*sz + 245 + sz/2 + 7);
+          g.font = '29px AvenirNext-Bold';
+          g.fillText(achievements[i][0], window.innerWidth * 0.07, i*sz + 275 + sz/2 + 8);
           g.font = '18px Avenir';
           var all = achievements[i][1];
           var total = "";
@@ -830,20 +1134,20 @@
           var len = total.split("\n").length;
 
           for (var j = 0 ; j < len ; j++) {
-            g.fillText(total.split("\n")[j], window.innerWidth*0.33, i*sz + 245 + sz/2 + (j - (len-1)/2) * 25);
+            g.fillText(total.split("\n")[j], window.innerWidth*0.33, i*sz + 275 + sz/2 + (j - (len-1)/2) * 25);
           }
 
           var val = achievements[i][2] / achievements[i][3];
-          console.log(val);
+
 
           g.fillStyle = 'rgba(240, 240, 240, 1)';
           var ht = 12;
-          g.fillRect(window.innerWidth*0.74, i*sz + 245 + sz/2 - ht/2, window.innerWidth*0.19, ht);
+          g.fillRect(window.innerWidth*0.74, i*sz + 275 + sz/2 - ht/2, window.innerWidth*0.19, ht);
           g.beginPath();
-          g.arc(window.innerWidth*0.74, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.arc(window.innerWidth*0.74, i*sz + 275 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
           g.fill();
           g.beginPath();
-          g.arc(window.innerWidth*0.93, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.arc(window.innerWidth*0.93, i*sz + 275 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
           g.fill();
           var left = window.innerWidth*0.74 + ht/2;
           var right = window.innerWidth*0.93 - ht/2;
@@ -853,14 +1157,14 @@
 
           g.fillStyle = col;
           g.beginPath();
-          g.arc(window.innerWidth*0.74, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+          g.arc(window.innerWidth*0.74, i*sz + 275 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
           g.fill();
           if (val == 1) {
             g.beginPath();
-            g.arc(window.innerWidth*0.93, i*sz + 245 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
+            g.arc(window.innerWidth*0.93, i*sz + 275 + sz/2, ht/2, ht/2, 0, 2*Math.PI);
             g.fill();
           }
-          g.fillRect(window.innerWidth*0.74, i*sz + 245 + sz/2 - ht/2, ans, ht);
+          g.fillRect(window.innerWidth*0.74, i*sz + 275 + sz/2 - ht/2, ans, ht);
           /*g.font = '21px Avenir';
           g.fillText(stats[races[i][1]-1][0], window.innerWidth * 0.38, i*50 + 270 + 4);
 
@@ -870,22 +1174,60 @@
             g.fillText(times[i] + "s", window.innerWidth * 0.63, i*50 + 270 + 4);
           }*/
         }
+        /*else {
+
+        }*/
 
         g.fillStyle = 'rgb(0, 0, 0)';
         g.font = '20px Avenir';
-        g.fillText("Achievement Name", window.innerWidth*0.07, 234);
-        g.fillText("Description", window.innerWidth*0.37, 234);
-        g.fillText("Progress", window.innerWidth*0.78, 234);
+        g.fillText("Achievement Name", window.innerWidth*0.07, 250);
+        g.fillText("Description", window.innerWidth*0.37, 250);
+        g.fillText("Progress", window.innerWidth*0.78, 250);
 
         for (var i = 0 ; i < achievements.length ; i++) {
           achievements[i] = oldAchievements[i];
         }
       }
+      else {
+        g.fillStyle = 'rgb(0, 0, 0)';
+        g.textAlign = 'center';
+        var sz = 38 * (window.innerWidth/2000)
+        var inc = sz * 1.4;
+        g.font = sz + 'px Avenir';
+        var start = 265;
+        g.fillText("Made by Xavier Plourde throughout 2021", window.innerWidth*0.5, start);
+        g.fillText("This game includes realistic 3D simulations of 207 real-life ski mountains", window.innerWidth*0.5, start + inc*2);
+        g.fillText("including every medium and large-sized ski mountain in the U.S., as well as some smaller ski mountains", window.innerWidth*0.5, start + inc*3);
+        g.fillText("I recommend that you play the tutorial if this is your first time playing.", window.innerWidth*0.5, start + inc*5);
+        g.fillStyle = 'rgb(100, 100, 100, 0.25)';
+        if (drawX >= window.innerWidth*0.3 && drawX <= window.innerWidth*0.7 && drawY >= 500 && drawY <= 580) {
+          document.getElementById("game").style.cursor = "pointer";
+          g.fillRect(window.innerWidth*0.29, 500, window.innerWidth*0.42, 84);
+        }
+        else {
+          g.fillRect(window.innerWidth*0.3, 500, window.innerWidth*0.4, 80);
+        }
+        g.fillStyle = 'rgb(0, 0, 0)';
+        g.font = '27px Avenir';
+        console.log(start+inc*6.5);
+        g.fillText("Play Tutorial", window.innerWidth*0.5, 553);
+        g.textAlign = 'left';
+
+      }
+
+      clicked --;
+
     };
+
+
 
 
     var mouseY = 0;
     var mouseX = 0;
+    var drawX = 0;
+    var drawY = 0;
+    var clicked = false;
+
     var nr = 0;
     var orot = 0;
 
@@ -900,7 +1242,7 @@
 
      function animate2() {
        if (document.getElementById("clear").innerHTML != "") {
-         //console.log("COMP CLEARED!!!");
+
          comp[parseInt(document.getElementById("clear").innerHTML)] = true;
          document.getElementById("clear").innerHTML = "";
 
@@ -908,11 +1250,30 @@
        if (document.getElementById("result").innerHTML) {
          if (document.getElementById("result").innerHTML != -1) {
            if (document.getElementById("result").innerHTML.split(" ")[0] == "Time") {
+             var ri = parseInt(document.getElementById("race").innerHTML.split(" ")[0]);
+             var tier = parseInt(document.getElementById("race").innerHTML.split(" ")[1]);
+             var fail = parseInt(document.getElementById("race").innerHTML.split(" ")[2]);
+             var ftier = parseInt(document.getElementById("race").innerHTML.split(" ")[3]);
+             console.log("Results: " + document.getElementById("race").innerHTML);
+             races[ri][111] = fail;
+             races[ri][112] = ftier;
+             if (races[ri][110]) {
+               races[ri][110] = Math.max(races[ri][110], tier);
+             }
+             else {
+               races[ri][110] = tier;
+             }
+             console.log(races[ri][110]);
+             document.getElementById("race").innerHTML = "";
+
              if (times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] == -1) {
                times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] = 1000000000;
              }
              times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] = Math.min(times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])], parseInt(parseFloat(document.getElementById("result").innerHTML.split(" ")[2])*10)/10);
-           }
+
+             document.getElementById("result").innerHTML = "";
+          }
+
            else {
              comp[parseInt(document.getElementById("result").innerHTML)] = true;
            }
@@ -939,8 +1300,12 @@
         img.hidden = true;
       }
       //document.getElementById("66").hidden = false;
+      if (!(loaded && mountSel == -1)) {
+        document.getElementById("tut").innerHTML = "";
+      }
 
-       if (loaded) {
+       if (loaded && mountSel != -1) {
+
          var g = document.getElementById("minimap").getContext('2d');
 
          var IW = 200;
@@ -1007,11 +1372,10 @@
          old.push(achievements[i].slice());
        }
        updateAchievements();
-       console.log(comp);
-       console.log("Checking");
+
        for (var i = 0 ; i < achievements.length ; i++) {
          if (achievements[i][2] != old[i][2]) {
-           console.log("DIFFERENT");
+
            var hash = parseInt(Math.random()*1000000000);
            //pos.push( = (1+hashes.length) * 80;
            hashes.push(i);
@@ -1019,9 +1383,6 @@
          }
        }
 
-       console.log(hashes);
-       console.log(vanishtimes);
-       console.log(document.getElementById("boxes").innerHTML);
        document.getElementById("boxes").innerHTML = "";
 
        var j = 80;
@@ -1056,12 +1417,15 @@
 
 
        if (!loaded && document.getElementById("selimg").width == 0) {
-         drawMenu();
+         //drawMenu();
+         window.requestAnimationFrame(drawMenu, 1);
+
        }
        else {
          document.getElementById("game").innerHTML = "";
          document.getElementById("game").width = 0;
          document.getElementById("game").height = 0;
+
        }
 
         //document.getElementById("extra").innerHTML = "";
@@ -1130,21 +1494,23 @@
       var y = event.pageY - etop;
       //mouseY = y;
       if (y >= 165 && y <= 207) {
-        var wd = (window.innerWidth*0.25-60);
-        if (x >= 30 && x <= 30 + wd) {
+        if (x >= 0 && x <= window.innerWidth*0.2) {
+          mountSel = -1;
+        }
+        else if (x >= window.innerWidth*0.2 && x <= window.innerWidth*0.4) {
           mountSel = 0;
         }
-        if (x >= window.innerWidth*0.25 + 30 && x <= window.innerWidth * 0.25 + 30 + wd) {
+        else if (x >= window.innerWidth*0.4 && x <= window.innerWidth*0.6) {
           mountSel = 1;
         }
-        if (x >= window.innerWidth*0.5 + 30 && x <= window.innerWidth * 0.5 + 30 + wd) {
+        else if (x >= window.innerWidth*0.6 + 30 && x <= window.innerWidth*0.8) {
           mountSel = 2;
         }
-        if (x >= window.innerWidth*0.75 + 30 && x <= window.innerWidth * 0.75 + 30 + wd) {
+        else if (x >= window.innerWidth*0.8 + 30 && x <= window.innerWidth) {
           mountSel = 3;
         }
       }
-
+      clicked = 2;
     });
 
 
@@ -1181,6 +1547,19 @@
 
     elem.addEventListener("mousedown", e => {
       lockPointer(elem);
+    });
+
+    var elem2 = document.getElementById("game");
+
+    var left = elem2.offsetLeft + elem2.clientLeft;
+    var etop = elem2.offsetTop + elem2.clientTop;
+
+
+    elem2.addEventListener('mousemove', function(event) {
+      var x = event.pageX - left;
+      var y = event.pageY - etop;
+      drawX = x;
+      drawY = y;
     });
 
     </script>

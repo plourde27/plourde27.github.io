@@ -7,6 +7,7 @@ var mouseY = 0;
 var mouseX = 0;
 var startX = -1;
 var startY = -1;
+var mountSel = -1;
 
 
 /*var stats = [
@@ -94,7 +95,7 @@ var stats = [
   ["ELDORA", "Eldora, CO", 1400, 65, 10, 58, 632, 1161, 1169, 521, 2],
   ["ELK MOUNTAIN", "Union Dale, PA", 1000, 27, 7, 59, 1272, 1149, 970, 514, 1],
   ["GIANTS RIDGE", "Biwabik, MN", 500, 35, 7, 60, 853, 758, 702, 244, 1],
-  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 61, 14, 1171, 1699, 905, 752, 2],
+  ["GORE MOUNTAIN", "North Creek, NY", 2537, 110, 14, 61, 1171, 1699, 905, 752, 2],
   ["GRAND TARGHEE", "Alta, WY", 2270, 97, 5, 62, 1121, 1608, 1571, 890, 2],
   ["GRANITE PEAK", "Wausau, WI", 700, 58, 5, 63, 800, 1117, 1053, 443, 1],
   ["GREAT DIVIDE", "Marysville, MT", 1580, 110, 6, 64, 1473, 1565, 1670, 1470, 2],
@@ -255,16 +256,28 @@ var trails = [
   ["ROCKET", 31, 3, [1252, 452, 1273, 456, 1239, 569, 1261, 571, 1193, 963, 1219, 968, 1155, 1312, 1178, 1312]],
   ["GALAXY", 31, 3, [1393, 415, 1390, 401, 1372, 437, 1384, 431, 1362, 630, 1395, 631, 1326, 1040, 1343, 1037, 1313, 1170, 1337, 1169, 1325, 1297, 1345, 1303]],
   ["NORTH STAR", 31, 2, [1374, 444, 1391, 438, 1415, 515, 1422, 509, 1524, 646, 1549, 649, 1491, 939, 1507, 942, 1355, 1284, 1364, 1298]],
-  ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
-  ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
-  ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
   ["RIDGE RUN", 68, 2, [2187, 221, 2205, 217, 2202, 264, 2211, 263, 2206, 314, 2218, 315, 2203, 428, 2220, 423, 2256, 472, 2263, 463, 2321, 538, 2330, 537, 2326, 602, 2337, 609, 2302, 657, 2312, 673, 2218, 698, 2218, 714]],
   ["BLUE OX", 192, 3, [1640, 1740, 1657, 1737, 1652, 1795, 1665, 1795, 1679, 1881, 1685, 1881, 1879, 2067, 1880, 2060, 1990, 2110, 1996, 2103]],
   ["RIVA RIDGE", 192, 3, [2138, 1517, 2150, 1516, 2156, 1561, 2171, 1567, 2148, 1632, 2164, 1637, 2132, 1717, 2141, 1717, 2152, 1783, 2159, 1780, 2270, 1942, 2284, 1929, 2339, 2007, 2362, 1982, 2371, 2047, 2386, 2050, 2361, 2153, 2375, 2153, 2394, 2272, 2402, 2272, 2436, 2473, 2455, 2467]],
   ["CHOPSTIX", 192, 2, [1288, 1472, 1349, 1507, 1368, 1341, 1476, 1417, 1545, 1205, 1579, 1226, 1539, 1076, 1602, 1076, 1548, 962, 1587, 962, 1522, 890, 1570, 920]],
   ["LOVER'S LEAP", 192, 3, [1468, 216, 1477, 215, 1496, 282, 1519, 282, 1506, 325, 1534, 364, 1465, 377, 1482, 418, 1395, 446, 1404, 453, 1354, 538, 1364, 540]],
-  ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]]
+  ["INNER MONGOLIA BOWL", 192, 3, [923, 1293, 1043, 1304, 964, 1176, 1039, 1196, 1030, 1053, 1063, 1076, 1087, 1025, 1095, 1057]],
+  ["GOLD COAST", 165, 2, [2581, 410, 2620, 422, 2544, 501, 2568, 501, 2565, 573, 2590, 587, 2569, 625, 2584, 634, 2480, 683, 2501, 703, 2457, 727, 2500, 739, 2431, 816, 2446, 832, 2382, 846, 2382, 877]],
+  ["WOMEN'S DOWNHILL", 165, 3, [1916, 1467, 1934, 1438, 1960, 1489, 1977, 1463, 2013, 1514, 2029, 1487, 2061, 1540, 2083, 1522, 2107, 1583, 2126, 1564, 2169, 1632, 2193, 1613, 2210, 1672, 2228, 1652, 2259, 1715, 2278, 1687, 2317, 1762, 2333, 1730, 2362, 1794, 2381, 1769, 2385, 1811, 2404, 1785]],
+  ["REUTER'S", 165, 2, [2814, 753, 2814, 733, 2853, 745, 2854, 734, 2885, 748, 2888, 737, 2933, 765, 2939, 752, 2986, 771, 2989, 754, 3021, 776, 3025, 756, 3051, 779, 3052, 759, 3073, 782, 3073, 763]],
+  ["GUNBARREL", 68, 4, [2503, 1170, 2528, 1166, 2520, 1225, 2554, 1219, 2527, 1285, 2557, 1278, 2551, 1332, 2577, 1323, 2586, 1401, 2597, 1399, 2606, 1465, 2627, 1462, 2618, 1551, 2642, 1547]],
+  ["ELLIE'S", 68, 3, [1889, 232, 1900, 233, 1895, 296, 1909, 292, 1971, 413, 1983, 413, 1996, 572, 2010, 562, 2036, 627, 2051, 615, 2069, 651, 2076, 643, 2145, 681, 2151, 669]],
+  ["OLYMPIC DOWNHILL", 68, 2, [1444, 1268, 1460, 1272, 1388, 1305, 1387, 1330, 1318, 1290, 1317, 1304, 1188, 1303, 1179, 1314, 1086, 1303, 1086, 1324, 966, 1326, 964, 1336, 841, 1335, 844, 1347, 755, 1416, 755, 1425, 686, 1433, 697, 1444, 578, 1555, 589, 1564, 494, 1617, 494, 1624]],
+  ["BURNOUT", 124, 3, [1894, 228, 1901, 223, 1953, 284, 1965, 276, 2037, 351, 2049, 337, 2125, 433, 2136, 420, 2215, 527, 2222, 517, 2247, 573, 2263, 575, 2235, 656, 2243, 659, 2217, 708, 2222, 710, 2203, 771, 2221, 770, 2235, 818, 2253, 806]],
+  ["LUMBERJACK", 124, 1, [1481, 539, 1502, 560, 1429, 635, 1443, 643, 1367, 723, 1371, 732, 1264, 851, 1271, 868, 1164, 984, 1172, 993, 1070, 1058, 1077, 1067, 1003, 1116, 1008, 1126, 918, 1169, 923, 1178, 859, 1210, 865, 1224, 803, 1277, 813, 1280, 810, 1380, 826, 1387]],
+  ["GOOSENECK", 124, 3, [1819, 1195, 1827, 1199, 1801, 1273, 1811, 1277, 1782, 1346, 1792, 1351, 1755, 1432, 1766, 1434, 1729, 1535, 1746, 1548, 1706, 1631, 1726, 1639, 1667, 1772, 1678, 1781]],
+  ["RAINBOW RIDGE", 72, 1, [948, 1077, 965, 1059, 1004, 1120, 1016, 1120, 1086, 1248, 1097, 1247, 1146, 1385, 1165, 1379, 1183, 1501, 1209, 1499, 1231, 1588, 1242, 1583, 1277, 1628, 1297, 1618, 1287, 1691, 1291, 1716, 1193, 1706, 1194, 1721, 1081, 1735, 1081, 1748, 947, 1743, 942, 1754, 870, 1697, 871, 1713, 812, 1724, 819, 1739, 781, 1773, 796, 1782, 773, 1845, 787, 1846, 780, 1924, 792, 1924, 786, 1985, 795, 1982, 794, 2035, 807, 2049, 718, 2097, 719, 2109, 655, 2115, 660, 2124, 657, 2194, 668, 2186, 754, 2228, 762, 2219, 827, 2256, 831, 2233]],
+  ["HIGH GRADE", 72, 2, [934, 1051, 934, 1069, 874, 1057, 876, 1070, 828, 1103, 850, 1103, 826, 1168, 876, 1170, 851, 1253, 885, 1261, 855, 1332, 874, 1340, 845, 1412, 882, 1412, 872, 1500, 895, 1504, 861, 1588, 871, 1594, 826, 1658, 836, 1667, 785, 1710, 809, 1716, 778, 1750, 798, 1750]],
+  ["CEDAR RIDGE", 72, 3, [1029, 1885, 1034, 1890, 980, 1937, 988, 1950, 930, 2020, 942, 2029, 886, 2095, 902, 2096, 870, 2145, 892, 2145, 885, 2193, 909, 2191]]
 ];
+
+trails[110] = ["TUTORIAL", 87, 1, [1283, 449, 1324, 450, 1274, 514, 1314, 517, 1279, 567, 1314, 569, 1273, 612, 1310, 614, 1259, 660, 1310, 659, 1263, 735, 1320, 736, 1253, 802, 1311, 800, 1275, 909, 1318, 908, 1284, 977, 1330, 979, 1277, 1030, 1329, 1028, 1279, 1045, 1337, 1046]];
+
 
 var races = [
   ["ODYSSEY", 66,  [1595, 631, 1559, 733, 1524, 855, 1509, 888, 1472, 941, 1442, 1004]],
@@ -277,11 +290,23 @@ var races = [
   ["LOWER BROADWAY", 75, [650, 662, 629, 717, 589, 832, 571, 892, 549, 953, 525, 1015]],
   ["TWITCHER", 92, [1462, 686, 1456, 718, 1455, 746, 1455, 774, 1455, 792, 1447, 810, 1429, 843, 1431, 876, 1438, 899, 1444, 960, 1452, 1013, 1448, 1063, 1470, 1116, 1491, 1163, 1513, 1192, 1542, 1226, 1571, 1263, 1588, 1314, 1621, 1350, 1646, 1387, 1657, 1410, 1662, 1438, 1678, 1468, 1687, 1500, 1698, 1542]],
   ["BIG BLUE", 19, [848, 221, 822, 269, 784, 321, 752, 361, 735, 396, 710, 439, 669, 532, 635, 603, 631, 620]]
+
 ];
 
 var racesplits = [
-  [3.182, 5.254, 7.178, 9.137, 10.812, 12.356, 13.957, 15.42, 16.916, 18.224, 19.812, 21.587, 23.77, 25.857, 27.798, 29.603, 31.244, 32.844, 34.86, 36.811, 39.363, 42.396, 45.232, 47.977, 51.112, 53.734, 55.948, 57.952, 59.86, 61.563, 63.779]
+  [3.182, 5.254, 7.178, 9.137, 10.812, 12.356, 13.957, 15.42, 16.916, 18.224, 19.812, 21.587, 23.77, 25.857, 27.798, 29.603, 31.244, 32.844, 34.86, 36.811, 39.363, 42.396, 45.232, 47.977, 51.112, 53.734, 55.948, 57.952, 59.86, 61.563, 63.779],
+  [3.548, 5.645, 7.946, 10.316, 13.015, 16.082, 18.599, 20.947, 22.816, 24.747, 26.749, 28.714, 30.644, 32.649],
+  [3.482, 6.332, 8.875, 11.008, 13.427, 16.315, 19.474, 22.549, 25.654, 29.123, 32.393, 36.088, 39.387, 41.639, 43.474, 45.104, 46.58, 48.173, 50.18, 52.321, 54.303, 56.656, 58.99, 60.957, 62.594, 64.53, 66.592, 68.954, 71.172, 73.158, 75.325, 77.849, 79.899, 82.138, 84.526, 87.11, 89.265, 91.587],
+
 ];
+for (var i = 0 ; i < 100 ; i++) {
+  if (i>=racesplits.length) {
+    racesplits.push([]);
+  }
+  while (racesplits[i].length < 100) {
+    racesplits[i].push(0);
+  }
+}
 
 var multipliers = [0.94, 1, 1.06, 1.12, 1.18, 2000000000];
 var tiers = ["S", "A", "B", "C", "D", "F"];
@@ -304,6 +329,7 @@ function runProgram(num, trailInd, raceInd) {
     starting = 6;
   }
   console.log(num + " " + trailInd + " " + raceInd);
+  var tutct = 0;
   var success = false;
   var cpval = 100;
   var countdown = 0;
@@ -346,9 +372,9 @@ function runProgram(num, trailInd, raceInd) {
   var TOWERS = 10;
   var CABLES = 10;
 
-  var ELFA = 1240;
+  var ELFA = 1240 * 1.5;
 
-  var GRIDSCALE = 24;
+  var GRIDSCALE = 24 * 1.5;
 
   GRIDSCALE *= Math.max(1, zooms[num]);
 
@@ -356,6 +382,7 @@ function runProgram(num, trailInd, raceInd) {
 
   var movables = [];
 
+  var menutim = -1;
   var grid = [];
   var elev = [];
   var rotx = 0;
@@ -364,7 +391,8 @@ function runProgram(num, trailInd, raceInd) {
 
   var CHUNK = 30;
   var STEEPCHUNK = 80;
-  var stand = 7.3;
+  //var stand = 7.3;
+  var stand = 19.3;
   stand /= Math.max(1, zooms[num]);
 
 
@@ -827,6 +855,7 @@ function runProgram(num, trailInd, raceInd) {
 
     var geometries = [];
     var geometries2 = [];
+    var leafgeometries = [];
     var steepgeo = [];
     for (var i = 0 ; i < 20 ; i++) {
       steepgeo.push([]);
@@ -1728,13 +1757,18 @@ function runProgram(num, trailInd, raceInd) {
 
     class Cylinder {
       constructor(x, y, z) {
-        const HT = Math.random()*40 + 220;
-        const geometry = new THREE2.CylinderGeometry(9.6, 9.6, HT, 3);
+        const HT = (Math.random()*40 + 220) * 1.8;
+        const geometry = new THREE2.CylinderGeometry(25, 25, HT, 6);
         /*const material = new THREE2.MeshBasicMaterial({color: 'rgb(0, 125, 0)'});
         const cylinder = new THREE2.Mesh(geometry, material);
         cylinder.rotation.x = 0.5*Math.PI;*/
         geometry.translate(x, z + HT/2, -y);
         geometries.push(geometry);
+        var extratop = HT * (Math.random() + 1.5);
+        var bot = HT * (Math.random()*0.3 + 0.1);
+        const geometry1101 = new THREE2.CylinderGeometry(50, 150 + Math.random()*120, (extratop - bot), 6);
+        geometry1101.translate(x, z + bot + (extratop - bot) / 2, -y);
+        leafgeometries.push(geometry1101);
         /*for (var i = 0 ; i < 0 ; i++) {
           const geometry17 = new THREE2.CylinderGeometry(0.3, 0.3, 50, 3);
           geometry17.rotateZ(Math.PI/2);
@@ -2002,6 +2036,11 @@ function runProgram(num, trailInd, raceInd) {
     const mesh = new THREE2.Mesh(mergedGeometry, material);
     scene.add(mesh);
 
+    const mergedGeometry1101 = BufferGeometryUtils.mergeBufferGeometries(leafgeometries, false);
+    const material1101 = new THREE2.MeshBasicMaterial({color:'rgb(0,82,0)'});
+    const mesh1101 = new THREE2.Mesh(mergedGeometry1101, material1101);
+    scene.add(mesh1101);
+
     for (var i = 0 ; i < 20 ; i++) {
       if (steepgeo[i].length) {
         const mergedGeometry2 = BufferGeometryUtils.mergeBufferGeometries(steepgeo[i], false);
@@ -2021,7 +2060,7 @@ function runProgram(num, trailInd, raceInd) {
     var TURNFRICTION = 1.02;
     var FLATFRICTION = 1.002;
     var ACCEL = 0.35;
-    var POLE = 6;
+    var POLE = 15;
     var TURN = 0.15;
     var FPFAC = 27;
 
@@ -2035,7 +2074,7 @@ function runProgram(num, trailInd, raceInd) {
     var maxX = 0;
     var maxY = 0;
 
-    var godmode = true;
+    var godmode = false;
     var possible = false;
 
     var tickt = 0;
@@ -2124,6 +2163,8 @@ function runProgram(num, trailInd, raceInd) {
     var time = -starting;
     var finalTime = 0;
     var pentime = 0;
+    var failed = 0;
+    var ftier = 0;
     var splittime = 0;
     var splits = [];
     var move = 0;
@@ -2166,7 +2207,6 @@ function runProgram(num, trailInd, raceInd) {
       move = 1.6 * (FPFAC / avg);
       //move = 0;
 
-      console.log(pressed2);
 
       if (keys[81] && ridingLift) {
         move = 72 * (FPFAC / avg);
@@ -2321,7 +2361,21 @@ function runProgram(num, trailInd, raceInd) {
         camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
       }
 
-      if (raceInd != -1) {
+      if (mountSel == -1) {
+        var texts = ["Welcome to Ultimate Ski Race 3!", "Click the screen and move the mouse to turn", "Go between all of the green gates", "Try to turn back and forth to avoid going too fast"];
+        var frm = parseInt(tutct / 120);
+        if (menutim < 0) {
+          document.getElementById("tut").innerHTML = texts[Math.min(frm, texts.length-1)];
+        }
+
+        document.getElementById("minimap").hidden = true;
+        tutct++;
+        menutim--;
+
+
+
+      }
+      else if (raceInd != -1) {
         if (starting > 0) {
           var tst = (parseInt(starting*10)/10);
           if (tst % 1 == 0) {
@@ -2333,8 +2387,20 @@ function runProgram(num, trailInd, raceInd) {
           document.getElementById("top").innerHTML = "Ready... Set... Go!";
         }
         else if (finalTime > 0) {
+          splittime -= 3;
+          var tieri = multipliers.length;
+          var tier = "F";
+          for (var j = multipliers.length - 1 ; j >= 0 ; j--) {
+            if (splits[splits.length - 1] <= racesplits[raceInd][splits.length-1] * multipliers[j]) {
+              tieri = j;
+              tier = tiers[j];
+            }
+          }
+
+
           console.log(splits);
           document.getElementById("top").innerHTML = "You finished the race with a final time of " + (parseInt(finalTime*10)/10) + " seconds! Press O to go back to the menu.";
+          document.getElementById("race").innerHTML = "Final Result: " + tier + " Tier";
         }
         else if (pentime > 0) {
           pentime -= 3;
@@ -2354,6 +2420,9 @@ function runProgram(num, trailInd, raceInd) {
               tier = tiers[j];
             }
           }
+          if (tier == "F") {
+            ftier = 1;
+          }
           document.getElementById("top").innerHTML = "Time taken: " + (tst) + "s    " + tier + " Tier";
 
         }
@@ -2371,10 +2440,12 @@ function runProgram(num, trailInd, raceInd) {
           }
 
           if (f) {
-            document.getElementById("top").innerHTML = "Level cleared! Press O to go back to the menu.";
-            success = true;
-            document.getElementById("clear").innerHTML = trailInd;
-            console.log("INDEX: " + trailInd);
+
+              document.getElementById("top").innerHTML = "Level cleared! Press O to go back to the menu.";
+              success = true;
+              document.getElementById("clear").innerHTML = trailInd;
+              console.log("INDEX: " + trailInd);
+
           }
           else {
             document.getElementById("top").innerHTML = "You didn't get all the checkpoints. Press R to restart the level, and press O to quit.";
@@ -2396,7 +2467,6 @@ function runProgram(num, trailInd, raceInd) {
         document.getElementById("top").innerHTML = "Press and hold Q to fast forward the lift ride";
       }
 
-      console.log(possible);
 
       if (stopped) {
         scene.children.forEach(function(object) {
@@ -2655,11 +2725,11 @@ function runProgram(num, trailInd, raceInd) {
       var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
       camera.position.y = elevat + upd;
 
-      console.log("Lift: " + ridingLift);
 
       if (starting <= 0) {
+        var ff = (FPFAC / avg) * 0.15 + 0.85;
 
-        playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL * (FPFAC / avg);
+        playerSpeed += (((-mx/mz)*dx + (-my/mz)*dy)/-0.4) * ACCEL * (ff);
 
 
         playerSpeed /= friction;
@@ -2673,13 +2743,13 @@ function runProgram(num, trailInd, raceInd) {
 
         playerSpeed = Math.max(playerSpeed, 0);
 
-        camx += Math.cos(-roty) * playerSpeed * (FPFAC / avg);
-        camy -= Math.sin(-roty) * playerSpeed * (FPFAC / avg);
+        camx += Math.cos(-roty) * playerSpeed * (ff);
+        camy -= Math.sin(-roty) * playerSpeed * (ff);
 
 
         if (keys[81] && godmode && !ridingLift) {
-          camx += Math.cos(-roty) * 96 * (FPFAC / avg);
-          camy -= Math.sin(-roty) * 96 * (FPFAC / avg);
+          camx += Math.cos(-roty) * 96 * (ff);
+          camy -= Math.sin(-roty) * 96 * (ff);
         }
 
         var elevat = (getElevation(camera.position.x / GRIDSCALE, (grid[0].length - 1 + camera.position.z / GRIDSCALE)) * (ELFA * (XF / 2.3)));
@@ -2747,9 +2817,29 @@ function runProgram(num, trailInd, raceInd) {
 
       if (keys[79]) {
 
+
         quit(success);
 
+        if (mountSel == 2) {
+          var tr = document.getElementById("race").innerHTML.split(" ")[2];
+          var trs = ["", "F", "D", "C", "B", "A", "S"];
+          var ind = 0;
+          for (var i = 0 ; i < trs.length ; i++) {
+            if (trs[i] == tr) {
+              ind = i;
+            }
+          }
+          if (ind < 4) {
+            failed = 0;
+            ftier = 0;
+          }
+          document.getElementById("race").innerHTML = raceInd + " " + ind + " " + parseInt(failed) + " " + parseInt(ftier);
+        }
+
         //aboutRun2();
+      }
+      else if (menutim == 0) {
+        quit(success);
       }
       else {
 
@@ -2783,20 +2873,21 @@ function runProgram(num, trailInd, raceInd) {
               if (i>0 && ocamx >= Math.min(x1,x2) - 100 && ocamx <= Math.max(x1,x2) + 100 && ocamy >= Math.min(y1,y2) - 100 && ocamy <= Math.max(y1,y2) + 100) {
                 //if (!ch[i/4]) {
                   console.log("CHECKPOINT!");
-                  console.log(i);
+                  console.log(mountSel);
+                  console.log((i) + " " + (i+3) + " " + (banpos.length-1) + " " + mountSel);
                 //}
                 if (!ch[i/4]) {
                   countdown = cpval;
+
+                  if (i+3 == banpos.length - 1 && mountSel == -1) {
+
+                      document.getElementById("tut").innerHTML = "You finished the tutorial! You will be redirected to the menu shortly.";
+                      menutim = 160;
+
+                  }
                   cpnum = i/4;
                 }
                 ch[i/4] = true;
-              }
-              else if (i==16) {
-                console.log(x1 + " " + y1);
-                console.log(x2 + " " + y2);
-                console.log(Math.min(x1,x2)-100 + " " +Math.min(y1,y2)-100);
-                console.log(ocamx + " " + ocamy);
-                console.log(Math.max(x1,x2)+100 + " " + Math.max(y1,y2)+100);
               }
             }
 
@@ -2810,17 +2901,19 @@ function runProgram(num, trailInd, raceInd) {
                 //if (!ch[i/4]) {
                   console.log("CHECKPOINT!");
                   console.log(i);
+
                   if (!ch[i/4]) {
+                    if (i+3 == banpos.length - 1 && mountSel == -1) {
+
+                        document.getElementById("tut").innerHTML = "You finished the tutorial! You will be redirected to the menu shortly.";
+                        menutim = 160;
+
+                    }
                     countdown = cpval;
                     cpnum = i/4;
                   }
                 //}
                 ch[i/4] = true;
-              }
-              else if (i==16) {
-                console.log(x1 + " " + y1);
-                console.log(camx + " " + camy);
-                console.log(x2 + " " + y2);
               }
             }
           }
@@ -2882,18 +2975,20 @@ function runProgram(num, trailInd, raceInd) {
                   //through the slalom
                   console.log("FAIL " + i);
                   pentime = 100;
+                  failed = 1;
                   time += 5;
                 }
                 else if ((d1 < d2 && i%2 == 1) || (d1 > d2 && i%2 == 0)) {
                   console.log("FAIL " + i);
                   pentime = 100;
+                  failed = 1;
                   time += 5;
                 }
                 else {
                   console.log("SUCCESS " + i);
                 }
 
-                splits.push(time);
+                splits.push(parseInt(time*1000)/1000);
                 splittime = 100;
               }
             }
@@ -2948,7 +3043,7 @@ function runProgram(num, trailInd, raceInd) {
       document.getElementById("top").innerHTML = "";
 
       document.getElementById("game").width = window.innerWidth;
-      document.getElementById("game").height = 270 + 50 * 207 + 50;
+      document.getElementById("game").height = 300 + 60 * 207 + 50;
 
       document.getElementById("three").removeChild(renderer.domElement);
       document.getElementById("three").innerHTML = "";
@@ -3015,7 +3110,6 @@ var clicking = false;
 
 var left = elem.offsetLeft + elem.clientLeft;
 var etop = elem.offsetTop + elem.clientTop;
-var mountSel = 0;
 
 elem.addEventListener('mousedown', function(event) {
   var x = event.pageX - left;
@@ -3023,17 +3117,19 @@ elem.addEventListener('mousedown', function(event) {
   //mouseY = y;
 
   if (y >= 165 && y <= 207) {
-    var wd = (window.innerWidth*0.3-60);
-    if (x >= 30 && x <= window.innerWidth*0.05 + wd) {
+    if (x >= 0 && x <= window.innerWidth*0.2) {
+      mountSel = -1;
+    }
+    else if (x >= window.innerWidth*0.2 && x <= window.innerWidth*0.4) {
       mountSel = 0;
     }
-    if (x >= window.innerWidth*0.25 + 30 && x <= window.innerWidth * 0.33 + 30 + wd) {
+    else if (x >= window.innerWidth*0.4 && x <= window.innerWidth*0.6) {
       mountSel = 1;
     }
-    if (x >= window.innerWidth*0.5 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+    else if (x >= window.innerWidth*0.6 + 30 && x <= window.innerWidth*0.8) {
       mountSel = 2;
     }
-    if (x >= window.innerWidth*0.75 + 30 && x <= window.innerWidth * 0.67 + 30 + wd) {
+    else if (x >= window.innerWidth*0.8 + 30 && x <= window.innerWidth) {
       mountSel = 3;
     }
   }
@@ -3041,7 +3137,27 @@ elem.addEventListener('mousedown', function(event) {
   if (!running && !clicking) {
     var width = elem.width;
     var height = elem.height;
-    if (mountSel == 0) {
+    if (mountSel == -1) {
+      var x = event.pageX - left;
+      var y = event.pageY - etop;
+
+      if (y >= 500 && y <= 580) {
+        //console.log("Running");
+
+        i = 110;
+
+        trailInd = i;
+        raceInd = -1;
+        num = trails[i][1]-1;
+
+        startX = (trails[i][3][0] + trails[i][3][2]) / 2;
+        startY = (trails[i][3][1] + trails[i][3][3]) / 2;
+
+
+        aboutRun2();
+      }
+    }
+    else if (mountSel == 0) {
       var x = event.pageX - left;
       var y = event.pageY - etop;
 
@@ -3066,9 +3182,9 @@ elem.addEventListener('mousedown', function(event) {
 
       for (var i = 0  ; i < stats.length ; i++) {
 
-        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
+        if (y >= 279 +i*60 && y <= 331 + i*60) {
 
-          num = stats[i][5];
+          num = parseInt(document.getElementById("mtn").innerHTML);
 
           raceInd = -1;
           trailInd = -1;
@@ -3082,7 +3198,7 @@ elem.addEventListener('mousedown', function(event) {
     else if (mountSel == 1) {
       for (var i = 0  ; i < trails.length ; i++) {
 
-        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
+        if (y >= 279 +i*60 && y <= 331 + i*60) {
 
           trailInd = i;
           raceInd = -1;
@@ -3101,7 +3217,7 @@ elem.addEventListener('mousedown', function(event) {
     else if (mountSel == 2) {
       for (var i = 0  ; i < races.length ; i++) {
 
-        if (x >= width*0.1 && x <= width*0.9 && y >= 249 +i*50 && y <= 291 + i*50) {
+        if ( y >= 279 +i*60 && y <= 331 + i*60) {
 
           trailInd = -1;
           raceInd = i;
