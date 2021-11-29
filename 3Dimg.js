@@ -294,11 +294,18 @@ var races = [
 ];
 
 var racesplits = [
-  [3.182, 5.254, 7.178, 9.137, 10.812, 12.356, 13.957, 15.42, 16.916, 18.224, 19.812, 21.587, 23.77, 25.857, 27.798, 29.603, 31.244, 32.844, 34.86, 36.811, 39.363, 42.396, 45.232, 47.977, 51.112, 53.734, 55.948, 57.952, 59.86, 61.563, 63.779],
-  [3.548, 5.645, 7.946, 10.316, 13.015, 16.082, 18.599, 20.947, 22.816, 24.747, 26.749, 28.714, 30.644, 32.649],
-  [3.482, 6.332, 8.875, 11.008, 13.427, 16.315, 19.474, 22.549, 25.654, 29.123, 32.393, 36.088, 39.387, 41.639, 43.474, 45.104, 46.58, 48.173, 50.18, 52.321, 54.303, 56.656, 58.99, 60.957, 62.594, 64.53, 66.592, 68.954, 71.172, 73.158, 75.325, 77.849, 79.899, 82.138, 84.526, 87.11, 89.265, 91.587],
-
+  [2.252, 3.831, 5.603, 7.198, 8.818, 10.382, 11.936, 13.181, 14.638, 16.192, 17.871, 19.359, 20.884, 22.253, 23.651, 25.213, 26.953, 28.735, 30.5, 32.1, 33.569, 34.886, 36.25, 37.493, 38.818, 40.091, 41.418, 43.104, 45.468, 47.223, 49.651, 52.05, 53.984, 55.617, 57.684, 59.668, 61.566, 63.743, 65.741, 67.527, 69.298, 71.093, 72.781, 74.529, 76.631, 78.654, 80.848],
+  [1.279, 3.074, 5.306, 7.539, 9.904, 12.076, 14.556, 16.122, 18.426, 20.392, 22.669, 24.942, 27.053, 28.7, 30.355, 32.072, 33.932, 36.332, 38.541, 40.573, 42.719, 45.12],
+  [1.291, 2.975, 4.618, 5.976, 7.508, 8.925, 10.51, 12.403, 13.819, 15.461, 16.783, 18.493, 20.192, 21.584, 23.206, 24.997, 26.315, 27.797, 29.243, 30.668, 32.105, 33.584, 34.857, 36.057, 37.257, 38.382, 39.631, 41.36, 42.931, 44.354, 45.777, 47.48, 49.229, 51.338, 52.915, 54.515, 55.872, 57.297, 58.596, 60.247, 61.821, 63.487, 65.171, 66.763, 68.226, 69.997, 71.763, 73.654, 75.304, 76.951, 78.74, 80.73, 82.407, 84.6, 86.435, 88.44, 90.298, 91.979],
+  [2.286, 3.991, 6.327, 8.204, 10.359, 12.183, 14.278, 16.223, 18.79, 20.85, 23.333, 25.113, 26.913, 28.608, 30.363, 31.896, 33.482, 35.033, 36.875, 38.711, 40.601, 42.265, 44.1, 45.778, 47.357, 48.978, 50.658, 52.391, 54.191, 55.891, 57.529, 59.12, 60.84, 62.464, 64.015, 65.599, 67.467, 68.895, 70.658, 72.17, 73.751, 75.176, 76.864, 78.252, 79.802, 81.36, 83.121, 84.765, 86.285, 87.828, 89.157, 90.434, 91.542, 92.898, 94.391, 96.093, 97.616, 99.152, 100.841, 102.36, 103.976, 106.088, 107.699, 109.358, 111.015, 113.285, 115.188, 116.891, 118.398, 119.94, 121.411, 122.784, 124.207, 125.663, 127.094, 128.471, 129.918, 131.408, 132.86, 134.324, 135.823, 137.622, 139.457, 141.502, 143.639, 145.842, 147.631, 149.678, 151.208, 152.641, 154.188, 155.793, 157.346, 158.955, 160.494, 162.046, 163.609, 165.264, 167.037, 168.812, 170.417, 172.083, 173.654, 175.114],
+  [1.492, 3.162, 4.912, 6.558, 8.407, 10.125, 11.675, 13.329, 15.026, 16.78, 18.626, 20.193, 21.793, 23.477, 25.23, 27.031, 28.66, 30.193, 31.726, 33.064, 34.726, 36.909, 38.883, 40.86, 42.992, 45.042, 46.859, 48.942, 51.096, 53.225, 55.257, 57.494, 59.455, 61.439, 63.213, 65.505, 67.694, 69.959, 72.363, 74.364, 76.472, 78.73, 80.713, 82.746, 84.508, 86.212, 87.878, 89.492, 91.23, 92.93, 94.69, 96.495, 98.374, 100.196, 101.993, 103.986, 105.777, 107.829, 109.895, 112.018, 114.245, 116.567, 118.805, 120.576],
+  [2.582, 4.15, 5.66, 7.111, 8.545, 9.915, 11.478, 12.972, 14.341, 15.718, 17.272, 18.648, 20.119, 21.631, 23.028, 24.514, 26.052, 27.55, 29.014, 30.662, 32.246, 33.877, 35.391, 36.893, 38.294, 39.812, 41.341, 42.864, 44.395, 45.874, 47.265, 48.848, 50.314, 51.708, 53.107, 54.556, 55.997, 57.561, 58.959, 60.467, 62.235, 63.994, 65.686, 67.174, 68.697, 70.366, 72.141, 73.618, 75.13, 76.61, 78.132, 79.509, 81.003, 82.424, 83.924, 85.447, 87.02, 88.567, 90.303, 92.167, 93.857, 95.6, 97.185],
+  [3.682, 7.326, 11.046, 14.87, 18.628, 22.098, 25.709, 29.41, 33.039, 36.618, 40.494, 43.455, 47.086, 50.635, 54.487, 57.085, 58.597, 60.348, 61.79, 63.322, 65.083, 66.841, 68.211, 69.673, 71.343, 72.965, 74.642, 76.248, 77.459, 79.057, 80.816, 82.273, 83.656, 84.969, 86.185, 87.408, 88.557, 89.859, 91.018, 92.398, 93.616, 94.683, 95.833, 98.5, 100.104, 102.034, 103.556, 104.981, 106.345, 107.774, 109.059, 110.342, 111.623, 113.057, 114.422, 115.918, 117.359, 118.698, 120.36, 121.715, 122.85, 124.211, 125.348, 127.009, 128.967, 130.711, 131.995, 133.654, 135.321, 136.848, 138.193, 139.648, 141.086, 142.662, 144.482, 146.387, 147.894, 149.553, 150.994, 152.666, 154.178, 155.525, 156.794, 158.481],
+  [1.614, 3.454, 5.4, 7.086, 8.669, 9.951, 11.161, 12.414, 13.603, 14.803, 15.895, 16.973, 18.113, 19.447, 20.625, 22.006, 23.313, 24.796, 26.134, 27.695, 29.365, 31.13, 32.957, 34.508, 35.977, 37.532, 39.444, 41.401, 43.434, 45.437, 47.627, 49.461, 51.025, 52.837, 54.514, 56.025, 57.493, 59.263],
+  [3.055, 4.66, 6.439, 8.077, 9.469, 11.128, 12.827, 14.628, 16.446, 18.319, 20.725, 22.716, 29.965, 32.049, 34.689, 36.641, 38.864, 40.847, 42.687, 44.733, 46.803, 48.75, 50.83, 52.78, 54.727, 56.481, 58.678, 60.428, 62.8, 64.312, 65.804, 67.209, 73.713, 70.089, 71.563, 73.09, 74.647, 76.22, 77.93, 79.549, 81.185, 82.735, 84.341, 85.761, 87.214, 88.678, 90.403, 92.066, 94.251, 95.802, 97.14, 98.372, 99.668, 101.024, 102.56, 104.01, 105.826, 107.256, 108.779, 109.921, 111.098, 112.374, 113.875, 115.015, 116.095, 117.162, 118.51, 119.582, 120.848, 122.098, 123.518, 124.876, 126.219, 127.36000000000001, 128.757, 130.015, 131.407, 132.739, 134.29, 135.432, 136.793, 138.086, 139.432, 140.715, 142.186, 143.49, 145.015, 146.613, 148.139, 149.443, 150.816, 152.271, 153.882, 155.554, 157.129, 158.518, 160.144, 161.523, 163.242, 164.96, 167.018, 168.759, 170.391, 172.034, 173.658, 175.414, 177.274, 179.133, 181.085, 182.828, 184.511, 186.235, 188.085],
+  [1.249, 2.64, 4.635, 5.837, 7.75, 9.054, 10.865, 12.343, 13.929, 15.493, 16.91, 18.319, 19.676, 21.084, 22.496, 24.085, 25.638, 27.23, 28.539, 30.158, 31.686, 33.152, 34.517]
 ];
+
 for (var i = 0 ; i < 100 ; i++) {
   if (i>=racesplits.length) {
     racesplits.push([]);
@@ -857,6 +864,9 @@ function runProgram(num, trailInd, raceInd) {
     var geometries2 = [];
     var leafgeometries = [];
     var steepgeo = [];
+    var total = [];
+    var elevf = 0;
+    var totalu = [];
     for (var i = 0 ; i < 20 ; i++) {
       steepgeo.push([]);
     }
@@ -1684,8 +1694,8 @@ function runProgram(num, trailInd, raceInd) {
 
     var geometries2 = [];
 
-    function makeTriangle(v1, v2, v3, col) {
-
+    function makeTriangle(v1, v2, v3, col, rand, stx, sty, incx, incy) {
+      elevf = v2.y;
       /*var geometry = new THREE.Geometry();
       var triangle = new THREE.Triangle(v1, v2, v3);
       var normal = triangle.getNormal();
@@ -1731,23 +1741,54 @@ function runProgram(num, trailInd, raceInd) {
       //geometries2.push(geometry);
       scene.add(mesh);*/
 
-      const geometry = new THREE.BufferGeometry();
+      //const geometry = new THREE.BufferGeometry();
       // create a simple square shape. We duplicate the top left and bottom right
       // vertices because each vertex needs to appear once per triangle.
-      const vertices = new Float32Array( [
-      	v1.x, v1.y,  v1.z,
+      var vertices = [
+      	/*v1.x, v1.y,  v1.z,
       	 v2.x, v2.y,  v2.z,
       	 v3.x,  v3.y,  v3.z,
-
+*/
          v3.x, v3.y, v3.z,
          v2.x, v2.y, v2.z,
          v1.x, v1.y, v1.z
-      ] );
+      ];
 
-      geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+      for (var i = 0 ; i < vertices.length ; i++) {
+        total.push(vertices[i]);
+      }
+
+
+
+      if (rand) {
+        totalu.push(stx);
+        totalu.push(sty)
+        totalu.push(stx + incx)
+        totalu.push(sty)
+        totalu.push(stx + incx)
+        totalu.push(sty + incy);
+      }
+      else {
+        totalu.push(stx + incx);
+        totalu.push(sty + incy);
+        totalu.push(stx);
+        totalu.push(sty + incy);
+        totalu.push(stx);
+        totalu.push(sty);
+      }
+        /*totalu.push(1);
+        totalu.push(1)
+        totalu.push(1)
+        totalu.push(0.5)
+        totalu.push(0.5)
+        totalu.push(0.5);*/
+
+
+
+      //geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
       //const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
       //const mesh = new THREE.Mesh( geometry, material );
-      steepgeo[tier].push(geometry);
+      //steepgeo[tier].push(geometry);
 
       /*geometries2.push(geometry);*/
     }
@@ -1786,7 +1827,7 @@ function runProgram(num, trailInd, raceInd) {
     class Cube {
 
 
-      constructor(pts, cl) {
+      constructor(pts, cl, stx, sty, incx, incy) {
         var vs = [];
         for (var i = 0 ; i < pts.length ; i++) {
           vs.push(new THREE.Vector3(pts[i][0], pts[i][1], pts[i][2]));
@@ -1804,9 +1845,9 @@ function runProgram(num, trailInd, raceInd) {
 
         col = cl;
 
-        makeTriangle(vs[0], vs[1], vs[2], col);
+        makeTriangle(vs[0], vs[1], vs[2], col, true, stx, sty, incx, incy);
 
-        makeTriangle(vs[2], vs[3], vs[0], col);
+        makeTriangle(vs[2], vs[3], vs[0], col, false, stx, sty, incx, incy);
 
         //makeTriangle(vs[0], vs[3], vs[2]);
 
@@ -1865,7 +1906,12 @@ function runProgram(num, trailInd, raceInd) {
 
     }*/
 
+    var xp = 0;
+    var yp = 0;
+
     for (var i = 0 ; i < grid.length  - CHUNK*2; i+=CHUNK) {
+      yp = 0;
+
       for (var j = 0 ; j < grid[i].length - CHUNK*2; j+=CHUNK) {
 
         var y1 = j;
@@ -1908,11 +1954,36 @@ function runProgram(num, trailInd, raceInd) {
         y2 /= FC;*/
         //cubes.push(new Cube([[y1*XF / 2, z1*XF / 2.3, -x1*XF / 2], [y2*XF / 2, z2*XF / 2.3, -x1*XF / 2], [y2*XF / 2, z3*XF / 2.3, -x2*XF / 2], [y1*XF / 2, z4*XF / 2.3, -x2*XF / 2]], cl));
         //if (i == CHUNK * 24 && j == CHUNK * 24) {
-        cubes.push(new Cube([[x1 * GRIDSCALE, (z1*XF / 2.3), -y1 * GRIDSCALE], [x2 * GRIDSCALE, (z2*XF / 2.3), -y1 * GRIDSCALE], [x2 * GRIDSCALE, (z3*XF / 2.3), -y2 * GRIDSCALE], [x1 * GRIDSCALE, (z4*XF / 2.3), -y2 * GRIDSCALE]], cl));
-        //}
+        var ct = 1;
+        var incx = 1/ct;
+        var incy = 1/ct;
+        var stx = (ct-xp%ct-1)*incx;
+        var sty = (ct-yp%ct-1)*incy;
 
+        /*if (i%(2*CHUNK) == 0) {
+          stx = 0;
+          incx = 1;
+        }
+        else {
+          stx = 1;
+          incx = -1;
+        }*/
+
+        /*if (j%(2*CHUNK) == 0) {
+          sty = 0;
+          incy = 1;
+        }
+        else {
+          sty = 1;
+          incy = -1;
+        }*/
+
+        cubes.push(new Cube([[x1 * GRIDSCALE, (z1*XF / 2.3), -y1 * GRIDSCALE], [x2 * GRIDSCALE, (z2*XF / 2.3), -y1 * GRIDSCALE], [x2 * GRIDSCALE, (z3*XF / 2.3), -y2 * GRIDSCALE], [x1 * GRIDSCALE, (z4*XF / 2.3), -y2 * GRIDSCALE]], cl, sty, stx, incy, incx));
+        //}
+        yp++;
 
       }
+      xp++;
     }
 
 
@@ -2032,24 +2103,49 @@ function runProgram(num, trailInd, raceInd) {
     }
 
     const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(geometries, false);
+    //console.log(mergedGeometry);
     const material = new THREE2.MeshBasicMaterial({color:'rgb(140,70,0)'});
     const mesh = new THREE2.Mesh(mergedGeometry, material);
     scene.add(mesh);
 
     const mergedGeometry1101 = BufferGeometryUtils.mergeBufferGeometries(leafgeometries, false);
+    console.log(mergedGeometry1101);
+    var tx = new THREE.TextureLoader()
+    var textur = tx.load('pine.png');
     const material1101 = new THREE2.MeshBasicMaterial({color:'rgb(0,82,0)'});
     const mesh1101 = new THREE2.Mesh(mergedGeometry1101, material1101);
+    //const material1101 = new THREE2.SpriteMaterial({map: textur, color:'rgb(255, 255, 255)'});
+    //const mesh1101 = new THREE2.Sprite(mergedGeometry1101, material1101);
+
+    //const material1101 = new THREE2.SpriteMaterial({map: textur, color:'rgb(255, 255, 255)'});
+  //  const mesh1101 = new THREE2.Sprite();
+
     scene.add(mesh1101);
 
-    for (var i = 0 ; i < 20 ; i++) {
+    /*for (var i = 0 ; i < 20 ; i++) {
       if (steepgeo[i].length) {
-        const mergedGeometry2 = BufferGeometryUtils.mergeBufferGeometries(steepgeo[i], false);
+        const mergedGeometry2 = BufferGeometryUtils.mergeBufferGeometries(steepgeo[i], false);*/
+    //total = [57000, elevf - 20000, -67000, 58000, elevf - 20000, -67000, 58000, elevf - 20000, -68000,
+    //59000, elevf - 20000, -67000, 60000, elevf - 20000, -67000, 60000, elevf - 20000, -68000];
+    //totalu = [0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1];
+    var snowgeo = new THREE.BufferGeometry();
+    snowgeo.setAttribute(
+      'position',
+      new THREE.BufferAttribute(new Float32Array(total), 3));
+
+  snowgeo.setAttribute(
+      'uv',
+      new THREE.BufferAttribute(new Float32Array(totalu), 2));
+
+        const txt = new THREE.TextureLoader()
+        const texture = txt.load('snow.png');
         //const material2 = new THREE2.MeshBasicMaterial({color:'rgb(' + parseInt(i*12.5) + ',' + parseInt(255 - i*12.5) + ',0)'});
-        const material2 = new THREE2.MeshBasicMaterial({color:'rgb(255, 255, 255)'});
-        const mesh2 = new THREE2.Mesh(mergedGeometry2, material2);
+        var col = parseInt(255);
+        const material2 = new THREE2.MeshBasicMaterial({map: texture, color:'rgb(' + col + ',' + col + ',' + col + ');'});
+        const mesh2 = new THREE2.Mesh(snowgeo, material2);
         scene.add(mesh2);
-      }
-    }
+
+
 
     /*
     const mergedGeometry2 = BufferGeometryUtils.mergeBufferGeometries(geometries2, false);
@@ -2171,6 +2267,7 @@ function runProgram(num, trailInd, raceInd) {
     var pressed2 = false;
 
     function animate() {
+      console.log(camera.position.x, camera.position.y, camera.position.z);
       renderer.setSize(window.innerWidth, window.innerHeight - 50);
 
       if (lastCall != -1) {
@@ -2361,6 +2458,11 @@ function runProgram(num, trailInd, raceInd) {
         camy = -(grid[0].length - lifts[0][4]) * GRIDSCALE;
       }
 
+      if (trailInd != -1) {
+        document.getElementById("instr").hidden = false;
+        document.getElementById("instr").innerHTML = "Go through all of the green gates, and reach the end of the level!";
+      }
+
       if (mountSel == -1) {
         var texts = ["Welcome to Ultimate Ski Race 3!", "Click the screen and move the mouse to turn", "Go between all of the green gates", "Try to turn back and forth to avoid going too fast"];
         var frm = parseInt(tutct / 120);
@@ -2376,6 +2478,9 @@ function runProgram(num, trailInd, raceInd) {
 
       }
       else if (raceInd != -1) {
+        document.getElementById("instr").hidden = false;
+        document.getElementById("instr").innerHTML = "Go to the right of the red slalom poles, and to the left of the blue ones";
+
         if (starting > 0) {
           var tst = (parseInt(starting*10)/10);
           if (tst % 1 == 0) {
@@ -2385,8 +2490,12 @@ function runProgram(num, trailInd, raceInd) {
         }
         else if (starting > -2) {
           document.getElementById("top").innerHTML = "Ready... Set... Go!";
+          document.getElementById("instr").hidden = false;
+          document.getElementById("instr").innerHTML = "Go to the right of the red slalom poles, and to the left of the blue ones";
         }
         else if (finalTime > 0) {
+          document.getElementById("instr").hidden = false;
+          document.getElementById("instr").innerHTML = "Go to the right of the red slalom poles, and to the left of the blue ones";
           splittime -= 3;
           var tieri = multipliers.length;
           var tier = "F";
@@ -2397,10 +2506,34 @@ function runProgram(num, trailInd, raceInd) {
             }
           }
 
+          var res = 0;
+          var rs = racesplits[raceInd][splits.length - 1];
+          var ls = splits[splits.length - 1];
 
-          console.log(splits);
+          if (tier == "F") {
+            res = 5 + (ls - rs * multipliers[multipliers.length - 2]) / ((multipliers[multipliers.length - 2] - multipliers[multipliers.length - 3]) * rs);
+            res = Math.min(6, res);
+          }
+          else if (tier == "S") {
+            res = 1 - (rs * multipliers[0] - ls) / ((multipliers[1] - multipliers[0]) * rs);
+            res = Math.max(0, res);
+          }
+          else {
+            for (var j = 1 ; j < multipliers.length ; j++) {
+              var good = multipliers[j-1] * rs;
+              var bad = multipliers[j] * rs;
+
+              if (ls >= good && ls <= bad) {
+                res = j + (ls - good) / (bad - good);
+
+              }
+            }
+          }
+
           document.getElementById("top").innerHTML = "You finished the race with a final time of " + (parseInt(finalTime*10)/10) + " seconds! Press O to go back to the menu.";
           document.getElementById("race").innerHTML = "Final Result: " + tier + " Tier";
+
+          document.getElementById("real").innerHTML = res;
         }
         else if (pentime > 0) {
           pentime -= 3;
@@ -3041,6 +3174,7 @@ function runProgram(num, trailInd, raceInd) {
 
       document.getElementById("extra").height = 0;
       document.getElementById("top").innerHTML = "";
+      document.getElementById("instr").innerHTML = "";
 
       document.getElementById("game").width = window.innerWidth;
       document.getElementById("game").height = 300 + 60 * 207 + 50;

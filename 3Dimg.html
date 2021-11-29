@@ -15,6 +15,12 @@
         margin-top: 5px;
         margin-bottom: 5px;
       }
+      #instr {
+        text-align: center;
+        font-family: 'Avenir';
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
       #minimap {
         position: absolute;
         top: 33px;
@@ -58,7 +64,9 @@
     <!--<canvas id="topbar" display="block" margin="0 auto"></canvas>!-->
     <audio id="main" src="main.m4a" loop="loop"></audio>
     <div id="result" hidden=true></div>
+    <div id="instr" hidden=true></div>
     <div id="riding" hidden=true></div>
+    <div id="real" hidden=true></div>
     <div id="top"></div>
     <div id="tut"></div>
     <div id="race"></div>
@@ -586,13 +594,17 @@
       ["BIG BLUE", 19, [848, 221, 822, 269, 784, 321, 752, 361, 735, 396, 710, 439, 669, 532, 635, 603, 631, 620]]
     ];
 
+    for (var i = 0 ; i < races.length ; i++) {
+      races[i].push([]);
+    }
+
     //odyssey: 63.9
 
     var achievements = [
       ["EXPLORER", "Ride at least one ski lift at least 10 different ski mountains", 0, 10],
       ["TOURIST", "Ride at least one ski lift from at least one ski mountain from each of the 50 states (excluding states with no ski mountains in the game)", 0, -1],
       ["ULTIMATE EXPLORER", "Ride at least one ski lift at every ski mountain in the game", 0, stats.length],
-      ["CHAMPION", "Reach Level 27", 1, 27],
+      ["CHAMPION", "Reach Level 27 [Not currently possible to earn]", 1, 27],
       ["GOOD START", "Achieve your first B Tier result in a race", 0, 1],
       ["TIERS OF JOY", "Achieve an S Tier result in 5 distinct races", 0, 5],
       ["GRANDMASTER", "Achieve an S Tier result in every race in the game", 0, races.length],
@@ -813,7 +825,7 @@
       g.fillText("Ultimate Ski Race 3D", window.innerWidth / 2, 100);
       g.font = '24px Avenir';
       g.fillStyle = 'rgb(0, 0, 0)';
-      g.fillText("November 15 Pre-Release Version", window.innerWidth / 2, 146);
+      g.fillText("November 28 Beta Version", window.innerWidth / 2, 146);
       g.textAlign = 'left';
 
       g.fillStyle = 'rgb(100, 100, 100, 0.25)';
@@ -1060,7 +1072,7 @@
           }
           g.fillStyle = 'rgb(0, 0, 0)';
           g.font = '29px AvenirNext-Bold';
-          g.fillText(races[i][0], window.innerWidth * 0.07, i*60 + 305 + 8);
+          g.fillText(races[i][0], window.innerWidth * 0.04, i*60 + 305 + 8);
           g.font = '21px Avenir';
 
           var ind = 0;
@@ -1073,7 +1085,7 @@
 
           g.font = '21px AvenirNext-Bold';
 
-          if (times[i] != -1) {
+          /*if (times[i] != -1) {
             g.fillText(times[i] + "s", window.innerWidth * 0.65, i*60 + 305 + 4);
             var trs = ["", "F", "D", "C", "B", "A", "S"];
             g.font = '21px Avenir';
@@ -1083,15 +1095,56 @@
             if (races[i][110]) {
               g.fillText(trs[races[i][110]] + " Tier", window.innerWidth * 0.78, i*60 + 305 + 4);
             }
+          }*/
+
+          g.fillStyle = 'rgb(255, 255, 255)';
+          var start = window.innerWidth*0.66;
+          var end = window.innerWidth*0.94;
+          var segs = 6;
+          var cols = [[255,0,0],[200,50,0],[150,150,0],[100,180,0],[0,255,0],[0,220,140]];
+          var x = start;
+          var w = (end-start)/segs;
+          var ts = ["F","D","C","B","A","S"];
+          for (var j = 0 ; j < segs ; j++) {
+            g.fillStyle = 'rgb(' + cols[j][0] + ',' + cols[j][1] + ',' + cols[j][2] + ',0.4)';
+            g.fillRect(x, i*60 + 293, w, 16);
+            var pos = -100000;
+            if (j == 0) {
+              pos = x;
+            }
+            else if (j == segs - 1) {
+              pos = x + w;
+            }
+            g.beginPath();
+            g.arc(pos, i*60 + 301, 8, Math.PI/2 + (j==segs-1) * Math.PI, Math.PI*(3/2) + (j==segs-1) * Math.PI);
+            //g.arc(200, 200, 50, 0, Math.PI);
+            g.fill();
+            g.beginPath();
+            g.textAlign = 'center';
+            g.fillStyle = 'rgb(200, 150, 0)';
+            g.font = '16px Avenir';
+            g.fillText(ts[j], x + w/2, i*60 + 324);
+            g.textAlign = 'left';
+            x += w;
           }
+
+          g.fillStyle = 'rgb(200, 150, 0)';
+          for (var j = 0 ; j < races[i][3].length ; j++) {
+            var res = 6 - races[i][3][j];
+            var wd = 4;
+            g.fillRect(start + (res / 6) * (end - start) - wd, i * 60 + 284, wd, 25);
+          }
+          g.fillStyle = 'rgb(255, 255, 255)';
+
+          //g.arc(window.innerWidth*0.93, i*60 + 301, 9, 9, 0, Math.PI);
+          g.fill();
         }
 
         g.fillStyle = 'rgb(0, 0, 0)';
         g.font = '21px Avenir';
         g.fillText("Trail Name", window.innerWidth*0.07, 250);
         g.fillText("Mountain Name", window.innerWidth*0.38, 250);
-        g.fillText("Best Time", window.innerWidth*0.65, 250);
-        g.fillText("Best Result", window.innerWidth*0.78, 250);
+        g.fillText("Results", window.innerWidth*0.77, 250);
 
       }
       else if (mountSel == 3) {
@@ -1116,7 +1169,7 @@
           }
           g.fillStyle = 'rgb(0, 0, 0)';
           g.font = '29px AvenirNext-Bold';
-          g.fillText(achievements[i][0], window.innerWidth * 0.07, i*sz + 275 + sz/2 + 8);
+          g.fillText(achievements[i][0], window.innerWidth * 0.04, i*sz + 275 + sz/2 + 8);
           g.font = '18px Avenir';
           var all = achievements[i][1];
           var total = "";
@@ -1195,7 +1248,7 @@
         var inc = sz * 1.4;
         g.font = sz + 'px Avenir';
         var start = 265;
-        g.fillText("Made by Xavier Plourde throughout 2021", window.innerWidth*0.5, start);
+        g.fillText("Made by plourde27 throughout 2021", window.innerWidth*0.5, start);
         g.fillText("This game includes realistic 3D simulations of 207 real-life ski mountains", window.innerWidth*0.5, start + inc*2);
         g.fillText("including every medium and large-sized ski mountain in the U.S., as well as some smaller ski mountains", window.innerWidth*0.5, start + inc*3);
         g.fillText("I recommend that you play the tutorial if this is your first time playing.", window.innerWidth*0.5, start + inc*5);
@@ -1247,6 +1300,7 @@
          document.getElementById("clear").innerHTML = "";
 
        }
+
        if (document.getElementById("result").innerHTML) {
          if (document.getElementById("result").innerHTML != -1) {
            if (document.getElementById("result").innerHTML.split(" ")[0] == "Time") {
@@ -1272,6 +1326,9 @@
              times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])] = Math.min(times[parseInt(document.getElementById("result").innerHTML.split(" ")[1])], parseInt(parseFloat(document.getElementById("result").innerHTML.split(" ")[2])*10)/10);
 
              document.getElementById("result").innerHTML = "";
+
+             var fl = parseFloat(document.getElementById("real").innerHTML);
+             races[ri][3].push(fl);
           }
 
            else {
