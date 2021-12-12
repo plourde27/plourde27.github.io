@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3D</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap" rel="stylesheet">
+    <style>
+      body {margin: 0; }
+      canvas {display: block; }
+      #title {
+        font-family: 'Shippori Antique B1';
+        font-size: 60px;
+        text-align: center;
+      }
+      #sub {
+        font-family: 'Avenir';
+        font-size: 18px;
+        text-align: center;
+      }
+      #win {
+        font-family: 'Avenir';
+        font-size: 18px;
+        text-align: center;
+      }
+      #bot {
+        font-family: 'Avenir';
+        position: absolute;
+        margin-top: 40%;
+        font-size: 18px;
+        text-align: center;
+      }
+    </style>
+    <script src="main.js" type="module"></script>
+    <script src="js/three.js"></script>
+  </head>
+  <body>
+    <div id="title">LABYRINTH GAME</div>
+    <div id="sub">Daedalus has created an intricate labyrinth in order to hide the Minotaur from the world, but in doing so, got lost in the maze himself. Help him escape!</div>
+    <div id="win">Click the screen to start, use WASD to move and the mouse to turn.</div>
+    <div id="sub">Made by Xavier Plourde for AGRS10 at UC Berkeley</div>
+    <div id="three"></div>
+    <div id="extra2" hidden=true></div>
+    <script>
+    var mouseX = 0;
+    var mouseY = 0;
+    var elem = document.getElementById("three");
+    elem.addEventListener("mousedown", e => {
+      lockPointer(elem);
+    });
+
+
+    function lockPointer(elem) {
+      if (elem.requestPointerLock) {
+        elem.requestPointerLock();
+      } else if (elem.webkitRequestPointerLock) {
+        elem.webkitRequestPointerLock();
+      } else if (elem.mozRequestPointerLock) {
+        elem.mozRequestPointerLock();
+      } else {
+        console.warn("Pointer locking not supported");
+      }
+    }
+
+    elem.addEventListener("mousemove", e => {
+      const {
+        movementX,
+        movementY
+      } = e;
+
+      mouseX += movementX;
+      mouseY += movementY;
+
+      document.getElementById("extra2").innerHTML = mouseX + " " + mouseY;
+    });
+    </script>
+  </body>
