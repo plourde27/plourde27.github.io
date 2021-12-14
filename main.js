@@ -492,7 +492,7 @@ renderer.render(scene, camera);
     camera.position.z = mouseY;*/
 
     var theta = (mouseX / 800) * (2 * Math.PI);
-    var phi = (mouseY / 400) * (Math.PI);
+    var phi = ((mouseY + 200) / 400) * (Math.PI);
 
     //camera.lookAt(camera.position.x + Math.cos(theta), camera.position.y, camera.position.z + Math.sin(theta));
     camera.lookAt(camera.position.x + Math.cos(theta) * Math.sin(phi), camera.position.y + Math.cos(phi), camera.position.z + Math.sin(theta) * Math.sin(phi));
