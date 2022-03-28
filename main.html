@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>3D</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap" rel="stylesheet">
+!-->
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+
     <style>
       body {margin: 0; }
       canvas {display: block; }
@@ -31,16 +34,43 @@
         font-size: 18px;
         text-align: center;
       }
+      #minimap {
+        position: absolute;
+        top: 33px;
+        left: 0px;
+      }
+      #menu {
+
+      }
+      #inptag {
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 280px;
+        margin-bottom: 30%;
+        font-size: 36px;
+        font-family: 'Avenir';
+        position: absolute;
+      }
+      #username {
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 280px;
+        font-family: 'Avenir';
+        font-size: 32px;
+        position: absolute;
+      }
     </style>
     <script src="main.js" type="module"></script>
     <script src="js/three.js"></script>
   </head>
   <body>
-    <div id="title">LABYRINTH GAME</div>
-    <div id="sub">Daedalus has created an intricate labyrinth in order to hide the Minotaur from the world, but in doing so, got lost in the maze himself. Help him escape!</div>
-    <div id="win">Click the screen to start, use WASD to move and the mouse to turn.</div>
-    <div id="sub">Made by Xavier Plourde for AGRS10 at UC Berkeley</div>
+    <div id="object"></div>
+    <div id="inptag" hidden=true>Enter Game Code:   <input id="inp" type="search"></div>
+    <div id="username">Enter Your Name:   <input id="inp2" type="search"></div>
+
+    <canvas id="menu"></canvas>
     <div id="three"></div>
+    <canvas id="minimap" width=400 height=400></canvas>
     <div id="extra2" hidden=true>0 0</div>
     <script>
     var mouseX = 0;

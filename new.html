@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3D</title>
+<!--    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap" rel="stylesheet">
+!-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@1,700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+
+    <style>
+      body {margin: 0; }
+      canvas {display: block; }
+      #title {
+        font-family: 'Shippori Antique B1';
+        font-size: 60px;
+        text-align: center;
+      }
+      #sub {
+        font-family: 'Avenir';
+        font-size: 18px;
+        text-align: center;
+      }
+      #win {
+        font-family: 'Avenir';
+        font-size: 18px;
+        text-align: center;
+      }
+      #bot {
+        font-family: 'Avenir';
+        position: absolute;
+        margin-top: 40%;
+        font-size: 18px;
+        text-align: center;
+      }
+      #minimap {
+        position: absolute;
+        top: 33px;
+        left: 0px;
+      }
+      #menu {
+
+      }
+      #inptag {
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 440px;
+        margin-bottom: 30px;
+        font-size: 32px;
+        font-family: 'Lato';
+        position: absolute;
+      }
+      #inp2 {
+        font-family: 'Lato';
+        font-size: 32px;
+      }
+      #username {
+        margin-left: 22%;
+        margin-right: 22%;
+        margin-top: 440px;
+        text-align: center;
+        font-family: 'Lato';
+        font-size: 36px;
+        position: absolute;
+      }
+      #topbar {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        background-color: 'rgb(255,255,255)';
+        font-family: 'Lato';
+        font-size: 24px;
+        text-align: center;
+      }
+    </style>
+    <script src="new.js" type="module"></script>
+    <script src="js/three.js"></script>
+  </head>
+  <body>
+    <div id="object"></div>
+    <div id="inptag" hidden=true>Enter Game Code:   <input id="inp" type="search"></div>
+    <div id="username">Enter Your Username:   <input id="inp2" type="search"></div>
+    <pre id="topbar" hidden=true></pre>
+    <canvas id="menu"></canvas>
+    <div id="three"></div>
+    <canvas id="minimap" width=400 height=400></canvas>
+
+    <div id="extra2" hidden=true>0 0</div>
+    <script>
+    var mouseX = 0;
+    var mouseY = 0;
+    var elem = document.getElementById("three");
+    elem.addEventListener("mousedown", e => {
+      lockPointer(elem);
+    });
+
+
+    function lockPointer(elem) {
+      if (elem.requestPointerLock) {
+        elem.requestPointerLock();
+      } else if (elem.webkitRequestPointerLock) {
+        elem.webkitRequestPointerLock();
+      } else if (elem.mozRequestPointerLock) {
+        elem.mozRequestPointerLock();
+      } else {
+        console.warn("Pointer locking not supported");
+      }
+    }
+
+    elem.addEventListener("mousemove", e => {
+      const {
+        movementX,
+        movementY
+      } = e;
+
+      mouseX += movementX;
+      mouseY += movementY;
+
+      document.getElementById("extra2").innerHTML = mouseX + " " + mouseY;
+    });
+    </script>
+  </body>
