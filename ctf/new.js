@@ -73,7 +73,9 @@ function runMenu() {
   function animate() {
     fc++;
 
-    window.requestAnimationFrame(animate);
+    //if (!quitt) {
+      window.requestAnimationFrame(animate);
+    //}
 
     //firebase.database().ref("test/" + Date.now() + "/" + fc).set({x0: 5, y0: 6});
     /*firebase.database().ref("ABCDEF").on("value", function(snapshot) {
@@ -397,6 +399,7 @@ function runMenu() {
 var wall = 'draw.png';
 var floor = 'stone.png';
 function run3D() {
+  var quitt = false;
 
 
   var keys = [];
@@ -1145,9 +1148,13 @@ renderer.render(scene, camera);
       this.body = [this.chest, this.rleg, this.lleg, this.neck, this.head];
 
       this.orbi = -1;
+      this.jc = [0,0,0,0,0,0,0,0,0,0,0,0];
     }
 
     animate() {
+      for (var i=0 ; i < 12 ; i++) {
+        this.jc[i]--;
+      }
       this.y = getElevation(this.x/MS, this.z/MS) * 15;
 
       var tx = this.x - this.ox;
@@ -1199,44 +1206,28 @@ renderer.render(scene, camera);
         }
       }
 
-      if (this.num == 0) {
-        for (var i = 0 ; i < bonuses.length ; i++) {
-          var dbRef = firebase.database().ref(code + "/bonus/" + (i+1));
-          dbRef.on("value", function(snapshot) {
-            if (snapshot != null && snapshot.val() != null) {
-              var ob = bonuses[i][3];
-              bonuses[i][3] = snapshot.val();
-              if (bonuses[i][3] <= 0 && ob > 0) {
-                scene.add(bonuses[i][4]);
-              }
-            }
-          });
+      for (var i = 0 ; i < bonuses.length ; i++) {
+        var ob = bonuses[i][3];
+        bonuses[i][3]--;
+        if (bonuses[i][3]<=0 && ob > 0) {
+          scene.add(bonuses[i][4]);
         }
-        var st = "";
-        for (var i = 0 ; i < bonuses.length ; i++) {
-          var ob = bonuses[i][3];
-          bonuses[i][3]--;
-          if (bonuses[i][3]<=0 && ob > 0) {
-            scene.add(bonuses[i][4]);
+      }
+
+      for (var i = 0 ; i < bonuses.length ; i++) {
+        var dbRef = firebase.database().ref(code + "/bonus/" + (i+1));
+        dbRef.on("value", function(snapshot) {
+          if (snapshot != null && snapshot.val() != null) {
+            var ob = bonuses[i][3];
+            bonuses[i][3] = snapshot.val();
+            if (bonuses[i][3] > ob && bonuses[i][3] > 0) {
+              scene.remove(bonuses[i][4]);
+            }
           }
-          st += bonuses[i][3] + " ";
-          firebase.database().ref(code + "/bonus/" + (i+1)).set(bonuses[i][3]);
-        }
+        });
       }
-      else {
-        for (var i = 0 ; i < bonuses.length ; i++) {
-          var dbRef = firebase.database().ref(code + "/bonus/" + (i+1));
-          dbRef.on("value", function(snapshot) {
-            if (snapshot != null && snapshot.val() != null) {
-              var ob = bonuses[i][3];
-              bonuses[i][3] = snapshot.val();
-              if (bonuses[i][3] <= 0 && ob > 0) {
-                scene.add(bonuses[i][4]);
-              }
-            }
-          });
-        }
-      }
+
+
 
       var alive = false;
       for (var i = 0 ; i < orbs.length ; i++) {
@@ -1266,7 +1257,7 @@ renderer.render(scene, camera);
       for (var i = 0 ; i < players.length ; i++) {
         if (i  == this.num) continue;
         var dst = Math.sqrt((players[i].x-this.x)*(players[i].x-this.x) + (players[i].z-this.z)*(players[i].z-this.z));
-        if (dst < 1000 && this.zone == this.num && !this.dead && !players[i].dead) {
+        if (dst < 1000 && this.zone == this.num && !this.dead && !players[i].dead && this.jc[i] <= 0) {
           players[i].captured = true;
           var mn = 1000000000000;
           var mni = -1;
@@ -1278,8 +1269,9 @@ renderer.render(scene, camera);
             }
           }
           if (mni != -1) {
-            firebase.database().ref(code + "/orb/" + (mni+1)).set({x: orbs[mni].x, y: orbs[mni].y, z: orbs[i].z, num: 12});
+            //firebase.database().ref(code + "/orb/" + (mni+1)).set({x: orbs[mni].x, y: orbs[mni].y, z: orbs[i].z, num: 12});
           }
+          this.jc[i] = 50;
           players[i].x = players[i].sx;
           players[i].y = players[i].sy;
           players[i].z = players[i].sz;
@@ -1305,7 +1297,24 @@ renderer.render(scene, camera);
           this.z = camera.position.z;
         }
         else {
+          this.x = this.sx;
+          this.z = this.sz;
+          this.y = this.sy;
+
           this.captured = false;
+          var mn = 0;
+          var mni = -1;
+          for (var j = 0 ; j < orbs.length ; j++) {
+            var d = Math.sqrt((orbs[j].x-this.x)*(orbs[j].x-this.x)+(orbs[j].z-this.z)*(orbs[j].z-this.z));
+            if (d > mn && orbs[j].num == this.num) {
+              mn = d;
+              mni = j;
+            }
+          }
+          if (mni != -1) {
+            firebase.database().ref(code + "/orb/" + (mni+1)).set({x: orbs[mni].x, y: orbs[mni].y, z: orbs[i].z, num: 12});
+          }
+
           camera.position.x = this.x;
           camera.position.z = this.z;
         }
@@ -1370,6 +1379,7 @@ renderer.render(scene, camera);
 
       var op = 170;
       MS = 400;
+      var t = 0;
       for (var i = (2*Math.PI)/(2*playerCount) ; i < 2*Math.PI ; i += (2*Math.PI) / playerCount) {
         makeLine(MS/2, MS/2, MS/2 + Math.cos(i)*MS/2, MS/2 + Math.sin(i)*MS/2);
         arcs.push([MS/2 + 175.5*Math.cos(i), MS/2 + 175.5*Math.sin(i), 0, 24, 0, 2*Math.PI]);
@@ -1387,12 +1397,29 @@ renderer.render(scene, camera);
         players.push(new Player(t, x*MS, getElevation(x, y) * 15, y * MS));
         t++;
 
+        bonuses.push([200 + Math.cos(i + (Math.PI/playerCount)) * 75, 200 + Math.sin(i + (Math.PI/playerCount)) * 75, 25, 0]);
+        bonuses.push([200 + Math.cos(i + (Math.PI/playerCount)) * 120, 200 + Math.sin(i + (Math.PI/playerCount)) * 120, 10, 0]);
+
+
+      }
+
+      var a = 0;
+
+      for (var i = 0 ; i < playerCount ; i++) {
+        bonuses.push([200 + Math.cos(a)* 12, 200 + Math.sin(a)*12, 10, 0]);
+        a += (2*Math.PI/playerCount);
+      }
+
+      for (var i = 0 ; i < playerCount * 2 ; i++) {
+        bonuses.push([200 + Math.cos(a)* 24, 200 + Math.sin(a)*24, 5, 0]);
+        a += (Math.PI/playerCount);
       }
 
 
+      bonuses.push([200, 200, 100, 0]);
 
-      arcs.push([200, 200, 73, 80, 0, 2*Math.PI]);
-      arcs.push([200, 200, 115, 123, 0, 2*Math.PI]);
+      arcs.push([200, 200, 70, 80, 0, 2*Math.PI]);
+      arcs.push([200, 200, 115, 125, 0, 2*Math.PI]);
       arcs.push([200, 200, 0, 30, 0, 2*Math.PI]);
     }
     else if (n == 2) {
@@ -1404,7 +1431,7 @@ renderer.render(scene, camera);
           grid[x][y] = Math.min(800, ((y - 300) * (y - 300) + (x - 300) * (x - 300)) / 35);
         }
       }
-
+      var t = 0;
       for (var i = (2*Math.PI)/(2*playerCount) ; i < 2*Math.PI ; i += (2*Math.PI) / playerCount) {
         makeLine(MS/2, MS/2, MS/2 + Math.cos(i)*MS/2, MS/2 + Math.sin(i)*MS/2);
         //arcs.push([MS/2 + 175.5*Math.cos(i), MS/2 + 175.5*Math.sin(i), 0, 24, 0, 2*Math.PI]);
@@ -1429,16 +1456,21 @@ renderer.render(scene, camera);
         t++;
 
         bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 185, 300 + Math.sin(i + (Math.PI/playerCount)) * 185, 25, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 180, 300 + Math.sin(i + (Math.PI/playerCount)) * 180, 10, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 190, 300 + Math.sin(i + (Math.PI/playerCount)) * 190, 10, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 175, 300 + Math.sin(i + (Math.PI/playerCount)) * 175, 5, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 195, 300 + Math.sin(i + (Math.PI/playerCount)) * 195, 5, 0]);
+
       }
 
       var a = 0;
       for (var i = 0 ; i < playerCount ; i++) {
-        bonuses.push([300 + Math.cos(a)* 5, 300 + Math.sin(a)*5, 10, 0]);
+        bonuses.push([300 + Math.cos(a)* 12, 300 + Math.sin(a)*12, 10, 0]);
         a += (2*Math.PI/playerCount);
       }
 
       for (var i = 0 ; i < playerCount * 2 ; i++) {
-        bonuses.push([300 + Math.cos(a)* 10, 300 + Math.sin(a)*10, 5, 0]);
+        bonuses.push([300 + Math.cos(a)* 24, 300 + Math.sin(a)*24, 5, 0]);
         a += (Math.PI/playerCount);
       }
 
@@ -1449,12 +1481,144 @@ renderer.render(scene, camera);
       arcs.push([300, 300, 0, 30, 0, 2*Math.PI]);
 
     }
+    else if (n == 3) {
+      MS = 600;
 
-    bonuses = [];
+      for (var x = 0 ; x < nx ; x++) {
+        for (var y = 0 ; y < mx ; y++) {
+          grid[x][y] = 0;
+        }
+      }
+
+      var mnd = 1000000000;
+
+      for (var x = 0 ; x < nx ; x++) {
+        for (var y = 0 ; y < mx ; y++) {
+          if (x>600 || y>600) continue;
+          var mnd = 1000000000;
+          var ang = (Math.PI)/playerCount;
+          for (var i = 0 ; i < playerCount ; i++) {
+            var xx = 300 + 250 * Math.cos(ang);
+            var yy = 300 + 250 * Math.sin(ang);
+            mnd = Math.min(mnd, Math.sqrt((x-xx)*(x-xx)+(y-yy)*(y-yy)));
+            ang += (2*Math.PI)/playerCount;
+          }
+          var omd = mnd;
+          var fc = 2700;
+          var ps = -mnd/18 + 3.5;
+          var op1 = (1 / (1 + Math.pow(2.71828, -ps))) * fc;
+          mnd = Math.sqrt((x-300)*(x-300)+(y-300)*(y-300)) / 0.8;
+          fc = 3600;
+          ps = -mnd/23 + 5;
+          var op2 = (1 / (1 + Math.pow(2.71828, -ps))) * fc;
+          grid[x][y] = Math.max(op1, op2);
+
+        }
+      }
+
+      var t = 0;
+      for (var i = (2*Math.PI)/(2*playerCount) ; i < 2*Math.PI ; i += (2*Math.PI) / playerCount) {
+        /*makeLine(MS/2, MS/2, MS/2 + Math.cos(i)*MS/2, MS/2 + Math.sin(i)*MS/2);
+        //arcs.push([MS/2 + 175.5*Math.cos(i), MS/2 + 175.5*Math.sin(i), 0, 24, 0, 2*Math.PI]);
+        var x = MS/2 + (op + 5.5)*Math.cos(i);
+        var y = MS/2 + (op + 5.5)*Math.sin(i);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));
+        var x = MS/2 + (op + 5.5)*Math.cos(i-0.04);
+        var y = MS/2 + (op + 5.5)*Math.sin(i-0.04);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));*/
+        var x = MS/2 + (250 + 5.5)*Math.cos(i+0.04);
+        var y = MS/2 + (250 + 5.5)*Math.sin(i+0.04);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));
+        var x = MS/2 + (250+8.5)*Math.cos(i);
+        var y = MS/2 + (250+8.5)*Math.sin(i);
+        players.push(new Player(t, x*MS, getElevation(x, y) * 15, y * MS));
+        makeLine(300, 300, x, y);
+        arcs.push([x, y, 0, 20, 0, 2*Math.PI]);
+        arcs.push([300+Math.cos(i+Math.PI/playerCount)*150, 300+Math.sin(i+Math.PI/playerCount)*150, 0, 22, 0, 2*Math.PI]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 135, 300 + Math.sin(i + (Math.PI/playerCount)) * 135, 5, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 140, 300 + Math.sin(i + (Math.PI/playerCount)) * 140, 10, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 145, 300 + Math.sin(i + (Math.PI/playerCount)) * 145, 25, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 150, 300 + Math.sin(i + (Math.PI/playerCount)) * 150, 100, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 155, 300 + Math.sin(i + (Math.PI/playerCount)) * 155, 25, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 160, 300 + Math.sin(i + (Math.PI/playerCount)) * 160, 10, 0]);
+        bonuses.push([300 + Math.cos(i + (Math.PI/playerCount)) * 165, 300 + Math.sin(i + (Math.PI/playerCount)) * 165, 5, 0]);
+
+        t++;
+      }
+
+      var a = 0;
+      for (var i = 0 ; i < playerCount ; i++) {
+        bonuses.push([300 + Math.cos(a)* 12, 300 + Math.sin(a)*12, 10, 0]);
+        a += (2*Math.PI/playerCount);
+      }
+
+      for (var i = 0 ; i < playerCount * 2 ; i++) {
+        bonuses.push([300 + Math.cos(a)* 24, 300 + Math.sin(a)*24, 5, 0]);
+        a += (Math.PI/playerCount);
+      }
+
+      bonuses.push([300, 300, 100, 0]);
+      arcs.push([300, 300, 0, 30, 0, 2*Math.PI]);
+      arcs.push([300, 300, 145, 155, 0, 2*Math.PI]);
+
+    }
+    else if (n == 4) {
+      MS = 800;
+      for (var x = 0 ; x < nx ; x++) {
+        for (var y = 0 ; y < mx ; y++) {
+          grid[x][y] = 0;
+          if (x>800 || y>800) continue;
+          var d = Math.max(0, Math.sqrt((x-400)*(x-400) + (y-400)*(y-400)) - 150);
+          grid[x][y] = (d * d) / 10;
+        }
+      }
+      var t = 0;
+      for (var i = (2*Math.PI)/(2*playerCount) ; i < 2*Math.PI ; i += (2*Math.PI) / playerCount) {
+        /*makeLine(MS/2, MS/2, MS/2 + Math.cos(i)*MS/2, MS/2 + Math.sin(i)*MS/2);
+        //arcs.push([MS/2 + 175.5*Math.cos(i), MS/2 + 175.5*Math.sin(i), 0, 24, 0, 2*Math.PI]);
+        var x = MS/2 + (op + 5.5)*Math.cos(i);
+        var y = MS/2 + (op + 5.5)*Math.sin(i);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));
+        var x = MS/2 + (op + 5.5)*Math.cos(i-0.04);
+        var y = MS/2 + (op + 5.5)*Math.sin(i-0.04);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));*/
+        var x = MS/2 + (140 + 5.5)*Math.cos(i+0.04);
+        var y = MS/2 + (140 + 5.5)*Math.sin(i+0.04);
+        orbs.push(new Orb(t, x * MS, getElevation(x, y) * 15, y * MS));
+        var x = MS/2 + (145)*Math.cos(i);
+        var y = MS/2 + (145)*Math.sin(i);
+        players.push(new Player(t, x*MS, getElevation(x, y) * 15, y * MS));
+
+        makeLine(400, 400, 400 + Math.cos(i) * 360, 400 + Math.sin(i) * 360);
+        arcs.push([400 + Math.cos(i+Math.PI/playerCount) * 250, 400 + Math.sin(i+Math.PI/playerCount) * 250, 0, 25, 0, 2*Math.PI]);
+        var bx = 400 + Math.cos(i+Math.PI/playerCount) * 250;
+        var by = 400 + Math.sin(i+Math.PI/playerCount) * 250;
+        bonuses.push([bx, by, 100, 0]);
+        for (var j = 0 ; j < 2*Math.PI ; j += (2*Math.PI)/5) {
+          bonuses.push([bx + Math.cos(j) * 9, by + Math.sin(j) * 9, 25, 0]);
+        }
+        for (var j = 0 ; j < 2*Math.PI ; j += (2*Math.PI)/5) {
+          bonuses.push([bx + Math.cos(j) * 18, by + Math.sin(j) * 18, 10, 0]);
+        }
+        for (var j = (2*Math.PI)/10 ; j < 2*Math.PI ; j += (2*Math.PI)/5) {
+          bonuses.push([bx + Math.cos(j) * 18, by + Math.sin(j) * 18, 5, 0]);
+        }
+        t++;
+      }
+
+      arcs.push([400, 400, 355, 365, 0, 2*Math.PI]);
+      arcs.push([400, 400, 245, 255, 0, 2*Math.PI]);
+
+
+      lakes.push([400, 400, 150]);
+
+
+    }
+
   }
 
 
-  makeMap(2);
+  makeMap(parseInt(Math.random() * 4) + 1);
 
   camera.position.x = players[you].x;
   camera.position.z = players[you].z;
@@ -1798,11 +1962,13 @@ var turfs2 = [];
     var oy = camera.position.y;
     var oz = camera.position.z;
 
-    /*if (keys[81]) {
-      camera.position.x += Math.cos(theta) * ms * 20;
-      camera.position.z += Math.sin(theta) * ms * 20;
+    var godmode = true;
+
+    if (keys[81] && godmode) {
+      camera.position.x += Math.cos(theta) * ms * 10;
+      camera.position.z += Math.sin(theta) * ms * 10;
     }
-    else */if (keys[87]) {
+    else if (keys[87]) {
       camera.position.x += Math.cos(theta) * ms;
       camera.position.z += Math.sin(theta) * ms;
     }
@@ -1855,7 +2021,7 @@ var turfs2 = [];
       }
     }
 
-    if (!collide || lake) {
+    if ((!collide || lake) && !godmode) {
       camera.position.x = (ox + (camera.position.x - ox) / 40);
       camera.position.y = (oy + (camera.position.y - oy) / 40);
       camera.position.z = (oz + (camera.position.z - oz) / 40);
@@ -1865,12 +2031,17 @@ var turfs2 = [];
     var py2 = camera.position.z;
 
 
-    /*if (keys[16]) {
+    if (keys[16] && godmode) {
       cty -= 135;
     }
-    if (keys[13]) {
+    if (keys[13] && godmode) {
       cty += 135;
-    }*/
+    }
+
+    if (keys[79] && !quitt) {
+      quitt = true;
+      quit();
+    }
 
     var lol = orbs.length;
 
@@ -1927,6 +2098,32 @@ var turfs2 = [];
     renderer.render(scene, camera);
 
   }
+
+  function quit() {
+
+    while (scene.children.length > 0) {
+      scene.remove(scene.children[0]);
+    }
+
+
+    document.exitPointerLock();
+
+    document.getElementById("minimap").width = 0;
+    document.getElementById("minimap").height = 0;
+
+    //document.getElementById("minimap").getContext('2d').fillStyle = 'rgb(255,255,255)';
+    //document.getElementById("minimap").getContext('2d').fillRect(-1000, -1000, 2000, 2000);
+
+    document.getElementById("topbar").innerHTML = "";
+
+    document.getElementById("menu").width = window.innerWidth;
+    document.getElementById("menu").height = 300 + 60 * 207 + 50;
+
+    document.getElementById("three").removeChild(renderer.domElement);
+    document.getElementById("three").innerHTML = "";
+    //num++;
+  }
+
   animate();
 }
 
