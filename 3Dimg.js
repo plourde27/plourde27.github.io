@@ -2141,7 +2141,7 @@ function runProgram(num, trailInd, raceInd) {
         const texture = txt.load('snow.png');
         //const material2 = new THREE2.MeshBasicMaterial({color:'rgb(' + parseInt(i*12.5) + ',' + parseInt(255 - i*12.5) + ',0)'});
         var col = parseInt(255);
-        const material2 = new THREE2.MeshBasicMaterial({map: texture, color:'rgb(' + col + ',' + col + ',' + col + ');'});
+        const material2 = new THREE2.MeshBasicMaterial({/*map: texture, */color:'rgb(' + col + ',' + col + ',' + col + ');'});
         const mesh2 = new THREE2.Mesh(snowgeo, material2);
         scene.add(mesh2);
 
