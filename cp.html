@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&family=Montserrat&display=swap" rel="stylesheet">        <meta charset="utf-8">
+        <title>Xavier Plourde</title>
+        <style>
+            #title {
+                font-family: 'Kanit';
+                background-color: rgb(250, 250, 250);
+                text-align: center;
+                font-size: 70px;
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                margin-top: 20px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 18px;
+                padding: 8px 4px 8px 4px;
+            }
+
+            #bar a:visited {
+                text-decoration: none;
+                color: black;
+            }
+
+            #blue {
+                color: rgb(45, 80, 236)
+            }
+
+            #white {
+                color: rgb(50, 50, 50);
+            }
+
+            #bar {
+                cursor: pointer;
+                background: none;
+                border: none;
+                font-family: 'Avenir', 'Montserrat';
+                width: 19%;
+                font-size: 17px;
+                text-align: center;
+                margin-bottom: 0px;
+            }
+
+            #biotitle {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 28px;
+                padding-top: 50px;
+                margin-bottom: 80px;
+            }
+
+            #bio {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 20px;
+                margin-top: 20px;
+            }
+
+            #me {
+                float: left;
+                margin-right: 50px;
+                border-radius: 15px;
+            }
+
+            .mainpage {
+                margin-left: 1%;
+                margin-right: 1%;
+            }
+
+            #bar a:link {
+                text-decoration: none;
+            }
+
+            .box {
+                background-color: rgb(252, 252, 252);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 20px;
+            }
+
+            #smallbox {
+                background-color: rgb(250, 250, 250);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 5px;
+                margin-bottom: 8px;
+            }
+
+            #huge {
+                font-family: 'AvenirNext-Bold';
+                font-size: 25px;
+            }
+
+            #big {
+                font-family: 'AvenirNext-Bold';
+                font-size: 22px;
+            }
+
+            #small {
+                margin-top: -15px;
+                font-family: 'Avenir';
+                font-size: 16px;
+            }
+
+            #green {
+                font-family: 'AvenirNext-Bold';
+                color: rgb(0, 110, 0);
+            }
+
+            #scs {
+                height: 200px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+
+            .imgblock {
+                text-align: center;
+                align-items: center;
+            }
+
+            #desc {
+                font-family: 'Avenir';
+                font-size: 15.5px;
+                margin-bottom: 17px;
+                margin-top: -12px;
+            }
+
+            
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    </head>
+
+  <body>
+    <p id="title"><span id="blue">XAVIER</span> <span id="white">PLOURDE</span></p>
+    <button id="bar"><a href="index.html">HOME</a></button>
+    <button id="bar"><a href="resume.html">RESUME</a></button>
+    <button id="bar"><a href="projects.html">PERSONAL PROJECTS</a></button>
+    <button id="bar"><a href="cp.html"><span id="blue">COMPETITIVE PROGRAMMING</span></a></button>
+    <button id="bar"><a href="cycling.html">CYCLING</a></button>
+<div class="mainpage">
+    <div class="box">
+        <p id="huge">ABOUT</p>
+        <p id="small">I started Competitive Programming in 2019, and eventually reached a peak rating of 2353 (International Master) on Codeforces.
+            <br>In Fall 2022, I started a Competitve Programming club at Berkeley, and my team placed third at ICPC Regionals in both 2022 and 2023.</p>
+    </div>
+
+    <div class="box">
+        <p id="huge">PROBLEMS I'VE AUTHORED</p>
+        <p id="small">As president of my high school computer science club, I created over 150 original problems for implementation-based practice contests, as well as 24 competitive programming problems for contests that were open to participants worldwide.
+        <br>Here are some of the highlights: 
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102892/problem/8">MAXIMUM DONUT</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(200,0,0);">Hard</strong></em></p>
+            <p id="desc"><em>Use prefix sum arrays and a clever formula to find the largest "donut" shape in a 2D grid</em></p>
+        </div>
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102892/problem/3">INFECTIOUS LETTERS</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(0,200,0);">Easy</strong></em></p>
+            <p id="desc"><em>Find which characters in a string are "infected" using some observations</em></p>
+        </div>
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102892/problem/6">BIRDWATCHING</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(200,200,0);">Medium</strong></em></p>
+            <p id="desc"><em>Use an ordered map to find the best way to place cameras to take pictures of birds</em></p>
+        </div>
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102953/problem/8">NUMBER PLACEMENT</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(200,200,0);">Medium</strong></em></p>
+            <p id="desc"><em>Use Depth-First Search and the Sieve of Eratosthenes to place prime numbers in a grid</em></p>
+        </div>
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102953/problem/7">MAXIMUM PLUS SIGN</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(200,200,0);">Medium</strong></em></p>
+            <p id="desc"><em>Similar to maximum donut, use prefix sums to find the maximum plus sign in a grid</em></p>
+        </div>
+        <div id="smallbox">
+            <p id="big"><a target="_blank" href="https://codeforces.com/gym/102892/problem/9">PLANE AND SIMPLE</a> &nbsp; &nbsp; <em style="font-size: 18px; font-family: 'Avenir'">Difficulty: <strong style="color:rgb(200,0,0);">Hard</strong></em></p>
+            <p id="desc"><em>Use Knapsack Dynamic Programming to optimally place luggage on a conveyor belt</em></p>
+        </div>
+    </div>
+    <div class="box" id="contestbox">
+        <p id="huge">NOTABLE CONTESTS I'VE DONE</p>
+    </div>
+</div>
+  <script>
+    var colorbins = [0, 1200, 1400, 1600, 1900, 2100, 2300, 2400, 2600, 3000];
+    var cols = [[125, 125, 125], [0, 125, 0], [0, 180, 125], [0, 0, 125], [180, 0, 180], [200, 180, 0], [240, 100, 0], [240, 0, 0], [240, 0, 120], [0, 0, 0]];
+
+    var contests = [
+        ["Educational Codeforces Round #147", "April 20, 2023", 199, 34, 2632, "My first time solving all problems in a rated Codeforces round"],
+        ["ICPC Pacific Northwest Regional 2023", "February 25, 2023", "N/A", "3rd", "N/A", "The most fun competitive programming contest I've participated in, placed third in the region on my team of three"],
+        ["Codeforces Polynomial Round", "December 17, 2022", 99, 209, 2464],
+        ["Codeforces Round #796", "June 3, 2022", 54, 152, 2502, "The round where I reached International Master on Codeforces, and my peak rating of 2353"],
+        ["ICPC Nationals (NAC) 2022", "May 30, 2022", "N/A", "33rd", "N/A", "The highest-level programming contest I've participated in. We didn't perform quite as well as we'd hoped, but it was still an amazing experience."],        
+        ["Codeforces Round #794", "May 25, 2022", 175, 55, 2752, "My best ever performance in a Division 1 Codeforces round"],
+        ["ICPC Pacific Northwest Regional 2022", "March 5, 2022", "N/A", "3rd", "N/A", "My first ever ICPC competition, my team of three placed third and qualified for ICPC Nationals!"],
+        ["Codeforces Round #767", "January 22, 2022", 94, 225, 2442],
+        ["Codeforces Global Round 16", "September 12, 2021", 42, 462, 2275],
+        ["Code Quest 2021", "April 27, 2021", "N/A", "1st", "N/A", "My third year participating in this in-person programming competition run by Lockheed Martin"],
+        ["Codeforces Round #712", "April 3, 2021", 53, 245, 2393],
+        ["Codeforces Round #706", "March 10, 2021", 150, 159, 2558],
+        ["Codeforces Round #671", "September 18, 2020", 248, 10, 2759, "My first time becoming Master on Codeforces, and my highest ever rating change"],
+        ["Codeforces Round #637", "April 23, 2020", 236, 18, 2635, "My first time becoming Candidate Master on Codeforces"],
+        ["Educational Codeforces Round #71", "August 22, 2019", 93, 856, 1874, "My first time becoming Expert on Codeforces"],
+        ["Code Quest 2019", "April 27, 2019", "N/A", "1st", "N/A"],
+        ["Code Quest 2018", "April 21, 2018", "N/A", "2nd", "N/A", "My first programming contest, a fun in-person competition run by Lockheed Martin"]
+    ];
+
+    for (var i = 0 ; i < contests.length ; i++) {
+        var contest = contests[i];
+
+        var st = "";
+
+        st += "<div id=\"smallbox\">";
+        
+        var ci = 0;
+        var col;
+
+        if (contests[i][4] != "N/A") {
+
+            while (contests[i][4] >= colorbins[ci]) {
+                ci++;
+            }
+
+            ci--;
+
+            col = cols[ci];
+        }
+        else {
+            col = [0, 0, 0];
+        }
+
+        var rcol = [200 - contests[i][2], 200, 0];
+        //for (var j = 0 ; j < contests[i].length ; j++) {
+        var min = 37;
+            st += "<p id=\"small\" style=\"margin-top: 14px\"><strong>" + contests[i][0] + "</strong> (" + contests[i][1] + "):";
+            if (contests[i][4] != "N/A") {
+                st += "</p><p id=\"small\" style=\"margin-top: -" + min + "px; text-align: center;\"><strong>Performance: <span style=\"color:rgb(" + col[0] + "," + col[1] + "," + col[2] + ")\">" + contests[i][4] + "</strong></span></p>";
+            }
+            else {
+                st += "</p><p id=\"small\" style=\"margin-top: -" + min + "px; text-align: center;\"><strong>Rank: <span style=\"color:rgb(" + col[0] + "," + col[1] + "," + col[2] + ")\">" + contests[i][3] + "</strong></span></p>";
+            }
+            if (contests[i][2] != "N/A") {
+                st += "<p id=\"small\" style=\"margin-top: -" + min + "px; text-align: right;\"><strong>Codeforces Rating Change: +<span style=\"color:rgb(" + rcol[0] + "," + rcol[1] + "," + rcol[2] + ")\">" + contests[i][2] + "</strong></span></p>";
+            }
+
+            if (contests[i].length > 5) {
+                st += "<p id=\"small\" style=\"margin-top: 6.5px; margin-bottom: 11px\"><em>" + contests[i][5] + "</p>";
+            }
+                //  st += "<span id=\"big\" style=\"color:rgb(" + col[0] + "," + col[1] + "," + col[2] + ")\"><strong>" + contests[i][4] + "</strong></span>";
+        //}
+
+        st += "</div>";
+
+        document.getElementById("contestbox").innerHTML += st;
+
+    }
+  </script>
+  </body>
+</html>

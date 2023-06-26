@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&family=Montserrat&display=swap" rel="stylesheet">        <meta charset="utf-8">
+        <meta charset="utf-8">
+        <title>Xavier Plourde</title>
+        <style>
+            #title {
+                font-family: 'Kanit';
+                background-color: rgb(250, 250, 250);
+                text-align: center;
+                font-size: 70px;
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                margin-top: 20px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 18px;
+                padding: 8px 4px 8px 4px;
+            }
+
+            #blue {
+                color: rgb(45, 80, 236);
+            }
+
+            #white {
+                color: rgb(50, 50, 50);
+            }
+
+            #bar {
+                cursor: pointer;
+                background: none;
+                border: none;
+                font-family: 'Avenir', 'Montserrat';
+                width: 19%;
+                font-size: 17px;
+                text-align: center;
+                margin-bottom: 0px;
+            }
+
+            #biotitle {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 28px;
+                padding-top: 50px;
+                margin-bottom: 80px;
+            }
+
+            #bio {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 20px;
+                margin-top: 20px;
+            }
+
+            #me {
+                float: left;
+                margin-right: 50px;
+                border-radius: 15px;
+            }
+
+            .mainpage {
+                margin-left: 1%;
+                margin-right: 1%;
+            }
+
+            #bar a:link {
+                text-decoration: none;
+            }
+
+            button {
+                cursor: pointer;
+            }
+
+            #back {
+                background-color: rgb(249, 249, 249);
+                border-radius: 6px;
+                text-align: center;
+                border-style: solid;
+                margin-top: 10px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                margin-bottom: -3px;
+                border-width: 1px;
+                margin-left: 40%;
+                margin-right: 40%;
+                width: 20%;
+                font-family: 'AvenirNext-Bold';
+                font-size: 16px;
+            }
+
+            #box {
+                background-color: rgb(252, 252, 252);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 20px;
+                text-align: left;
+                width: 97%;
+                
+            }
+
+            #smallbox {
+                background-color: rgb(250, 250, 250);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 5px;
+                margin-bottom: 8px;
+            }
+
+            #huge {
+                font-family: 'AvenirNext-Bold';
+                font-size: 25px;
+            }
+
+            #big {
+                font-family: 'AvenirNext-Bold';
+                font-size: 22px;
+            }
+
+            #small2 {
+                font-family: 'Avenir';
+                font-size: 16px;
+            }
+
+            #small {
+                margin-top: -15px;
+                font-family: 'Avenir';
+                font-size: 16px;
+            }
+
+            #smallblog {
+                font-family: 'Avenir';
+                font-size: 16px;
+            }
+
+            #bigblog {
+                font-family: 'AvenirNext-Bold';
+                font-size: 22px;
+                margin-bottom: -6px;
+            }
+
+            #hugeblog {
+                font-family: 'AvenirNext-Bold';
+                font-size: 25px;
+                margin-bottom: 5px;
+            }
+
+            #green {
+                font-family: 'AvenirNext-Bold';
+                color: rgb(0, 110, 0);
+            }
+
+            #bar a:visited {
+                text-decoration: none;
+                color: black;
+            }
+
+            img {
+                text-align: center;
+                margin-top: 5px;
+                margin-bottom: -5px;
+            }
+
+            #route {
+                text-align: left;
+                margin-right: 20px;
+                margin-top: 14px;
+                margin-bottom: 10px;
+                /*float: left;*/
+            }
+
+            #routetitle {
+                position: relative;
+            }
+
+            .ridetitle {
+                position: absolute;
+                margin-left: 181px;
+                margin-top: -128px;
+                width: 500%;
+            }
+
+            
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    </head>
+
+  <body>
+    <p id="title"><span id="blue">XAVIER</span> <span id="white">PLOURDE</span></p>
+    <button id="bar"><a href="index.html">HOME</a></button>
+    <button id="bar"><a href="resume.html">RESUME</span></a></button>
+    <button id="bar"><a href="projects.html">PERSONAL PROJECTS</a></button>
+    <button id="bar"><a href="cp.html">COMPETITIVE PROGRAMMING</a></button>
+    <button id="bar"><a href="cycling.html"><span id="blue">CYCLING</span></a></button>
+
+    <div class="mainpage">
+        <div id="box">
+            <p id="huge">CAL CYCLING WEBSITE</p>
+            <p id="small">As Technical Captain for the Cal Cycling club, I designed a <a href="calcycling.web.app" target="_blank">new website</a> for the club in July 2022.</p>
+        </div>
+    </div>
+    <script>
+
+    var rides = [
+        ["Syracuse to Amherst in One Day", "June 2023", 238.55, 6824, "My longest ever ride, and one of my only one way rides"],
+        ["Pt. Reyes Lighthouse", "May 2023", 136.15, 9806, "My last Berkeley ride for Spring 2023, exploring the Pt. Reyes National Seashore"],
+        ["Owens Valley Trip", "May 2023", 35.11, 6316, "A 6-day cycling and camping trip in the scenic Owens Valley and Eastern Sierras"],
+        ["Mt. Tamalpais to Santa Cruz Double Century", "May 2023", 204.07, 12484, ""],
+        ["Three Peaks in One Day", "May 2023", 201.00, 16411, ""],
+        ["Forks of Salmon", "May 2023", 100.39, 10571, ""],
+        ["LA Century", "March 2023", 117.18, 11903, ""],
+        ["Idria", "February 2023", 114.89, 8179, ""],
+        ["Santa Cruz Mountains Century", "December 2022", 103.08, 9006, ""],
+        ["Coast and Mountains Century", "September 2022", 137.31, 8205, ""],
+        ["Whiteface Mountain", "July 2022", 71.00, 5735, ""],
+        ["Adirondack Double Century", "July 2022", 200.74, 6362, ""],
+        ["Cape Cod Century", "June 2022", 129.26, 4505, ""],
+        ["Yosemite", "May 2022", 87.80, 8619, ""],
+        ["Syracuse to Rochester", "June 2021", 168.38, 2635, ""]
+    ];
+
+    var blogs = [
+        [
+            "[title] The 10 Best Cycling Descents in the Bay Area",
+            "[subtitle] A deep dive into all the descents that you'll want to include in your cycling routes, and one descent that you'll want to avoid.",
+            "Whether it's the one descent on a quick 10-mile ride or one of many descents on a century ride, a descent can make or break a ride. Some descents are so good you wish you could ride them forever, while on others, you're nervously counting down the miles until you finish, including it only because it connects other parts of the route together. In this blog, I'll share my experience with some of the descents in the Bay Area, and narrow down which ones are the \"best\".",
+            "For the purposes of this blog, I'll rate the descents on the following categories:",
+            "Road Surface Quality - a good road surface can make a descent feel smooth and seamless, almost like skiing, while a rough one can be both not fun and dangerous.",
+            "Curviness - an optimal descent has just enough curves and hairpins to be exciting, but not so many that you have to ride your brakes the whole time",
+            "Steepness - similar to above, an optimal descent is steep enough that you can pick up speed, but not <em>too much</em>.",
+            "Length - a never-ending mountain descent is often a lot more fun than a 0.2 mile neighborhood descent",
+            "Scenery - cruising through thick redwood forests or green hills with ocean views is always nice",
+            "Traffic - it's not as important than climbs or flats, but lower traffic is always nicer, especially since you might run the risk of <em>outpacing</em> cars and being forced to ride your brakes the whole way down.",
+            "Also, as one more technical note - we'll consider Santa Cruz County to be part of the \"Bay Area\" for the purposes of this list, since it is relatively accessible via BART, and includes many of the best descents in the area.",
+            "Without further ado, let's get into the list!",
+            "[big] #10: Wildcat Canyon",
+            "This is a classic descent in the Orinda hills, included in many popular routes starting in Berkeley, such as the Three Bears Loop (36 miles). It has variable grades, starting out relatively flat (1-2%) before getting steeper (8%) towards the bottom. It's included in this list because it has a lot of fun hairpin turns, but it is a good bit shorter than most of the other descents on this list (700 vertical feet).",
+            "Getting here from Berkeley is very easy, as you can climb Euclid or Spruce and take the false-flat section of Wildcat Canyon to Inspiration Point and begin the descent. After this, you can either turn back, try the Three Bears loop mentioned earlier, or if you're feeling adventurous, attempt the steep Lomas Cantadas climb, which parallels Wildcat Canyon.",
+            "[big] #9: Old Santa Cruz Highway",
+            "The first of many descents on this list from the Santa Cruz Mountains, this descent is long, scenic, and with a very good road surface, but isn't as steep as the other descents on this list (4-5% average grade). It's still a fun descent, however, as the profile of the turns in the road allows you to still pick up descent speed going down.",
+            "Many Berkeley riders are scared away by how far the Santa Cruz Mountains appear to be on a map, but by BARTing to Beryessa for the start of the ride, they're a lot closer than you think. This descent can be included in an fun out-and-back to the highest paved portion of Loma Prieta (68 miles), among other routes.",
+            "[big] #8: Claremont",
+            "This is the closest descent to Berkeley on this list, and also the descent on this list I've personally done the most (38 times so far!). The entire descent is steep (9% average), and it starts out even steeper (11%) with several fun hairpins. Then, it straightens out towards the bottom and becomes a very easy descent to hit 40mph+ on. It's not quite as long as some of the descents on this list (100 vertical feet), but is still a really fun addition to a short local ride.",
+            "As mentioned above, this descent is very close to Berkeley, and is included in many short 10-mile routes.",
+            "[big] #7: Pantoll Rd/Panoramic Highway",
+            "This is the only descent in Marin County on this list, and is also likely the most scenic descent on this list. Starting from the intersection of Ridgecrest and Pantoll, this descent curves through some impressive open fields with ocean views, and becomes much more thickly wooded after the turn onto Panoramic Highway. The road surface starts out moderately good and becomes amazing after the intersection, and the steepness varies throughout.",
+            "This descent is almost always included on Mt. Tamalpais rides (80 miles starting and ending in Berkeley, or 66 miles ending in SF), and is a great descent to reward yourself with after climbing the famous mountain.",
+            "[big] #6: Hwy 84 East",
+            "One of many notable South Bay descents, this descent is amazingly smooth, long, and steep, with the one downside being typically high traffic levels. Still, you're going fast enough that it still feels relatively safe, and it's a great descent to pair with the famous parallel Old la Honda Road climb.",
+            "This descent is far from Berkeley and far from BART, but it's a great descent to include in a longer route if you find yourself going through the area.",
+            "[big] #5: Hwy 236 North (Big Basin)",
+            "This amazing descent checks all the boxes - amazing scenery, perfect steepness and curviness, and almost no traffic - except for one: it's the shortest descent in this list (600 vertical feet), but despite this, it's still an amazing descent, and amazing to pair with the Big Basin climb several miles earlier on the same road.",
+            "Like Hwy 84 East, this is far from both Berkeley and BART, but there are many longer routes including this descent that start and end at Beryessa or Millbrae BART, the shortest of which being the Big Basin Loop (85 miles).",
+            "[big] #4: Kings Mountain",
+            "Another South Bay classic, this is a long (2000 vertical feet), scenic, and fairly steep and technical descent in Woodside. It's commonly included with the even more scenic Tunitas Creek Road climb.",
+            "Like the previous two descents on this list, it's a bit hard to get to from Berkeley, but one great way to hit this descent is to start at Colma or Daly City BART, take Highway 1 to Tunitas Creek Road, and climb Tunitas Creek Road to the start of this descent, ending at Fremont or Millbrae BART (75 miles).",
+            "[big] #3: Mt. Diablo",
+            "The best descent in the East Bay, the longest descent on this list (3600 vertical feet), and the longest continuous descent in the entire Bay Area (Mt. Hamilton is longer, but has several uphill sections), Mt. Diablo has an amazingly consistent grade and feels like it goes on forever. After the junction, you can take either the South Gate or North Gate routes - the South Gate route is a slightly better descent, but the North Gate route leaves you slightly closer to Berkeley/Walnut Creek BART.",
+            "This descent is fairly easy to get to from Berkeley, and is included in the popular Mt. Diablo route (80 miles from Berkeley, or 35 miles starting and ending at Walnut Creek BART).",
+            "[img] diablo.png A very long and open descent",
+            "[big] #2: Bear Creek Road (Santa Cruz County)",
+            "Both of the top two descents are deep in the Santa Cruz Mountains, and like the other nearby descents, this one is long, scenic, and has a smooth road surface with a consistent grade and fun hairpins.",
+            "This descent is somewhat far from Berkeley, but like the Big Basin descent, is included in many longer routes through the Santa Cruz Mountains.",
+            "[big] #1: Hwy 9 North",
+            "This is it - the best descent in the Bay. In my opinion, it's not a very close race - Highway 9 is clearly a better descent than all its competitors. The road surface is perfectly smooth, it has an exact 6-7% grade the whole way down, and it has just enough hairpins to be interesting, but they're wide enough that you barely have to brake at all on the whole descent. And like the other Santa Cruz Mountain descents on this list, you're in a beautiful redwood forest the whole time. There can be a bit of traffic on this road, but in practice it isn't too much of a problem.",
+            "When I first did this descent, it was at the end of a long ride, my first ever ride in the Santa Cruz Mountains, and I was unfortunately too tired to appreciate it. I've done it five times since then, however, and each one has been more fun than the last. Now I try to include this in my route whenever it's even remotely possible.",
+            "This descent may appear to be quite far from Berkeley, but like the other Santa Cruz Mountain descents on this list, with the power of BART, it's a lot closer than it looks. You can do an out-and-back to the top of this descent from Beryessa BART (42 miles), or start at Millbrae BART and connect to this descent from Skyline Blvd (54 miles). There are also many longer routes that hit #1, #2 (Bear Creek), and #5 (Big Basin) on this list, all in the same ride, as they're in relatively close proximity to each other.",
+            "[big] Bonus - Scariest Descent in the Bay Area: Jamison Creek Road",
+            "Unlike every other descent on this page, this is NOT one you'll want to include in your rides. Unfortunately, since it's the only logical way to descend after climbing either Alba Road or Bonny Doon (both of which are amazing climbs), you're often forced to do this descent.",
+            "The Strava segment for this descent has the hilarous and threatening name \"Jameson Creek Descend - Don't Try This, May Cause Serious Death\" - and for good reason. It's fairly long and scenic, and at first glance may look similar to some of the actually good descents that made the top 10 list, but unfortunately, this particular descent has a super rough road surface, and an extremely steep 12% average grade, which makes it a battle between braking before the many hairpin turns, and not skidding out on the rough pavement.",
+            "This is the hardest descent to get to from Berkeley on this page, and that's a good thing. Avoid this whenever possible, but that may not be possible.",
+            "[img] death.png My personal favorite Strava segment name in the Bay Area"
+        ],
+
+    ];
+
+    var mainEl = document.getElementsByClassName("mainpage")[0];
+
+    function back() {
+        mainEl.innerHTML = "";
+        for (var i = 0 ; i < blogs.length ; i++) {
+            mainEl.innerHTML += "<button id=\"box\" onclick=go(" + i + ")><p id=\"huge\">" + blogs[i][0].split("] ")[1].toUpperCase() + "</p><p id=\"small\">" + blogs[i][1].split("] ")[1] + "</p></button>"
+        }
+    }
+
+    function go(ind) {
+        var elStr = "<div id=\"box\">";
+        elStr += "<button onclick=back() id=\"back\">BACK</button>";
+        for (var i = 0 ; i < blogs[ind].length ; i++) {
+            if (i == 1) continue;
+
+            if (blogs[ind][i].split("").slice(0, 7).join("") == "[title]") {
+                elStr += "<p id=\"hugeblog\">" + blogs[ind][i].split("").slice(7, blogs[ind][i].length).join("").toUpperCase() + "</p>";
+            }
+            else if (blogs[ind][i].split("").slice(0, 5).join("") == "[big]") {
+                elStr += "<p id=\"bigblog\">" + blogs[ind][i].split("").slice(5, blogs[ind][i].length).join("") + "</p>";
+            }
+            else if (blogs[ind][i].split("").slice(0, 5).join("") == "[img]") {
+                elStr += "<div style=\"text-align: center;\"><img src=\"imgs/" + blogs[ind][i].split(" ")[1] + "\" height=200px></div>";
+                elStr += "<p id=\"smallblog\" style=\"text-align: center;\"><em>" + blogs[ind][i].split(" ").slice(2, blogs[ind][i].split(" ").length).join(" ") + "</em></p>"
+                //>" + blogs[ind][i].split("").slice(5, blogs[ind][i].length).join("") + "</p>";
+            }
+            else {
+                elStr += "<p id=\"smallblog\">" + blogs[ind][i] + "</p>";
+            }
+        }
+        elStr += "</div>";
+        mainEl.innerHTML = elStr;
+    }
+
+   // back();
+
+   var st = "<div id=\"box\">";
+    st += "<p id=\"huge\">NOTABLE RIDES I'VE DONE</p>";
+
+    for (var i = 0 ; i < rides.length ; i++) {
+        st += "<div id=\"smallbox\">";
+        st += "<span id=\"routetitle\"><img id=\"route\" src=\"imgs/ride" + (i+1) + ".png\" width=160 height=120>";
+        st += "<p class=\"ridetitle\" id=\"big\">" + rides[i][0] + "<span id=\"small2\">&nbsp;<em>" + rides[i][1] + "</em><br>";
+        st += "<span id=\"small2\">" + rides[i][2] + " Miles, " + rides[i][3] + " ft. Elevation Gain";
+        if (rides[i][4].length > 0) {
+            st += "<br><br>" + rides[i][4];
+        }
+        st += "</span></p></span>";
+        st += "</div>";
+    }
+
+    st += "</div>";
+
+    mainEl.innerHTML += st;
+
+  </script>
+  </body>
+</html>
