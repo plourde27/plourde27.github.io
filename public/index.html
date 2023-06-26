@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+    Syracuse to Amherst in One Day- 238, 6k
+    My longest ever ride, and one of my only one way rides
+
+    Pt. Reyes Lighthouse - 136 9k
+    My last Berkeley ride for Spring 2023, exploring the Pt. Reyes National Seashore
+
+    Owens Valley Trip - 250ish 40k-ish
+    A 6-day cycling and camping trip in the scenic Owens Valley and Eastern Sierras
+
+    Tam Santa Cruz - 204 12k
+    Three Peaks - 200 17k
+    Forks of Salmon - 100 11k
+    LA Century - 120 12k
+    Idria - 115 7.5k
+    SC Century December - 100 9k
+    Physics HW - 137 8.5k
+    Whiteface - 71 5.7k
+    Double Century - 200 6k
+    Cape Cod - 129 4k
+    Ontario June - 175 5k
+    Yosemite - 87 8.7k
+    Rochester - 175 2.5k
+-->
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&family=Montserrat&display=swap" rel="stylesheet">        <meta charset="utf-8">
+        <meta charset="utf-8">
+        <title>Xavier Plourde</title>
+        <style>
+            #title {
+                font-family: 'Kanit';
+                background-color: rgb(250, 250, 250);
+                text-align: center;
+                font-size: 70px;
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                margin-top: 20px;
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 18px;
+                padding: 8px 4px 8px 4px;
+            }
+
+            #blue {
+                color: rgb(45, 80, 236)
+            }
+
+            #white {
+                color: rgb(50, 50, 50);
+            }
+
+            #bar {
+                cursor: pointer;
+                background: none;
+                border: none;
+                font-family: 'Avenir', 'Montserrat';
+                width: 19%;
+                font-size: 17px;
+                text-align: center;
+                margin-bottom: 0px;
+            }
+
+            #biotitle {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 24px;
+                padding-top: 50px;
+                margin-bottom: 73px;
+
+            }
+
+            #bio {
+                font-family: 'Avenir', 'Montserrat';
+                font-size: 20px;
+                margin-top: 20px;
+            }
+
+            #me {
+                float: left;
+                margin-right: 50px;
+                border-radius: 25px;
+                margin-top: 18px;
+                margin-bottom: 3px;
+            }
+
+            .mainpage {
+                margin-left: 1%;
+                margin-right: 1%;
+            }
+
+            #bar a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .box {
+                background-color: rgb(252, 252, 252);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 20px;
+            }
+
+            #smallbox {
+                background-color: rgb(250, 250, 250);
+                border-radius: 8px;
+                border-color: rgb(200, 200, 200);
+                border-style: solid;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin-top: 5px;
+                margin-bottom: 8px;
+            }
+
+            #huge {
+                font-family: 'AvenirNext-Bold';
+                font-size: 25px;
+            }
+
+            #big {
+                font-family: 'AvenirNext-Bold';
+                font-size: 22px;
+            }
+
+            #small {
+                margin-top: -7px;
+                font-family: 'Avenir';
+                font-size: 17.5px;
+            }
+
+            #green {
+                font-family: 'AvenirNext-Bold';
+                color: rgb(0, 110, 0);
+            }
+
+            
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    </head>
+
+  <body>
+    <p id="title"><span id="blue">XAVIER</span> <span id="white">PLOURDE</span></p>
+    <button id="bar"><a href="index.html"><span id="blue">HOME</span></a></button>
+    <button id="bar"><a href="resume.html">RESUME</a></button>
+    <button id="bar"><a href="projects.html">PERSONAL PROJECTS</a></button>
+    <button id="bar"><a href="cp.html">COMPETITIVE PROGRAMMING</a></button>
+    <button id="bar"><a href="cycling.html">CYCLING</a></button>
+
+    <div class="mainpage">
+        <div class="box">
+            <img id="me" src="imgs/xavier.png" width=180px height=180px>
+            <p id="biotitle">
+                Welcome to my personal website! I am a rising junior at the University of California, Berkeley, studying computer science.
+            </p>
+        </div>
+        <div class="box">
+            <p id="huge">ABOUT ME</p>
+            <p id="small">Throughout high school and college, I've worked on many personal <a href="projects.html">coding projects</a> and games.
+                <br><br>In May 2020, I started <a href="cp.html">competitive programming</a>, initially participating in live Codeforces contests, and I eventually reached International Master on Codeforces, and placed 3rd in ICPC Regionals in 2022 and 2023, qualifying for and participating in Nationals in 2022.
+                <br><br>Outside of school, I am an avid long-distance <a href="cycling.html">road cyclist</a>, having done 22 100+ mile rides and one 200 mile ride, and I also really like rock climbing and skiing.
+            </p>
+        </div>
+    </div>
+  <script>
+    var num = "LOL";
+    var rd = Math.random();
+    console.log(rd);
+    if (rd > 0.5) {
+        num = 1;
+    }
+    else if (rd > 0.33) {
+        num = 2;
+    }
+    else if (rd > 0.17) {
+        num = 3;
+    }
+    else if (rd > 0.001) {
+        num = 4;
+    }
+
+    console.log(num);
+    //document.getElementById("me").innerHTML += "<img id=\"me\" src=\"imgs/xavier" + num + ".png\" width=180px height=180px>";
+    document.getElementById("me").src = "imgs/xavier" + num + ".png";
+  </script>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-FKqzGUMIcr1VFFHPijiBUS0osu4bSPA",
+      authDomain: "xavier-plourde.firebaseapp.com",
+      projectId: "xavier-plourde",
+      storageBucket: "xavier-plourde.appspot.com",
+      messagingSenderId: "874138512862",
+      appId: "1:874138512862:web:c11d3181ea6f70d829014f",
+      measurementId: "G-F5JCCNVB77"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  
+  </body>
+</html>
